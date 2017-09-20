@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import { HashRouter, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 
 // Material themes
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -17,6 +17,9 @@ import DatePicker from 'material-ui/DatePicker';
 // Quokka import
 import ReduxStore from './store';
 
+// Actions
+import { signup } from './actions/session_actions';
+
 // testing APIs functions
 // import * as API from './util/session_api_util';
 // window.login = API.login;
@@ -27,6 +30,15 @@ class Application extends React.Component {
   state = {
     date: ''
   };
+
+  static propTypes = {
+    dispatchSignup: PropTypes.func.isRequired
+  };
+
+  componentDidMount() {
+    // Purposely put nothing inside
+    this.props.dispatchSignup({ username: '', password: '' });
+  }
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
@@ -49,10 +61,20 @@ class Application extends React.Component {
   }
 }
 
-const Router = ({ store }) => (
-  <Provider store={store}>
+const mapStoreStateToProps = (storeState) => ({
+  session: storeState.session,
+  errors: storeState.errors
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchSignup: (userInfo) => dispatch(signup(userInfo))
+});
+
+// Example of a stateless function component, argument is ALWAYS props
+const Router = (props) => (
+  <Provider store={props.store}>
     <HashRouter>
-      <Route path="/" component={Application} />
+      <Route path="/" component={connect(mapStoreStateToProps, mapDispatchToProps)(Application)} />
     </HashRouter>
   </Provider>
 );
@@ -62,9 +84,5 @@ Router.propTypes = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  // testing configureStores
-  const store = ReduxStore();
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
   ReactDOM.render(<Router store={ReduxStore} />, document.getElementById('react-application'));
 });

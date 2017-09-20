@@ -24,7 +24,8 @@
     "afterAll": false,
     "jest": false,
     "document": false,
-    "WebSocket": false
+    "WebSocket": false,
+    "$": false
   },
   "rules": {
     "jsx-a11y/href-no-hash": "off",
