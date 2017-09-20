@@ -17,6 +17,12 @@ import DatePicker from 'material-ui/DatePicker';
 // Quokka import
 import ReduxStore from './store';
 
+// testing APIs functions
+// import * as API from './util/session_api_util';
+// window.login = API.login;
+// window.signup = API.signup;
+// window.logout = API.logout;
+
 class Application extends React.Component {
   state = {
     date: ''
