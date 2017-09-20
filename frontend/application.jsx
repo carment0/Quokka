@@ -28,6 +28,10 @@ class Application extends React.Component {
     date: ''
   };
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+  }
+
   // prop arrow fn no need to bind
   handlePickDate = (e, value) => {
     this.setState({ date: value.toString() });
@@ -58,5 +62,9 @@ Router.propTypes = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  // testing configureStores
+  const store = ReduxStore();
+  window.getState = store.getState;
+  window.dispatch = store.dispatch;
   ReactDOM.render(<Router store={ReduxStore} />, document.getElementById('react-application'));
 });
