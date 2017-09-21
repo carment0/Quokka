@@ -14,24 +14,27 @@ import AppBar from 'material-ui/AppBar';
 import { signup } from '../actions/session_actions';
 
 // Other containers
-import SignupPage from './signup_page';
-import HomePage from './home_page';
+import Welcome from './welcome';
+import Management from './management';
 
 class Application extends React.Component {
   static propTypes = {
     session: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    dispatchSignup: PropTypes.func.isRequired
+    // dispatchSignup: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    this.props.history.push('/signup');
-    this.props.dispatchSignup({ username: 'hello', password: '12' });
+    const pathName = this.props.history.location.pathname;
+    if (pathName !== '/welcome') {
+      this.props.history.push('/welcome');
+    // this.props.dispatchSignup({ username: 'hello', password: '12' });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.session.currentUser !== null) {
-      this.props.history.push('/home');
+      this.props.history.push('/management');
     }
   }
 
@@ -40,8 +43,8 @@ class Application extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <div>
           <AppBar title="Welcome to Quokka" />
-          <Route exact path="/signup" component={SignupPage} />
-          <Route exact path="/home" component={HomePage} />
+          <Route exact path="/welcome" component={Welcome} />
+          <Route exact path="/management" component={Management} />
         </div>
       </MuiThemeProvider>
     );
