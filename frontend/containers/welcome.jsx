@@ -109,9 +109,8 @@ class Welcome extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: Boolean(state.ui.session.currentUser),
-  errors: state.ui.errors.sessionErrors,
-  currentUser: state.ui.session.currentUser
+  loggedIn: Boolean(state.session.currentUser),
+  errors: state.errors.sessionErrors
 });
 
 const mapDispatchToProps = (dispatch) => ({
