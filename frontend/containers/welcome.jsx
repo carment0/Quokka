@@ -31,7 +31,6 @@ class Welcome extends React.Component {
       openModal: true,
       formType
     });
-    console.log(this.state);
   }
 
   handleOpenSignup = () => {
@@ -42,49 +41,43 @@ class Welcome extends React.Component {
     this.setState({ openModal: true, type: 'LOG_IN' });
   };
 
-  handleClose = () => {
+  handleModalClose = () => {
     this.setState({ openModal: false, type: '' });
   };
 
   get form() {
-    console.log(this.state);
     if (this.state.type === FormTypes.SIGN_UP) {
       return (
         <Signup
-          dispatchSignup={this.props.dispatchLogin}  />
+          dispatchSignup={this.props.dispatchSignup}
+          handleModalClose={this.handleModalClose} />
       );
     }
     return (
       <Login
-        dispatchLogin={this.props.dispatchLogin} />
+        dispatchLogin={this.props.dispatchLogin}
+        handleModalClose={this.handleModalClose} />
     );
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    if (this.state.formType === 'Sign Up') {
-      console.log('su');
-      this.props.dispatchSignup(this.state);
-    } else {
-      console.log('li');
-      this.props.dispatchLogin(this.state);
-    }
-  }
+  // handler = (e) => {
+  //   e.preventDefault();
+  //   this.setState({
+  //     username: '',
+  //     password: ''
+  //   });
+  // }
+
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (this.state.formType === 'Sign Up') {
+  //     this.props.dispatchSignup(this.state);
+  //   } else {
+  //     this.props.dispatchLogin(this.state);
+  //   }
+  // }
 
   render() {
-    const actions = [
-      <FlatButton label="Cancel"
-        primary={true}
-        onClick={this.handleClose}/>,
-
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onClick={this.handleSubmit}/>
-    ];
-
-
     return (
       <div className="welcome-container">
         <nav className="nav-bar">
@@ -98,7 +91,6 @@ class Welcome extends React.Component {
         <h1>Welcome to Quokka</h1>
         <Dialog
           title="Dialog With Actions"
-          actions={actions}
           modal={false}
           open={this.state.openModal}
           onRequestClose={this.handleClose}>
