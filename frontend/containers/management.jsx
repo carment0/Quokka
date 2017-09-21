@@ -7,7 +7,7 @@ class Management extends React.Component {
 
   render() {
     return (
-      <h1>management</h1>
+      <h1>Management</h1>
     );
   }
 }
