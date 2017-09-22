@@ -46,7 +46,7 @@ class Login extends React.Component {
             label="Submit"
             primary={true}
             keyboardFocused={true}
-            onClick={this.props.dispatchLogin} />
+            onClick={() => this.props.dispatchLogin(this.state)} />
         </form>
       </div>
     );

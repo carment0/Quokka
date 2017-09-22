@@ -8,7 +8,7 @@ import { Route } from 'react-router-dom';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import AppBar from 'material-ui/AppBar';
+// import AppBar from 'material-ui/AppBar';
 
 // Actions
 import { signup } from '../actions/session_actions';
@@ -21,7 +21,6 @@ class Application extends React.Component {
   static propTypes = {
     session: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    // dispatchSignup: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -33,16 +32,17 @@ class Application extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.session.currentUser !== null) {
-      this.props.history.push('/management');
-    }
+    if (
+      (nextProps.session.currentUser !== null)
+      && (nextProps.location.pathname !== '/management')
+    ) { this.props.history.push('/management'); }
   }
 
   render() {
+    // <AppBar title="Welcome to Quokka" />
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <div>
-          <AppBar title="Welcome to Quokka" />
           <Route exact path="/welcome" component={Welcome} />
           <Route exact path="/management" component={Management} />
         </div>
