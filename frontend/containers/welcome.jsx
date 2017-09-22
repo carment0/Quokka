@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import Paper from 'material-ui/Paper';
 import { login, signup } from '../actions/session_actions';
 import Login from '../components/login';
 import Signup from '../components/signup';
@@ -60,35 +61,32 @@ class Welcome extends React.Component {
     );
   }
 
-  // handler = (e) => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     username: '',
-  //     password: ''
-  //   });
-  // }
-
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (this.state.formType === 'Sign Up') {
-  //     this.props.dispatchSignup(this.state);
-  //   } else {
-  //     this.props.dispatchLogin(this.state);
-  //   }
-  // }
-
   render() {
     return (
-      <div className="welcome-container">
-        <nav className="nav-bar">
-          <FlatButton label="Login"
-            secondary={true}
-            onClick={this.handleOpenLogin} />
-          <FlatButton label="Sign up"
-            primary={true}
-            onClick={this.handleOpenSignup} />
-        </nav>
-        <h1>Welcome to Quokka</h1>
+      <section className="welcome-page">
+        <Paper zDepth={2} className="nav-bar">
+          <section className="left-container">
+            <div className="logo" />
+            <div className="text">
+              <p>Blah blah blah</p>
+            </div>
+          </section>
+          <section className="right-container">
+            <div className="button-container">
+              <FlatButton label="Login"
+                className="login-button"
+                secondary={true}
+                onClick={this.handleOpenLogin} />
+              <FlatButton label="Sign up"
+                className="signup-button"
+                primary={true}
+                onClick={this.handleOpenSignup} />
+            </div>
+          </section>
+        </Paper>
+        <section className="content">
+          <div className="dick" />
+        </section>
         <Dialog
           title="Dialog With Actions"
           modal={false}
@@ -96,7 +94,7 @@ class Welcome extends React.Component {
           onRequestClose={this.handleClose}>
           {this.form}
         </Dialog>
-      </div>
+      </section>
     );
   }
 }

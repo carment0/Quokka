@@ -1,0 +1,82 @@
+// Make sure each container component occupies the whole page
+.welcome-page {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .nav-bar {
+    height: 8%;
+    width: 100%;
+    display: inherit;
+    flex-direction: row;
+
+    .left-container {
+      height: 100%;
+      width: 50%;
+      display: inherit;
+      flex-direction: row;
+
+      .logo {
+        height: 100%;
+        width: 10%;
+        display: inherit;
+        flex-direction: row;
+        margin-left: 2rem;
+        background-image: image-url("doraemon.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
+      .text {
+        height: 100%;
+        width: calc(100% - 10% - 2rem);
+        display: inherit;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        p {
+          font-size: 3rem;
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+
+    .right-container {
+      height: 100%;
+      width: 50%;
+      display: inherit;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+
+      .button-container {
+        height: 100%;
+        width: 30%;
+        display: inherit;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+
+        .login-button {
+          margin-right: 1.5rem !important;
+        }
+
+        .signup-button {
+          margin-right: 1.5rem !important;
+        }
+      }
+    }
+  }
+
+  .content {
+    height: calc(100% - 8% - 1rem);
+    width: 100%;
+    margin-top: 1rem;
+    background-image: image-url("dick.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
