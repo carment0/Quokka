@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Material themes
 import AppBar from 'material-ui/AppBar';
@@ -12,13 +13,17 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';// import IconButton fr
 // import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 // import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
+import { connect } from 'react-redux';
+import { logout } from '../actions/session_actions';
+
 class Management extends React.Component {
+  static propTypes = {
+    dispatchLogout: PropTypes.func.isRequired,
+    currentUser: PropTypes.object.isRequired
+  };
+
   componentWillMount() {
     // Redirect user if no one is currently signed in
-  }
-
-  returnHome() {
-    
   }
 
   render() {
@@ -26,16 +31,24 @@ class Management extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <div>
           <AppBar
-            title="Welcome to Quokka"
-            showMenuIconButton={false}
-            onTitleTouchTap={returnHome}
-            iconClassNameLeft
-            />
-          <h1>Management</h1>
+            title="Welcome to Quokka" />
+          <hgroup className="header-group">
+            <h2 className="header-name">Hi, {this.props.currentUser.username}!</h2>
+            <button className="header-button" onClick={() => this.props.dispatchLogout()}>Log Out</button>
+          </hgroup>
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
-export default Management;
+const mapStateToProps = ({ session }) => ({
+  currentUser: session.currentUser
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchLogout: () => dispatch(logout())
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Management);

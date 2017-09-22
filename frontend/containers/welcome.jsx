@@ -8,8 +8,6 @@ import { login, signup } from '../actions/session_actions';
 import Login from '../components/login';
 import Signup from '../components/signup';
 
-// import Signup from '../components/signup';
-
 // Enum
 const FormTypes = {
   SIGN_UP: 'SIGN_UP',
@@ -68,7 +66,7 @@ class Welcome extends React.Component {
           <section className="left-container">
             <div className="logo" />
             <div className="text">
-              <p>Blah blah blah</p>
+              <p>Quokka</p>
             </div>
           </section>
           <section className="right-container">
