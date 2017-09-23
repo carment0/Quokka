@@ -14,9 +14,24 @@ const FormTypes = {
   LOG_IN: 'LOG_IN'
 };
 
+// Dialog content is the white box that pops up during on click
+const dialogContentStyle = {
+  width: '40%',
+  minWidth: '350px',
+  maxWidth: '500px'
+};
+
+// Dialog title is the title section inside content body
+const dialogTitleStyle = {
+  fontWeight: '100',
+  fontSize: '2rem',
+  display: 'flex',
+  justifyContent: 'center'
+};
+
 class Welcome extends React.Component {
   state = {
-    openModal: false,
+    openDialog: false,
     type: ''
   };
 
@@ -27,21 +42,21 @@ class Welcome extends React.Component {
 
   openForm = (formType) => {
     this.setState({
-      openModal: true,
+      openDialog: true,
       formType
     });
   }
 
   handleOpenSignup = () => {
-    this.setState({ openModal: true, type: 'SIGN_UP' });
+    this.setState({ openDialog: true, type: 'SIGN_UP' });
   };
 
   handleOpenLogin = () => {
-    this.setState({ openModal: true, type: 'LOG_IN' });
+    this.setState({ openDialog: true, type: 'LOG_IN' });
   };
 
-  handleModalClose = () => {
-    this.setState({ openModal: false, type: '' });
+  handleDialogClose = () => {
+    this.setState({ openDialog: false, type: '' });
   };
 
   get form() {
@@ -49,14 +64,21 @@ class Welcome extends React.Component {
       return (
         <Signup
           dispatchSignup={this.props.dispatchSignup}
-          handleModalClose={this.handleModalClose} />
+          handleDialogClose={this.handleDialogClose} />
       );
     }
     return (
       <Login
         dispatchLogin={this.props.dispatchLogin}
-        handleModalClose={this.handleModalClose} />
+        handleDialogClose={this.handleDialogClose} />
     );
+  }
+
+  get dialogTitle() {
+    if (this.state.type === FormTypes.SIGN_UP) {
+      return 'Sign up for Quokka';
+    }
+    return 'Login';
   }
 
   render() {
@@ -84,10 +106,12 @@ class Welcome extends React.Component {
           <div className="dick" />
         </section>
         <Dialog
-          title="Dialog With Actions"
+          titleStyle={dialogTitleStyle}
+          contentStyle={dialogContentStyle}
+          title={this.dialogTitle}
           modal={false}
-          open={this.state.openModal}
-          onRequestClose={this.handleClose}>
+          open={this.state.openDialog}
+          onRequestClose={this.handleDialogClose}>
           {this.form}
         </Dialog>
       </section>

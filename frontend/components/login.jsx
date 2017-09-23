@@ -1,19 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: ''
-    };
-  }
+  state = { username: '', password: '' };
 
   static propTypes = {
-    handleModalClose: PropTypes.func.isRequired,
+    handleDialogClose: PropTypes.func.isRequired,
     dispatchLogin: PropTypes.func.isRequired
   };
 
@@ -23,30 +20,45 @@ class Login extends React.Component {
     });
   }
 
+  handleFormSubmission = (e) => {
+    e.preventDefault();
+    this.props.dispatchLogin(this.state);
+  }
+
   render() {
     return (
-      <div className="login-form">
-        <h1>Login</h1>
-        <form>
-          <input type="text"
+      <div className="login">
+        <div className="google-login">
+          <RaisedButton label="Login with Google" secondary={true} fullWidth={true} />
+          <Divider style={{ width: '85%', height: '2px', marginTop: '1rem', marginBottom: '1rem' }} />
+        </div>
+        <div className="divider">
+          <div className="text">OR</div>
+        </div>
+        <form className="login-form" onSubmit={this.handleFormSubmission}>
+          <TextField
+            fullWidth={true}
             value={this.state.username}
             onChange={this.update('username')}
-            placeholder="Username" />
-          <br /><br />
-          <input type="password"
+            hintText="Enter your username"
+            floatingLabelText="Username" /><br />
+          <TextField
+            fullWidth={true}
             value={this.state.password}
             onChange={this.update('password')}
-            placeholder="Password" />
-          <br /><br />
-          <FlatButton label="Cancel"
-            primary={true}
-            onClick={this.props.handleModalClose} />
-
-          <FlatButton
-            label="Submit"
-            primary={true}
-            keyboardFocused={true}
-            onClick={() => this.props.dispatchLogin(this.state)} />
+            hintText="Enter your password"
+            floatingLabelText="Password"
+            type="password" /><br />
+          <div className="button-container">
+            <FlatButton
+              type="submit"
+              label="Submit"
+              primary={true}
+              keyboardFocused={true} />
+            <FlatButton label="Cancel"
+              primary={true}
+              onClick={this.props.handleDialogClose} />
+          </div>
         </form>
       </div>
     );

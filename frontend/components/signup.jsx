@@ -4,16 +4,10 @@ import FlatButton from 'material-ui/FlatButton';
 // import Dialog from 'material-ui/Dialog';
 
 class Signup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: ''
-    };
-  }
+  state = { username: '', password: '' };
 
   static propTypes = {
-    handleModalClose: PropTypes.func.isRequired,
+    handleDialogClose: PropTypes.func.isRequired,
     dispatchSignup: PropTypes.func.isRequired
   };
 
@@ -40,7 +34,7 @@ class Signup extends React.Component {
           <br /><br />
           <FlatButton label="Cancel"
             primary={true}
-            onClick={this.props.handleModalClose} />
+            onClick={this.props.handleDialogClose} />
 
           <FlatButton
             label="Submit"
