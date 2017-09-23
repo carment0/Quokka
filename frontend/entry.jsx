@@ -14,7 +14,6 @@ import { createStore, applyMiddleware } from 'redux';
 import Application from './containers/application';
 import RootReducer from './reducers';
 
-// Example of a stateless function component, argument is ALWAYS props
 const Router = (props) => (
   <Provider store={props.store}>
     <HashRouter>
@@ -27,16 +26,14 @@ Router.propTypes = {
   store: PropTypes.object.isRequired
 };
 
-const reduxStore = (preloadedState = {}) => (createStore(RootReducer, preloadedState, applyMiddleware(thunk, logger)));
-
 document.addEventListener('DOMContentLoaded', () => {
-  let store;
+  const preloadedState = {};
+
   if (window.currentUser) {
-    const preloadedState = { session: { currentUser: window.currentUser } };
-    store = reduxStore(preloadedState);
+    preloadedState.session = { currentUser: window.currentUser };
     delete window.currentUser;
-  } else {
-    store = reduxStore();
   }
-  ReactDOM.render(<Router store={store} />, document.getElementById('react-application'));
+
+  const ReduxStore = createStore(RootReducer, preloadedState, applyMiddleware(thunk, logger));
+  ReactDOM.render(<Router store={ReduxStore} />, document.getElementById('react-application'));
 });
