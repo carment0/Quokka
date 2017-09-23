@@ -2,13 +2,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
 
 // Material themes
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import AppBar from 'material-ui/AppBar';
+
+// protected and auth routes
+import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 // Actions
 import { signup } from '../actions/session_actions';
@@ -25,6 +27,7 @@ class Application extends React.Component {
 
   componentDidMount() {
     const pathName = this.props.history.location.pathname;
+    console.log(pathName);
     if (pathName !== '/welcome') {
       this.props.history.push('/welcome');
     // this.props.dispatchSignup({ username: 'hello', password: '12' });
@@ -32,10 +35,9 @@ class Application extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (
-      (nextProps.session.currentUser !== null)
-      && (nextProps.location.pathname !== '/management')
-    ) { this.props.history.push('/management'); }
+    if (nextProps.history.location.pathname === '/') {
+      this.props.history.push('/welcome');
+    }
   }
 
   render() {
@@ -43,8 +45,8 @@ class Application extends React.Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <div>
-          <Route exact path="/welcome" component={Welcome} />
-          <Route exact path="/management" component={Management} />
+          <AuthRoute exact path="/welcome" component={Welcome} />
+          <ProtectedRoute exact path="/management" component={Management} />
         </div>
       </MuiThemeProvider>
     );

@@ -27,7 +27,16 @@ Router.propTypes = {
   store: PropTypes.object.isRequired
 };
 
+const reduxStore = (preloadedState = {}) => (createStore(RootReducer, preloadedState, applyMiddleware(thunk, logger)));
+
 document.addEventListener('DOMContentLoaded', () => {
-  const reduxStore = createStore(RootReducer, applyMiddleware(thunk, logger));
-  ReactDOM.render(<Router store={reduxStore} />, document.getElementById('react-application'));
+  let store;
+  if (window.currentUser) {
+    const preloadedState = { session: { currentUser: window.currentUser } };
+    store = reduxStore(preloadedState);
+    delete window.currentUser;
+  } else {
+    store = reduxStore();
+  }
+  ReactDOM.render(<Router store={store} />, document.getElementById('react-application'));
 });
