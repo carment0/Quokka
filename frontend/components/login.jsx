@@ -15,9 +15,7 @@ class Login extends React.Component {
   };
 
   update(field) {
-    return (e) => this.setState({
-      [field]: e.currentTarget.value
-    });
+    return (e) => this.setState({ [field]: e.currentTarget.value });
   }
 
   handleFormSubmission = (e) => {
@@ -29,7 +27,7 @@ class Login extends React.Component {
     return (
       <div className="login">
         <div className="google-login">
-          <RaisedButton label="Login with Google" secondary={true} fullWidth={true} />
+          <RaisedButton label="Login with Demo Account" secondary={true} fullWidth={true} />
           <Divider style={{ width: '85%', height: '2px', marginTop: '1rem', marginBottom: '1rem' }} />
         </div>
         <div className="divider">
