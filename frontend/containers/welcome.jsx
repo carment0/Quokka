@@ -103,7 +103,27 @@ class Welcome extends React.Component {
           </section>
         </Paper>
         <section className="content">
-          <div className="dick" />
+          <div className="left-container">
+            <div className="text-box">
+              <div className="head-line">
+                Achieve success with Quokka
+              </div>
+              <div className="catch-phrase">
+                Assign yourself a blowjob a day, keep loneliness away
+              </div>
+              <div className="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in commodo dolor, nec congue tellus.
+                Vestibulum dignissim sodales dolor, in vehicula turpis porta euismod. Proin vel placerat mi, sit amet
+                blandit massa. Proin ac dui urna. Nulla convallis, odio et mollis mollis, tortor purus eleifend diam,
+                ac finibus purus enim vitae metus. Nulla facilisi. In facilisis, tellus vel lobortis maximus, nibh justo
+                tempor lectus, ac vulputate turpis lectus ac purus. Duis ac neque nec nunc placerat cursus. Phasellus
+                dignissim, elit quis pulvinar rhoncus, sem nulla iaculis tellus, nec dapibus sapien nibh at justo.
+                Nullam eu mi quis mauris fermentum pretium. Nulla pellentesque nunc orci, eget hendrerit nisi congue a.
+                Sed rutrum lectus eu dictum sagittis.
+              </div>
+            </div>
+          </div>
+          <div className="righ-container" />
         </section>
         <Dialog
           titleStyle={dialogTitleStyle}

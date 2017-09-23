@@ -68,15 +68,55 @@
   }
 
   .content {
+    display: flex;
+    flex-direction: row;
     height: calc(100% - 8%);
     width: 100%;
     z-index: -1;
-    .dick {
+    background-image: image-url("background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    .left-container {
+      display: flex;
+      flex-direction: column;
       height: 100%;
-      width: 100%;
-      background-image: image-url("background.jpeg");
-      background-repeat: no-repeat;
-      background-size: cover;
+      width: 50%;
+
+      .text-box {
+        width: 100%; // 100% to left-container
+        display: flex;
+        flex-direction: column;
+        position: relative; // Relative to its normal position
+        top: 31%;
+        left: 31%;
+        .head-line {
+          width: 100%;
+          color: white;
+          font-size: 3rem;
+          font-weight: bolder;
+          text-shadow: 1px 1px 4px #effete;
+        }
+
+        .catch-phrase {
+          width: 100%;
+          color: white;
+          font-size: 2rem;
+          font-weight: normal;
+          text-shadow: 1px 1px 4px #effete;
+        }
+
+        .description {
+          width: 70%;
+          color: white;
+          font-size: 1rem;
+          font-weight: lighter;
+        }
+      }
+    }
+
+    .right-container {
+      height: 100%;
+      width: 50%;
     }
   }
 }
