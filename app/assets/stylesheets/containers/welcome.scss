@@ -72,16 +72,21 @@
     flex-direction: row;
     height: calc(100% - 8%);
     width: 100%;
-    z-index: -1;
-    background-image: image-url("background.jpeg");
+    z-index: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), image-url('background.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
+    &:hover {
+      background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), image-url('background.jpeg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
     .left-container {
       display: flex;
       flex-direction: column;
       height: 100%;
       width: 50%;
-
       .text-box {
         width: 100%; // 100% to left-container
         display: flex;
