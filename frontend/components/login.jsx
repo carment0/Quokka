@@ -5,6 +5,7 @@ import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
 
+const fatDividerStyle = { width: '85%', height: '2px', marginTop: '1rem', marginBottom: '1rem' };
 
 class Login extends React.Component {
   state = { username: '', password: '' };
@@ -23,16 +24,16 @@ class Login extends React.Component {
     this.props.dispatchLogin(this.state);
   }
 
+  demoLogin() {
+    return (e) => {
+      e.preventDefault();
+      this.props.dispatchLogin({ username: 'guest user', password: '123456' });
+    };
+  }
+
   render() {
     return (
       <div className="login">
-        <div className="google-login">
-          <RaisedButton label="Login with Demo Account" secondary={true} fullWidth={true} />
-          <Divider style={{ width: '85%', height: '2px', marginTop: '1rem', marginBottom: '1rem' }} />
-        </div>
-        <div className="divider">
-          <div className="text">OR</div>
-        </div>
         <form className="login-form" onSubmit={this.handleFormSubmission}>
           <TextField
             fullWidth={true}
@@ -58,6 +59,12 @@ class Login extends React.Component {
               onClick={this.props.handleDialogClose} />
           </div>
         </form>
+        <div className="divider">
+          <Divider style={fatDividerStyle} />
+        </div>
+        <div className="demo-login">
+          <RaisedButton label="Login with Demo Account" secondary={true} fullWidth={true} onClick={this.demoLogin()} />
+        </div>
       </div>
     );
   }

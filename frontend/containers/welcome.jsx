@@ -64,6 +64,7 @@ class Welcome extends React.Component {
       return (
         <Signup
           dispatchSignup={this.props.dispatchSignup}
+          dispatchLogin={this.props.dispatchLogin}
           handleDialogClose={this.handleDialogClose} />
       );
     }
@@ -76,7 +77,7 @@ class Welcome extends React.Component {
 
   get dialogTitle() {
     if (this.state.type === FormTypes.SIGN_UP) {
-      return 'Sign up for Quokka';
+      return 'Sign Up';
     }
     return 'Login';
   }
@@ -123,7 +124,7 @@ class Welcome extends React.Component {
               </div>
             </div>
           </div>
-          <div className="righ-container" />
+          <div className="right-container" />
         </section>
         <Dialog
           titleStyle={dialogTitleStyle}
