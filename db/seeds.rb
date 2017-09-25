@@ -38,9 +38,3 @@ assignment_1 = TaskAssignment.create(user_id: user_2.id, task_id: task_1.id)
 assignment_2 = TaskAssignment.create(user_id: user_1.id, task_id: task_2.id)
 assignment_3 = TaskAssignment.create(user_id: user_2.id, task_id: task_2.id)
 assignment_4 = TaskAssignment.create(user_id: user_1.id, task_id: task_3.id)
-
-# 5 seeds
-# 6 util/actions
-# 7 reducers
-# 10 container
-# 12 components
