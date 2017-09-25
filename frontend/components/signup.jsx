@@ -28,7 +28,7 @@ class Signup extends React.Component {
   demoLogin() {
     return (e) => {
       e.preventDefault();
-      this.props.dispatchLogin({ username: 'guest user', password: '123456' });
+      this.props.dispatchLogin({ username: 'guestuser', password: '123456' });
     };
   }
 

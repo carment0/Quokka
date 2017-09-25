@@ -2,9 +2,15 @@ class User < ApplicationRecord
 
   attr_reader :password
 
-  validates :username, :password_digest, :session_token, presence: true
+  validates :username, :password_digest, :session_token, :name, presence: true
   validates :username, uniqueness: true
   validates :password, length: { minimum: 6 }, allow_nil: true
+
+  has_many :administrated_projects
+
+  has_many :task_assignments
+  has_many :assigned_tasks, through: :task_assignments, source: :task
+  has_many :projects, through: :assigned_tasks, source: :project
 
   after_initialize :ensure_session_token
 
@@ -30,6 +36,9 @@ class User < ApplicationRecord
   end
 
   private
+  def ensure_first_and_last_name
+    self.name ||= "Full name"
+  end
 
   def ensure_session_token
     generate_unique_session_token unless self.session_token
