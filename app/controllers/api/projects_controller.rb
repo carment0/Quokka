@@ -2,11 +2,13 @@ class Api::ProjectsController < ApplicationController
   before_action :require_logged_in
 
   def index
-    render json: Project.all
+    @project = Project.all
+    render json: "index.json.jbuilder"
   end
 
   def show
-    render json: Project.find(params[:id])
+    @project = Project.find(params[:id])
+    render "show.json.jbuilder"
   end
 
   def create

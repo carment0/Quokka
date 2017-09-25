@@ -2,11 +2,13 @@ class Api::TasksController < ApplicationController
   before_action :require_logged_in
 
   def index
-    render json: Task.all
+    @task = Task.all
+    render json: "index.json.jbuilder"
   end
 
   def show
-    render json: Task.find(params[:id])
+    @task = Task.find(params[:id])
+    render "show.json.jbuilder"
   end
 
   def create
