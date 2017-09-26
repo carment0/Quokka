@@ -2,7 +2,12 @@ export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS';
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT';
 export const REMOVE_PROJECT = 'REMOVE_PROJECT';
 export const RECEIVE_PROJECT_ERRORS = 'RECEIVE_PROJECT_ERRORS';
+export const RECEIVE_ASSIGNED_PROJECTS = 'RECEIVE_ASSIGNED_PROJECTS';
 
+export const receiveAssignedProjects = (projects) => ({
+  type: RECEIVE_ASSIGNED_PROJECTS,
+  projects
+});
 
 export const receiveProjects = (projects) => ({
   type: RECEIVE_PROJECTS,
@@ -19,7 +24,7 @@ export const removeProject = (project) => ({
   project
 });
 
-export const receiveErrors = (errors) => ({
+export const receiveProjectErrors = (errors) => ({
   type: RECEIVE_PROJECT_ERRORS,
   errors
 });
@@ -28,6 +33,13 @@ export const fetchProjects = () => (dispatch) => (
   $.ajax({ method: 'GET', url: '/api/projects' })
     .then((projects) => (
       dispatch(receiveProjects(projects))
+    ))
+);
+
+export const fetchAssignedProjects = (userId) => (dispatch) => (
+  $.ajax({ method: 'GET', url: `/api/users/${userId}/projects/assigned` })
+    .then((projects) => (
+      dispatch(receiveAssignedProjects(projects))
     ))
 );
 
@@ -44,7 +56,7 @@ export const createProject = (new_project) => (dispatch) => (
       dispatch(receiveProject(project))
     ))
     .fail((err) => (
-      dispatch(receiveErrors(err.responseJSON))
+      dispatch(receiveProjectErrors(err.responseJSON))
     ))
 );
 
@@ -54,7 +66,7 @@ export const updateProject = (updated_project) => (dispatch) => (
       dispatch(receiveProject(project))
     ))
     .fail((err) => (
-      dispatch(receiveErrors(err.responseJSON))
+      dispatch(receiveProjectErrors(err.responseJSON))
     ))
 );
 

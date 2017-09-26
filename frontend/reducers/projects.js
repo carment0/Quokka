@@ -1,30 +1,33 @@
+import { combineReducers } from 'redux';
 import merge from 'lodash/merge';
 
-import {
-  RECEIVE_PROJECTS,
-  RECEIVE_PROJECT,
-  REMOVE_PROJECT,
-  RECEIVE_PROJECT_ERRORS
-} from '../actions/project_actions';
+import AssignedProjectReducer from './projects/assigned';
+import { RECEIVE_PROJECTS, RECEIVE_PROJECT, REMOVE_PROJECT } from '../actions/project_actions';
 
-const ProjectReducer = (oldState = {}, action) => {
+
+const AllProjectReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
+
   switch (action.type) {
     case RECEIVE_PROJECTS:
       const nextState = merge({}, oldState);
       action.projects.forEach((project) => { nextState[project.id] = project; });
       return nextState;
+
     case RECEIVE_PROJECT:
       return merge({}, oldState, { [action.project.id]: action.project });
+
     case REMOVE_PROJECT:
       const newState = merge({}, oldState);
       delete newState[action.project.id];
       return newState;
-    case RECEIVE_PROJECT_ERRORS:
-      return action.errors;
+
     default:
       return oldState;
   }
 };
 
-export default ProjectReducer;
+export default combineReducers({
+  all: AllProjectReducer,
+  assigned: AssignedProjectReducer
+});
