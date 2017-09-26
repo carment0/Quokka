@@ -3,14 +3,20 @@ export const RECEIVE_PROJECT = 'RECEIVE_PROJECT';
 export const REMOVE_PROJECT = 'REMOVE_PROJECT';
 export const RECEIVE_PROJECT_ERRORS = 'RECEIVE_PROJECT_ERRORS';
 export const RECEIVE_ASSIGNED_PROJECTS = 'RECEIVE_ASSIGNED_PROJECTS';
+export const RECEIVE_ADMINISTRATED_PROJECTS = 'RECEIVE_ADMINISTRATED_PROJECTS';
+
+export const receiveProjects = (projects) => ({
+  type: RECEIVE_PROJECTS,
+  projects
+});
 
 export const receiveAssignedProjects = (projects) => ({
   type: RECEIVE_ASSIGNED_PROJECTS,
   projects
 });
 
-export const receiveProjects = (projects) => ({
-  type: RECEIVE_PROJECTS,
+export const receiveAdministratedProjects = (projects) => ({
+  type: RECEIVE_ADMINISTRATED_PROJECTS,
   projects
 });
 
@@ -40,6 +46,13 @@ export const fetchAssignedProjects = (userId) => (dispatch) => (
   $.ajax({ method: 'GET', url: `/api/users/${userId}/projects/assigned` })
     .then((projects) => (
       dispatch(receiveAssignedProjects(projects))
+    ))
+);
+
+export const fetchAdministratedProjects = (userId) => (dispatch) => (
+  $.ajax({ method: 'GET', url: `/api/users/${userId}/projects/administrated` })
+    .then((projects) => (
+      dispatch(receiveAdministratedProjects(projects))
     ))
 );
 

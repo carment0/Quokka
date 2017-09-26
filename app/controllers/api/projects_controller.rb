@@ -11,6 +11,7 @@ class Api::ProjectsController < ApplicationController
     render "show.json.jbuilder"
   end
 
+  # .where, .join => ActiveRecord Query Methods (sql)
   def user_administrated_projects
     @projects = Project.where("admin_id = ?", params[:user_id])
     render "index.json.jbuilder"

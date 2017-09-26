@@ -12,6 +12,7 @@ class Project < ApplicationRecord
            through: :tasks,
            source: :task_assignments
 
+# { distinct } => no duplicates of the same user when they have multiple tasks assigned in same project
   has_many :task_assignees,
            -> { distinct },
            through: :task_assignments,

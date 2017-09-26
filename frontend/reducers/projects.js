@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 import merge from 'lodash/merge';
 
 import AssignedProjectReducer from './projects/assigned';
+import AdministratedProjectReducer from './projects/administrated';
+
 import { RECEIVE_PROJECTS, RECEIVE_PROJECT, REMOVE_PROJECT } from '../actions/project_actions';
 
 
@@ -29,5 +31,6 @@ const AllProjectReducer = (oldState = {}, action) => {
 
 export default combineReducers({
   all: AllProjectReducer,
-  assigned: AssignedProjectReducer
+  assigned: AssignedProjectReducer,
+  administrated: AdministratedProjectReducer
 });
