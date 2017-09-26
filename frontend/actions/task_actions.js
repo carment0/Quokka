@@ -1,6 +1,7 @@
 export const RECEIVE_TASKS = 'RECEIVE_TASKS';
 export const RECEIVE_TASK = 'RECEIVE_TASK';
 export const REMOVE_TASK = 'REMOVE_TASK';
+export const RECEIVE_TASK_ERRORS = 'RECEIVE_TASK_ERRORS';
 
 
 export const receiveTasks = (tasks) => ({
@@ -16,6 +17,11 @@ export const receiveTask = (task) => ({
 export const removeTask = (task) => ({
   type: REMOVE_TASK,
   task
+});
+
+export const receiveErrors = (errors) => ({
+  type: RECEIVE_TASK_ERRORS,
+  errors
 });
 
 export const fetchTasks = (project_id) => (dispatch) => (
@@ -37,12 +43,18 @@ export const createTask = (project_id, new_task) => (dispatch) => (
     .then((task) => (
       dispatch(receiveTask(task))
     ))
+    .fail((err) => (
+      dispatch(receiveErrors(err.responseJSON))
+    ))
 );
 
 export const updateTask = (project_id, updated_task) => (dispatch) => (
   $.ajax({ method: 'PATCH', url: `api/projects/${project_id}/tasks/${updated_task.id}`, data: { updated_task } })
     .then((task) => (
       dispatch(receiveTask(task))
+    ))
+    .fail((err) => (
+      dispatch(receiveErrors(err.responseJSON))
     ))
 );
 

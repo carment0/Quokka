@@ -16,8 +16,8 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/session_actions';
 
 // Quokka imports
-import Project_Index from '../components/project_index';
-import Task_Index from '../components/task_index';
+import Project_Index from './project_index';
+import Task_Index from './task_index';
 
 // Routes
 import ProtectedRoute from '../routes/protected_route';

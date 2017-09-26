@@ -1,6 +1,7 @@
 export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS';
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT';
 export const REMOVE_PROJECT = 'REMOVE_PROJECT';
+export const RECEIVE_PROJECT_ERRORS = 'RECEIVE_PROJECT_ERRORS';
 
 
 export const receiveProjects = (projects) => ({
@@ -16,6 +17,11 @@ export const receiveProject = (project) => ({
 export const removeProject = (project) => ({
   type: REMOVE_PROJECT,
   project
+});
+
+export const receiveErrors = (errors) => ({
+  type: RECEIVE_PROJECT_ERRORS,
+  errors
 });
 
 export const fetchProjects = () => (dispatch) => (
@@ -37,12 +43,18 @@ export const createProject = (new_project) => (dispatch) => (
     .then((project) => (
       dispatch(receiveProject(project))
     ))
+    .fail((err) => (
+      dispatch(receiveErrors(err.responseJSON))
+    ))
 );
 
 export const updateProject = (updated_project) => (dispatch) => (
   $.ajax({ method: 'PATCH', url: `api/projects/${updated_project.id}`, data: { updated_project } })
     .then((project) => (
       dispatch(receiveProject(project))
+    ))
+    .fail((err) => (
+      dispatch(receiveErrors(err.responseJSON))
     ))
 );
 

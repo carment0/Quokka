@@ -3,7 +3,8 @@ import merge from 'lodash/merge';
 import {
   RECEIVE_TASKS,
   RECEIVE_TASK,
-  REMOVE_TASK
+  REMOVE_TASK,
+  RECEIVE_TASK_ERRORS
 } from '../actions/task_actions';
 
 const TaskReducer = (oldState = {}, action) => {
@@ -19,6 +20,8 @@ const TaskReducer = (oldState = {}, action) => {
       const newState = merge({}, oldState);
       delete newState[action.task.id];
       return newState;
+    case RECEIVE_TASK_ERRORS:
+      return action.errors;
     default:
       return oldState;
   }

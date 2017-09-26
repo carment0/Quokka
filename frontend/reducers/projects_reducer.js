@@ -3,7 +3,8 @@ import merge from 'lodash/merge';
 import {
   RECEIVE_PROJECTS,
   RECEIVE_PROJECT,
-  REMOVE_PROJECT
+  REMOVE_PROJECT,
+  RECEIVE_PROJECT_ERRORS
 } from '../actions/project_actions';
 
 const ProjectReducer = (oldState = {}, action) => {
@@ -19,6 +20,8 @@ const ProjectReducer = (oldState = {}, action) => {
       const newState = merge({}, oldState);
       delete newState[action.project.id];
       return newState;
+    case RECEIVE_PROJECT_ERRORS:
+      return action.errors;
     default:
       return oldState;
   }
