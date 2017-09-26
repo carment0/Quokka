@@ -11,6 +11,23 @@ class Api::ProjectsController < ApplicationController
     render "show.json.jbuilder"
   end
 
+  def user_administrated_projects
+    @projects = Project.where("admin_id = ?", params[:user_id])
+    render "index.json.jbuilder"
+  end
+
+  def user_assigned_projects
+    assigned_tasks = Task.joins(:task_assignments).where("user_id = ?", params[:user_id])
+    projects_map_by_id = Hash.new
+    assigned_tasks.each do |task|
+      project = task.project
+      projects_map_by_id[project.id] = project
+    end
+
+    @projects = projects_map_by_id
+    render "index.json.jbuilder"
+  end
+
   def create
     @project = current_user.project.new(project_params)
     if @project.save

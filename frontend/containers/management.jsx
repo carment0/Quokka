@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 // Material themes
 import AppBar from 'material-ui/AppBar';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -16,8 +15,7 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/session_actions';
 
 // Quokka imports
-import Project_Index from './project_index';
-import Task_Index from './task_index';
+import ProjectIndex from './project_index';
 
 // Routes
 import ProtectedRoute from '../routes/protected_route';
@@ -63,8 +61,7 @@ class Management extends React.Component {
               <div className="user-notification-sidebar">my notifications</div>
             </div>
             <div className="right-container">
-              <ProtectedRoute path="/projects" component={Project_Index} />
-              <ProtectedRoute path="/tasks" component={Task_Index} />
+              <ProtectedRoute path="/projects" component={ProjectIndex} />
               <h2 className="header-name">Hi, {this.props.currentUser.username}!</h2>
               <button className="header-button" onClick={() => this.props.dispatchLogout()}>Log Out</button>
             </div>

@@ -18,6 +18,18 @@ project_1 = Project.create(name: "Protein ADS122",
                            admin_id: admin.id,
                            deadline: "2017-10-01")
 
+project_2 = Project.create(name: "Protein ADS123",
+                          description: "Exploring the efficacy of ADS123",
+                          completed: false,
+                          admin_id: admin.id,
+                          deadline: "2017-10-02")
+
+project_3 = Project.create(name: "Protein ADS124",
+                          description: "Exploring the efficacy of ADS124",
+                          completed: false,
+                          admin_id: admin.id,
+                          deadline: "2017-10-03")
+
 task_1 = Task.create(name: "Materials",
                      description: "Request protein",
                      completed: true,
