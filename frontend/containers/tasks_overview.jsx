@@ -18,9 +18,7 @@ class TasksOverview extends React.Component {
   }
 
   componentDidMount() {
-
     this.props.dispatchFetchAssignedTasks(this.props.currentUser.id);
-        console.log("hello")
   }
 
   render() {

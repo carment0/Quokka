@@ -1,6 +1,6 @@
 import merge from 'lodash/merge';
 
-import { RECEIVE_ASSIGNED_TASKS } from '../../actions/project_actions';
+import { RECEIVE_ASSIGNED_TASKS } from '../../actions/task_actions';
 
 export default (oldState = {}, action) => {
   Object.freeze(oldState);
@@ -8,8 +8,8 @@ export default (oldState = {}, action) => {
   const newState = {};
   switch (action.type) {
     case RECEIVE_ASSIGNED_TASKS:
-      action.tasks.forEach((task) => {
-        newState[task.id] = task;
+      action.projects.forEach((project) => {
+        newState[project.id] = project;
       });
       return merge({}, oldState, newState);
 
