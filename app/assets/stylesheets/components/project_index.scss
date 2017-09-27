@@ -1,0 +1,22 @@
+li {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+
+  .project-detail-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
+    }
+
+  .project-detail-2 {
+    padding-left: 30px;
+  }
+
+  .graph-summary {
+    align-self: center;
+  }
+}

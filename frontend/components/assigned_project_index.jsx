@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 
 class AssignedProjectIndex extends React.Component {
   static propTypes = {
@@ -14,15 +14,33 @@ class AssignedProjectIndex extends React.Component {
 
     return Object.keys(this.props.assignedProjects).map((projectId) => {
       const project = this.props.assignedProjects[projectId];
-      return <li key={project.name}>{project.name}</li>;
+      return (
+        <li key={project.name}>
+          <div className="project-summary">
+            <Link to={`/projects/${project.id}`}
+              className="project-link"
+              style={{ textDecoration: 'none', color: 'black' }}>
+              <div className="project-detail-1">
+                <name> {project.name} </name>
+                <deadline> Deadline: {project.deadline} </deadline>
+              </div>
+              <div className="project-detail-2">
+                <description> {project.description} </description>
+              </div>
+            </Link>
+          </div>
+          <div className="graph-summary">
+              graph coming soon
+          </div>
+        </li>);
     });
   }
 
   render() {
     return (
-      <div>
-        <h1>Your assigned projects</h1>
-        <ul>{this.projects}</ul>
+      <div className="assigned-projects">
+        <h4>Your Assigned Projects</h4>
+        <ul className="assigned-projects-list">{this.projects}</ul>
       </div>
     );
   }

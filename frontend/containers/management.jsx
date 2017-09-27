@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Material UI
 import Drawer from 'material-ui/Drawer';
@@ -74,7 +75,13 @@ class Management extends React.Component {
             </div>
           </div>
 
+
           <div className="content-body">
+            <div className="switch-component-section">
+              <Link to="/management/tasks" className="task-link"> My Tasks </Link>|
+              <Link to="/management/projects" className="project-link"> My Projects </Link>|
+              <Link to="/management/calendar" className="task-link"> My Calendars </Link>
+            </div>
             <Paper zDepth={1} className="dash-board">
               <Switch>
                 <Route exact path="/management/" component={ProjectsOverview} />
