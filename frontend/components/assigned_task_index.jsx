@@ -6,22 +6,35 @@ class AssignedTaskIndex extends React.Component {
     assignedTasks: PropTypes.object.isRequired
   }
 
-  get tasks() {
+  get project() {
     if (Object.keys(this.props.assignedTasks).length === 0) {
       return <div />;
     }
 
     return Object.keys(this.props.assignedTasks).map((projectId) => {
       const project = this.props.assignedTasks[projectId];
-      return (
-        <li key={project.name}>{project.name}</li>);
+      console.log(project.tasks);
+      return project.tasks.map((task) => {
+        return (
+          <ul key={task.name}>
+            <h4>Project: {project.name}</h4>
+            <li>
+              <div className="task-details">
+                <tname>{task.name} : {task.description}</tname>
+                <tduedate>{task.due_date}</tduedate>
+              </div>
+            </li>
+          </ul>
+        );
+      });
     });
   }
+
 
   render() {
     return (
       <div className="assigned-tasks">
-        <ul className="assigned-tasks-list">{this.tasks}</ul>
+        <div className="assigned-tasks-list">{this.project}</div>
       </div>
     );
   }
