@@ -2,22 +2,48 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-// Quokka imports
-import AdministratedProjectIndex from './administrated_project_index';
-import AssignedProjectIndex from './assigned_project_index';
+// Components
+import AdministratedProjectIndex from '../components/administrated_project_index';
+import AssignedProjectIndex from '../components/assigned_project_index';
 
-// This component should be connected, not AdministratedProjectIndex, not AssignedProjectIndex
-// We simply pass down the necessary props to the index pages
+// Actions
+import { fetchAssignedProjects, fetchAdministratedProjects } from '../actions/project_actions';
+
+
 class ProjectsOverview extends React.Component {
+  static propTypes = {
+    dispatchFetchAssignedProjects: PropTypes.func.isRequired,
+    dispatchFetchAdministratedProjects: PropTypes.func.isRequired,
+    currentUser: PropTypes.object.isRequired,
+    assignedProjects: PropTypes.object.isRequired,
+    administratedProjects: PropTypes.object.isRequired
+  }
+
+  componentDidMount() {
+    this.props.dispatchFetchAdministratedProjects(this.props.currentUser.id);
+    this.props.dispatchFetchAssignedProjects(this.props.currentUser.id);
+  }
+
   render() {
     return (
       <div>
         <h1>Project Overview</h1>
-        <AdministratedProjectIndex />
-        <AssignedProjectIndex />
+        <AdministratedProjectIndex administratedProjects={this.props.administratedProjects} />
+        <AssignedProjectIndex assignedProjects={this.props.assignedProjects} />
       </div>
     );
   }
 }
 
-export default ProjectsOverview;
+const mapStateToProps = (state) => ({
+  currentUser: state.sessions.currentUser,
+  assignedProjects: state.projects.assigned,
+  administratedProjects: state.projects.administrated
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchFetchAssignedProjects: (userId) => dispatch(fetchAssignedProjects(userId)),
+  dispatchFetchAdministratedProjects: (userId) => dispatch(fetchAdministratedProjects(userId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsOverview);
