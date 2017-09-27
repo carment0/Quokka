@@ -1,17 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 
+// Material UI
 import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
+import Paper from 'material-ui/Paper';
 
 // Actions
 import { logout } from '../actions/session_actions';
 
-// Quokka imports
-import AdministratedProjectIndex from './administrated_project_index';
-import AssignedProjectIndex from './assigned_project_index';
+// Components
+import ProjectsOverview from './projects_overview';
+import TasksOverview from './tasks_overview';
+import Calendar from './calendar';
 
 
 class Management extends React.Component {
@@ -60,11 +64,26 @@ class Management extends React.Component {
           </Drawer>
         </div>
         <div className={this.managementMainContentClassName}>
-          <h2 className="header-name">Hi, {this.props.currentUser.username}!</h2>
-          <RaisedButton label="Log out" onClick={this.handleLogout} />
-          <RaisedButton label="Menu" onClick={this.handleSidebarOpen} />
-          <AdministratedProjectIndex />
-          <AssignedProjectIndex />
+          <div className="nav-bar">
+            <div className="left-container">
+              <RaisedButton label="Menu" onClick={this.handleSidebarOpen} />
+            </div>
+            <div className="right-container">
+              <h2 className="header-name">Hi, {this.props.currentUser.username}!</h2>
+              <RaisedButton label="Log out" onClick={this.handleLogout} />
+            </div>
+          </div>
+
+          <div className="content-body">
+            <Paper zDepth={1} className="dash-board">
+              <Switch>
+                <Route exact path="/management/" component={ProjectsOverview} />
+                <Route path="/management/projects" component={ProjectsOverview} />
+                <Route path="/management/tasks" component={TasksOverview} />
+                <Route path="/management/calendar" component={Calendar} />
+              </Switch>
+            </Paper>
+          </div>
         </div>
       </div>
     );
