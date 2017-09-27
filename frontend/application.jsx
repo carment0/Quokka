@@ -23,6 +23,7 @@ import AuthRoute from './routes/auth_route';
 import Welcome from './containers/welcome';
 import Management from './containers/management';
 import RootReducer from './reducers';
+import AdministratedProjectIndex from './containers/administrated_project_index';
 
 
 class Application extends React.Component {
@@ -48,6 +49,7 @@ class Application extends React.Component {
         <div>
           <AuthRoute exact path="/welcome" component={Welcome} />
           <ProtectedRoute exact path="/management" component={Management} />
+          <ProtectedRoute path="/projects/administrated" component={AdministratedProjectIndex} />
         </div>
       </MuiThemeProvider>
     );
@@ -70,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const preloadedState = {};
 
   if (window.currentUser) {
-    preloadedState.session = { currentUser: window.currentUser };
+    preloadedState.sessions = { currentUser: window.currentUser };
     delete window.currentUser;
   }
 

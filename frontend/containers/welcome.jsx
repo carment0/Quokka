@@ -136,7 +136,7 @@ class Welcome extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: Boolean(state.session.currentUser),
+  loggedIn: Boolean(state.sessions.currentUser),
   errors: state.errors.session
 });
 

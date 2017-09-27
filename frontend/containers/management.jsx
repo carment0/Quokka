@@ -15,10 +15,9 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/session_actions';
 
 // Quokka imports
-import ProjectIndex from './project_index';
 
 // Routes
-import ProtectedRoute from '../routes/protected_route';
+// import ProtectedRoute from '../routes/protected_route';
 
 class Management extends React.Component {
   static propTypes = {
@@ -61,7 +60,6 @@ class Management extends React.Component {
               <div className="user-notification-sidebar">my notifications</div>
             </div>
             <div className="right-container">
-              <ProtectedRoute path="/projects" component={ProjectIndex} />
               <h2 className="header-name">Hi, {this.props.currentUser.username}!</h2>
               <button className="header-button" onClick={() => this.props.dispatchLogout()}>Log Out</button>
             </div>
@@ -77,8 +75,8 @@ class Management extends React.Component {
   }
 }
 
-const mapStateToProps = ({ session }) => ({
-  currentUser: session.currentUser
+const mapStateToProps = ({ sessions }) => ({
+  currentUser: sessions.currentUser
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -18,7 +18,8 @@ AuthRoute.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return { isAuthenticated: Boolean(state.session.currentUser) };
+
+  return { isAuthenticated: Boolean(state.sessions.currentUser) };
 };
 
 export default withRouter(connect(mapStateToProps, null)(AuthRoute));
