@@ -1,12 +1,39 @@
-.management-page {
+.management {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
 
   .management-main {
-  display: inherit;
-  flex-direction: row;
+    display: inherit;
+    flex-direction: row;
+    height: 92%;
+    width: 100%;
+
+    .left-sidebar {
+      display: inherit;
+      flex-direction: column;
+      height: 100%; // Relative to management-main
+      width: 10%;
+    }
+
+    .right-container {
+      display: inherit;
+      flex-direction: column;
+      height: 100%;
+      width: 90%;
+
+      // Obviously header items should not belong to right container but whatever, too lazy to fix them all
+      .header-name {
+        // Put in style, whatever you like
+      }
+
+      .header-button {
+        // Temporary styling
+        height: 2rem;
+        width: 4rem;
+      }
+    }
   }
 
   .management-footer {
@@ -17,10 +44,5 @@
     flex-direction: row;
     justify-content: flex-end;
     z-index: 69;
-
-    .management-footer > * {
-
-    }
   }
-
 }

@@ -3,38 +3,45 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchAdministratedProjects } from '../actions/project_actions';
 
-class AdministratedProject extends React.Component {
+class AdministratedProjectIndex extends React.Component {
   static propTypes = {
-    dispatchfetchAdministratedProjects: PropTypes.func.isRequired,
+    dispatchFetchAdministratedProjects: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
-    administrated: PropTypes.object.isRequired
+    administratedProjects: PropTypes.object.isRequired
   }
 
   componentWillMount() {
-    this.props.dispatchfetchAdministratedProjects(this.props.currentUser.id);
+    this.props.dispatchFetchAdministratedProjects(this.props.currentUser.id);
+  }
+
+  get projects() {
+    if (Object.keys(this.props.administratedProjects).length === 0) {
+      return <div />;
+    }
+
+    return Object.keys(this.props.administratedProjects).map((projectId) => {
+      const project = this.props.administratedProjects[projectId];
+      return <li key={project.name}>{project.name}</li>;
+    });
   }
 
   render() {
-    const { administrated } = this.props;
     return (
-      <div className="administrated-index">
-        <h3>Your projects:</h3>
-        <ul>
-          {administrated.map((project) =>  project)}
-        </ul>
+      <div>
+        <h1>Your administrated projects</h1>
+        <ul>{this.projects}</ul>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ state }) => ({
+const mapStateToProps = (state) => ({
   currentUser: state.sessions.currentUser,
-  administrated: state.projects.administrated
+  administratedProjects: state.projects.administrated
 });
-
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchfetchAdministratedProjects: (userId) => dispatch(fetchAdministratedProjects(userId))
+  dispatchFetchAdministratedProjects: (userId) => dispatch(fetchAdministratedProjects(userId))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdministratedProject);
+export default connect(mapStateToProps, mapDispatchToProps)(AdministratedProjectIndex);
