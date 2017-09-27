@@ -25,7 +25,7 @@ class Api::ProjectsController < ApplicationController
       projects_map_by_id[project.id] = project
     end
 
-    @projects = projects_map_by_id
+    @projects = projects_map_by_id.values
     render "index.json.jbuilder"
   end
 

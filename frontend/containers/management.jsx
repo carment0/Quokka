@@ -15,9 +15,11 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/session_actions';
 
 // Quokka imports
+import AdministratedProjectIndex from './administrated_project_index';
+import AssignedProjectIndex from './assigned_project_index';
 
 // Routes
-// import ProtectedRoute from '../routes/protected_route';
+import ProtectedRoute from '../routes/protected_route';
 
 class Management extends React.Component {
   static propTypes = {
@@ -62,6 +64,8 @@ class Management extends React.Component {
             <div className="right-container">
               <h2 className="header-name">Hi, {this.props.currentUser.username}!</h2>
               <button className="header-button" onClick={() => this.props.dispatchLogout()}>Log Out</button>
+              <ProtectedRoute path="/users/:userId/projects/administrated" component={AdministratedProjectIndex} />
+              <ProtectedRoute path="/users/:userId/projects/assigned" component={AssignedProjectIndex} />
             </div>
           </div>
           <div className="management-footer">
