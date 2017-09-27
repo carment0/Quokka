@@ -2,12 +2,19 @@ export const RECEIVE_TASKS = 'RECEIVE_TASKS';
 export const RECEIVE_TASK = 'RECEIVE_TASK';
 export const REMOVE_TASK = 'REMOVE_TASK';
 export const RECEIVE_TASK_ERRORS = 'RECEIVE_TASK_ERRORS';
+export const RECEIVE_ASSIGNED_TASKS = 'RECEIVE_ASSIGNED_TASKS';
 
 
 export const receiveTasks = (tasks) => ({
   type: RECEIVE_TASKS,
   tasks
 });
+
+export const receiveAssignedTasks = (tasks) => ({
+  type: RECEIVE_ASSIGNED_TASKS,
+  tasks
+});
+
 
 export const receiveTask = (task) => ({
   type: RECEIVE_TASK,
@@ -28,6 +35,13 @@ export const fetchTasks = (project_id) => (dispatch) => (
   $.ajax({ method: 'GET', url: `/api/projects/${project_id}/tasks` })
     .then((tasks) => (
       dispatch(receiveTasks(tasks))
+    ))
+);
+
+export const fetchAssignedTasks = (userId) => (dispatch) => (
+  $.ajax({ method: 'GET', url: `/api/users/${userId}/tasks/assigned` })
+    .then((tasks) => (
+      dispatch(receiveAssignedTasks(tasks))
     ))
 );
 

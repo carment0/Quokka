@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       # get => only GET request
       get 'projects/administrated', to: 'projects#user_administrated_projects'
       get 'projects/assigned', to: 'projects#user_assigned_projects'
+      get 'tasks/assigned', to: 'tasks#user_assigned_tasks'
     end
 
     resource :session, only: [:create, :destroy, :show]

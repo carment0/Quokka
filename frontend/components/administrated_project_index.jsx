@@ -21,7 +21,7 @@ class AdministratedProjectIndex extends React.Component {
               className="project-link"
               style={{ textDecoration: 'none', color: 'black' }}>
               <div className="project-detail-1">
-                <name> {project.name} </name>
+                <name style={{ textDecoration: 'underline' }}> {project.name} </name>
                 <deadline> Deadline: {project.deadline} </deadline>
               </div>
               <div className="project-detail-2">
