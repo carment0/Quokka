@@ -6,28 +6,28 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(name: "Guest User", username: "guestuser", password: "123456")
+admin_1 = User.create(name: "Guest User", username: "guestuser", password: "123456")
+admin_2 = User.create(name: "Calvin Feng", username: "cfeng", password: "12341234")
 
-admin = User.create(name: "Calvin Feng", username: "cfeng", password: "12341234")
 user_1 = User.create(name: "Carmen To", username: "cto", password: "123123")
 user_2 = User.create(name: "Sam Madison", username: "smadison", password: "qweqwe")
 
 project_1 = Project.create(name: "Protein ADS122",
                            description: "Exploring the efficacy of ADS122",
                            completed: false,
-                           admin_id: admin.id,
+                           admin_id: admin_1.id,
                            deadline: "2017-10-01")
 
 project_2 = Project.create(name: "Protein ADS123",
                           description: "Exploring the efficacy of ADS123",
                           completed: false,
-                          admin_id: admin.id,
+                          admin_id: admin_1.id,
                           deadline: "2017-10-02")
 
 project_3 = Project.create(name: "Protein ADS124",
                           description: "Exploring the efficacy of ADS124",
                           completed: false,
-                          admin_id: admin.id,
+                          admin_id: admin_2.id,
                           deadline: "2017-10-03")
 
 task_1 = Task.create(name: "Materials",
@@ -38,15 +38,21 @@ task_1 = Task.create(name: "Materials",
 task_2 = Task.create(name: "Experiment",
                      description: "completed three day PK with ADS122",
                      completed: false,
-                     project_id: project_1.id,
+                     project_id: project_2.id,
                      due_date: "2017-09-26")
 task_3 = Task.create(name: "Presentation slides",
                      description: "Prepare slides with summarized data for project meeting discussion",
                      completed: false,
-                     project_id: project_1.id,
+                     project_id: project_3.id,
                      due_date: "2017-10-30")
 
-assignment_1 = TaskAssignment.create(user_id: user_2.id, task_id: task_1.id)
-assignment_2 = TaskAssignment.create(user_id: user_1.id, task_id: task_2.id)
-assignment_3 = TaskAssignment.create(user_id: user_2.id, task_id: task_2.id)
-assignment_4 = TaskAssignment.create(user_id: user_1.id, task_id: task_3.id)
+
+TaskAssignment.create(user_id: admin_1.id, task_id: task_1.id)
+TaskAssignment.create(user_id: admin_1.id, task_id: task_2.id)
+TaskAssignment.create(user_id: admin_1.id, task_id: task_3.id)
+
+TaskAssignment.create(user_id: user_1.id, task_id: task_2.id)
+TaskAssignment.create(user_id: user_1.id, task_id: task_3.id)
+
+TaskAssignment.create(user_id: user_2.id, task_id: task_1.id)
+TaskAssignment.create(user_id: user_2.id, task_id: task_3.id)

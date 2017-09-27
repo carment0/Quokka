@@ -3,38 +3,46 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchAssignedProjects } from '../actions/project_actions';
 
-class AssignedProject extends React.Component {
+class AssignedProjectIndex extends React.Component {
   static propTypes = {
-    dispatchfetchAssignedProjects: PropTypes.func.isRequired,
+    dispatchFetchAssignedProjects: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
-    assigned: PropTypes.object.isRequired
+    assignedProjects: PropTypes.object.isRequired
   }
 
   componentWillMount() {
-    this.props.dispatchfetchAssignedProjects(this.props.currentUser.id);
+    this.props.dispatchFetchAssignedProjects(this.props.currentUser.id);
+  }
+
+  get projects() {
+    if (Object.keys(this.props.assignedProjects).length === 0) {
+      return <div />;
+    }
+
+    return Object.keys(this.props.assignedProjects).map((projectId) => {
+      const project = this.props.assignedProjects[projectId];
+      return <li key={project.name}>{project.name}</li>;
+    });
   }
 
   render() {
-    const { assigned } = this.props;
     return (
-      <div className="administrated-index">
-        <h3>Projects you are assigned to:</h3>
-        <ul>
-          {assigned.map((project) =>  project)}
-        </ul>
+      <div>
+        <h1>Your assigned projects</h1>
+        <ul>{this.projects}</ul>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ state }) => ({
+const mapStateToProps = (state) => ({
   currentUser: state.sessions.currentUser,
-  assigned: state.projects.assigned
+  assignedProjects: state.projects.assigned
 });
 
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchfetchAssignedProjects: (userId) => dispatch(fetchAssignedProjects(userId))
+  dispatchFetchAssignedProjects: (userId) => dispatch(fetchAssignedProjects(userId))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AssignedProject);
+export default connect(mapStateToProps, mapDispatchToProps)(AssignedProjectIndex);
