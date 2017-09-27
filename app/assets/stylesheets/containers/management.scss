@@ -2,47 +2,71 @@
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
-  .management-main {
+  .main-content {
     display: inherit;
-    flex-direction: row;
-    height: 92%;
+    flex-direction: column;
+    height: 100%;
     width: 100%;
+    background-color: #e0e0e0;
+    -webkit-transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
 
-    .left-sidebar {
+    .nav-bar {
       display: inherit;
-      flex-direction: column;
-      height: 100%; // Relative to management-main
-      width: 10%;
-    }
+      width: 100%;
+      height: 5%;
+      flex-direction: row;
 
-    .right-container {
-      display: inherit;
-      flex-direction: column;
-      height: 100%;
-      width: 90%;
-
-      // Obviously header items should not belong to right container but whatever, too lazy to fix them all
-      .header-name {
-        // Put in style, whatever you like
+      .left-container {
+        display: inherit;
+        width: 50%;
+        height: 100%;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
       }
 
-      .header-button {
-        // Temporary styling
-        height: 2rem;
-        width: 4rem;
+      .right-container {
+        display: inherit;
+        width: 50%;
+        height: 100%;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+      }
+    }
+
+    .content-body {
+      display: inherit;
+      width: 100%;
+      height: 95%;
+      flex-direction: column;
+
+      .dash-board {
+        margin: 2rem 2rem 2rem 2rem;
       }
     }
   }
+  .content-with-menu-open {
+    width: calc(100% - 256px);
+  }
 
-  .management-footer {
-    min-height: 50px;
-    height: 8%;
-    width: 100%;
+
+  .left-side-bar {
     display: inherit;
-    flex-direction: row;
-    justify-content: flex-end;
-    z-index: 69;
+    width: 0px;
+    height: 100%;
+    -webkit-transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
+    -moz-transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
+    -o-transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .left-side-bar-with-menu-open {
+    width: 256px;
   }
 }
