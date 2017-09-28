@@ -19,7 +19,7 @@ class AssignedTaskIndex extends React.Component {
           <ul key={task.name}>
             <h4>Project: {project.name}</h4>
             <li>
-              <div className="task-details">
+              <div className="task-details" style={task.completed ? { color: 'green' } : { color: 'red' }}>
                 <tname>{task.name} : {task.description}</tname>
                 <tduedate>{task.due_date}</tduedate>
               </div>
