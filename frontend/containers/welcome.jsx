@@ -94,11 +94,11 @@ class Welcome extends React.Component {
             <div className="button-container">
               <FlatButton label="Login"
                 className="login-button"
-                secondary={true}
+                primary={true}
                 onClick={this.handleOpenLogin} />
               <FlatButton label="Sign up"
                 className="signup-button"
-                primary={true}
+                secondary={true}
                 onClick={this.handleOpenSignup} />
             </div>
           </section>
