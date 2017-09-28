@@ -24,6 +24,14 @@ import Welcome from './containers/welcome';
 import Management from './containers/management';
 import RootReducer from './reducers';
 
+const customizedTheme = {
+  palette: {
+    primary1Color: '#F7882F',
+    accent1Color: '#F7C331',
+  }
+};
+
+console.log(lightBaseTheme);
 
 class Application extends React.Component {
   static propTypes = {
@@ -44,7 +52,7 @@ class Application extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+      <MuiThemeProvider muiTheme={getMuiTheme(customizedTheme)}>
         <div>
           <AuthRoute exact path="/welcome" component={Welcome} />
           <ProtectedRoute exact path="/management" component={Management} />

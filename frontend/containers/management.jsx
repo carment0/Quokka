@@ -6,9 +6,14 @@ import { Link } from 'react-router-dom';
 
 // Material UI
 import Drawer from 'material-ui/Drawer';
-import RaisedButton from 'material-ui/RaisedButton';
+// import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import FlatButton from 'material-ui/FlatButton';
 
 // Actions
 import { logout } from '../actions/session_actions';
@@ -55,6 +60,30 @@ class Management extends React.Component {
     return 'left-side-bar';
   }
 
+  // NOTE: We should make iconElementLeft an individual component which allows us to render more items into it
+  // Same applies to iconElementRight. We can do a lot of shit with them. Let's do that later
+  get iconElementLeft() {
+    if (this.state.sidebarOpen) {
+      return (
+        <IconButton onClick={this.handleSidebarOpen}>
+          <NavigationClose />
+        </IconButton>
+      );
+    }
+
+    return (
+      <IconButton onClick={this.handleSidebarOpen}>
+        <NavigationMenu />
+      </IconButton>
+    );
+  }
+
+  get iconElementRight() {
+    return (
+      <FlatButton label="Log out" onClick={this.handleLogout} />
+    );
+  }
+
   render() {
     return (
       <div className="management">
@@ -66,15 +95,10 @@ class Management extends React.Component {
         </div>
         <div className={this.managementMainContentClassName}>
           <div className="nav-bar">
-            <div className="left-container">
-              <RaisedButton label="Menu" onClick={this.handleSidebarOpen} />
-            </div>
-            <div className="right-container">
-              <h2 className="header-name">Hi, {this.props.currentUser.username}!</h2>
-              <RaisedButton label="Log out" onClick={this.handleLogout} />
-            </div>
+            <AppBar
+              iconElementLeft={this.iconElementLeft}
+              iconElementRight={this.iconElementRight} />
           </div>
-
 
           <div className="content-body">
             <div className="switch-component-section">
