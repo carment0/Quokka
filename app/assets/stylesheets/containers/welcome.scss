@@ -1,4 +1,10 @@
-// Make sure each container component occupies the whole page
+$blueberry: #6B7A8F;
+$light-apple-core: #eaddcc;
+$apple-core: #DCC7AA;
+$dark-apple-core: #9a8b76;
+$citrus: #F7C331;
+$apricot: #F7882F;
+
 .welcome-page {
   height: 100%;
   width: 100%;
@@ -24,10 +30,6 @@
         width: 12%;
         min-width: 50px;
         display: inherit;
-        // flex-direction: row;
-        // background-image: image-url("logo.png");
-        // background-repeat: no-repeat;
-        // background-size: cover;
       }
 
       .text {

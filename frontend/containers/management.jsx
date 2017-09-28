@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 // Material UI
 import Drawer from 'material-ui/Drawer';
-// import RaisedButton from 'material-ui/RaisedButton';
+import { Tabs, Tab } from 'material-ui/Tabs';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
@@ -14,6 +13,9 @@ import IconButton from 'material-ui/IconButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
+import AssignmentIcon from 'material-ui/svg-icons/action/assignment';
+import ListIcon from 'material-ui/svg-icons/action/list';
+import DateIcon from 'material-ui/svg-icons/action/date-range';
 
 // Actions
 import { logout } from '../actions/session_actions';
@@ -23,6 +25,8 @@ import ProjectsOverview from './projects_overview';
 import TasksOverview from './tasks_overview';
 import Calendar from './calendar';
 
+// Style
+import Colors from '../shared/colors';
 
 class Management extends React.Component {
   state = {
@@ -31,7 +35,7 @@ class Management extends React.Component {
 
   static propTypes = {
     dispatchLogout: PropTypes.func.isRequired,
-    currentUser: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired
   };
 
   handleSidebarOpen = () => {
@@ -60,8 +64,6 @@ class Management extends React.Component {
     return 'left-side-bar';
   }
 
-  // NOTE: We should make iconElementLeft an individual component which allows us to render more items into it
-  // Same applies to iconElementRight. We can do a lot of shit with them. Let's do that later
   get iconElementLeft() {
     if (this.state.sidebarOpen) {
       return (
@@ -80,7 +82,9 @@ class Management extends React.Component {
 
   get iconElementRight() {
     return (
-      <FlatButton label="Log out" onClick={this.handleLogout} />
+      <FlatButton label="Log out"
+        onClick={this.handleLogout}
+        labelStyle={{ color: 'white', fontWeight: '900' }} />
     );
   }
 
@@ -101,11 +105,23 @@ class Management extends React.Component {
           </div>
 
           <div className="content-body">
-            <div className="switch-component-section">
-              <Link to="/management/tasks" className="task-link"> My Tasks </Link>|
-              <Link to="/management/projects" className="project-link"> My Projects </Link>|
-              <Link to="/management/calendar" className="task-link"> My Calendars </Link>
-            </div>
+            <Tabs>
+              <Tab
+                style={{ backgroundColor: Colors.DARK_APPLE_CORE }}
+                icon={<AssignmentIcon />}
+                label="Projects"
+                onActive={() => { this.props.history.push('/management/projects'); }} />
+              <Tab
+                style={{ backgroundColor: Colors.DARK_APPLE_CORE }}
+                icon={<ListIcon />}
+                label="Tasks"
+                onActive={() => { this.props.history.push('/management/tasks'); }} />
+              <Tab
+                style={{ backgroundColor: Colors.DARK_APPLE_CORE }}
+                icon={<DateIcon />}
+                label="Calendar"
+                onActive={() => { this.props.history.push('/management/calendar'); }} />
+            </Tabs>
             <Paper zDepth={1} className="dash-board">
               <Switch>
                 <Route exact path="/management/" component={ProjectsOverview} />
@@ -128,6 +144,5 @@ const mapStateToProps = ({ sessions }) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchLogout: () => dispatch(logout())
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Management);

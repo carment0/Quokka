@@ -24,14 +24,16 @@ import Welcome from './containers/welcome';
 import Management from './containers/management';
 import RootReducer from './reducers';
 
+// Style
+import Colors from './shared/colors';
+
 const customizedTheme = {
   palette: {
-    primary1Color: '#F7882F',
-    accent1Color: '#F7C331',
+    primary1Color: Colors.APRICOT,
+    accent1Color: Colors.CITRUS,
   }
 };
 
-console.log(lightBaseTheme);
 
 class Application extends React.Component {
   static propTypes = {

@@ -1,3 +1,10 @@
+$blueberry: #6B7A8F;
+$light-apple-core: #eaddcc;
+$apple-core: #DCC7AA;
+$dark-apple-core: #9a8b76;
+$citrus: #F7C331;
+$apricot: #F7882F;
+
 .management {
   height: 100%;
   width: 100%;
@@ -9,7 +16,7 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
-    background-color: #DCC7AA;
+    background-color: $light-apple-core;
     -webkit-transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
     -moz-transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
     -o-transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1);
