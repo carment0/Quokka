@@ -4,30 +4,31 @@ import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
 // Material UI
-import Drawer from 'material-ui/Drawer';
 import { Tabs, Tab } from 'material-ui/Tabs';
-import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
+import FlatButton from 'material-ui/FlatButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import FlatButton from 'material-ui/FlatButton';
-import AssignmentIcon from 'material-ui/svg-icons/action/assignment';
 import ListIcon from 'material-ui/svg-icons/action/list';
 import DateIcon from 'material-ui/svg-icons/action/date-range';
+import AssignmentIcon from 'material-ui/svg-icons/action/assignment';
 
 // Actions
 import { logout } from '../actions/session_actions';
 
-// Components
-import ProjectOverview from './projects/project_overview';
+// Other Containers
 import ProjectDetail from './projects/project_detail';
-import TasksOverview from './tasks/tasks_overview';
-import Calendar from './calendar';
+import ProjectOverview from './projects/project_overview';
+import TaskOverview from './tasks/task_overview';
+import CalendarOverview from './calendars/calendar_overview';
 
 // Style
 import Colors from '../shared/colors';
+
 
 class Management extends React.Component {
   state = {
@@ -144,8 +145,8 @@ class Management extends React.Component {
                 <Route exact path="/management/" component={ProjectOverview} />
                 <Route exact path="/management/projects" component={ProjectOverview} />
                 <Route path="/management/projects/:id" component={ProjectDetail} />
-                <Route path="/management/tasks" component={TasksOverview} />
-                <Route path="/management/calendar" component={Calendar} />
+                <Route path="/management/tasks" component={TaskOverview} />
+                <Route path="/management/calendar" component={CalendarOverview} />
               </Switch>
             </Paper>
           </content>

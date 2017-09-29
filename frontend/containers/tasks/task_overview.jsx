@@ -10,7 +10,7 @@ import { fetchAssignedTasks } from '../../actions/task_actions';
 
 // This component should be connected just like what we did in ProjectsOverview
 
-class TasksOverview extends React.Component {
+class TaskOverview extends React.Component {
   static propTypes = {
     dispatchFetchAssignedTasks: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
@@ -40,4 +40,4 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchFetchAssignedTasks: (userId) => dispatch(fetchAssignedTasks(userId))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TasksOverview);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskOverview);
