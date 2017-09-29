@@ -5,7 +5,7 @@
 }
 
 html, body {
-  font-size: 13px;
+  font-size: 12px;
   height: 100vh;
   width: 100vw;
 }
@@ -26,15 +26,22 @@ html, body, h1, h2, h3, h4, h5 {
   }
 }
 
+// Landing page
 @import "containers/welcome.scss";
 @import "components/login.scss";
 @import "components/signup.scss";
 
+
+// Application page
 @import "containers/management.scss";
-@import "components/project_overview.scss";
+
+// == Projects
+@import "containers/project_overview.scss";
+@import "components/assigned_project_index.scss";
+@import "components/admin_project_index.scss";
 
 @import "containers/project_detail.scss";
 @import "components/project_task_item.scss";
 
-
+// == Tasks
 @import "components/task_overview.scss";

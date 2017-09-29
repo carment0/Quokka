@@ -102,7 +102,7 @@ class Management extends React.Component {
     return (
       <FlatButton label="Log out"
         onClick={this.handleLogout}
-        labelStyle={{ color: 'white', fontWeight: '900' }} />
+        labelStyle={{ color: 'white', fontWeight: '900', marginRight: '2rem' }} />
     );
   }
 
@@ -128,17 +128,17 @@ class Management extends React.Component {
                 style={{ backgroundColor: Colors.DARK_APPLE_CORE }}
                 icon={<AssignmentIcon />}
                 label="Projects"
-                onActive={() => { this.props.history.push('/management/projects'); }} />
+                onActive={() => this.props.history.push('/management/projects')} />
               <Tab
                 style={{ backgroundColor: Colors.DARK_APPLE_CORE }}
                 icon={<ListIcon />}
                 label="Tasks"
-                onActive={() => { this.props.history.push('/management/tasks'); }} />
+                onActive={() => this.props.history.push('/management/tasks')} />
               <Tab
                 style={{ backgroundColor: Colors.DARK_APPLE_CORE }}
                 icon={<DateIcon />}
                 label="Calendar"
-                onActive={() => { this.props.history.push('/management/calendar'); }} />
+                onActive={() => this.props.history.push('/management/calendar')} />
             </Tabs>
             <Paper zDepth={1} className="content-component" rounded={false}>
               <Switch>

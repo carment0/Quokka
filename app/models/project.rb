@@ -6,11 +6,12 @@ class Project < ApplicationRecord
              foreign_key: :admin_id,
              class_name: 'User'
 
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
 
   has_many :task_assignments,
            through: :tasks,
-           source: :task_assignments
+           source: :task_assignments,
+           dependent: :destroy
 
 # { distinct } => no duplicates of the same user when they have multiple tasks assigned in same project
   has_many :task_assignees,

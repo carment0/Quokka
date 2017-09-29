@@ -5,10 +5,11 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 
-class AssignedProjectIndex extends React.Component {
+class AdminProjectIndex extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
-    assignedProjects: PropTypes.object.isRequired
+    adminProjects: PropTypes.object.isRequired,
+    dispatchDeleteProject: PropTypes.func.isRequired
   }
 
   viewProjectClickHandler(projectId) {
@@ -18,15 +19,22 @@ class AssignedProjectIndex extends React.Component {
     };
   }
 
+  deleteProjectClickHandler(projectId) {
+    return (e) => {
+      e.preventDefault();
+      this.props.dispatchDeleteProject(projectId);
+    };
+  }
+
   get projectCardList() {
-    const projectIds = Object.keys(this.props.assignedProjects);
+    const projectIds = Object.keys(this.props.adminProjects);
 
     if (projectIds.length === 0) {
       return;
     }
 
     const items = projectIds.map((projectId) => {
-      const project = this.props.assignedProjects[projectId];
+      const project = this.props.adminProjects[projectId];
 
       return (
         <Card key={project.id}>
@@ -39,6 +47,8 @@ class AssignedProjectIndex extends React.Component {
           <CardActions
             style={{ display: 'flex', justifyContent: 'flex-end', padding: '0.5rem' }}>
             <FlatButton label="View" primary={true} onClick={this.viewProjectClickHandler(project.id)} />
+            <FlatButton label="Edit" />
+            <FlatButton label="Delete" secondary={true} onClick={this.deleteProjectClickHandler(project.id)} />
           </CardActions>
           <CardText expandable={true}>{project.description}</CardText>
         </Card>
@@ -55,11 +65,11 @@ class AssignedProjectIndex extends React.Component {
   render() {
     return (
       <div className="admin-projects">
-        <h2>Your Assigned Projects</h2>
+        <h2>Your Administrated Projects</h2>
         {this.projectCardList}
       </div>
     );
   }
 }
 
-export default AssignedProjectIndex;
+export default AdminProjectIndex;
