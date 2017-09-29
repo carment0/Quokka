@@ -7,14 +7,7 @@ class Api::TasksController < ApplicationController
   end
 
   def user_assigned_tasks
-    assigned_tasks = Task.joins(:task_assignments).where("user_id = ?", params[:user_id])
-    projects_map_by_id = Hash.new
-    assigned_tasks.each do |task|
-      project = task.project
-      projects_map_by_id[project.id] = project
-    end
-
-    @projects = projects_map_by_id.values
+    @assigned_tasks = Task.joins(:task_assignments).where("user_id = ?", params[:user_id])
     render "index.json.jbuilder"
   end
 

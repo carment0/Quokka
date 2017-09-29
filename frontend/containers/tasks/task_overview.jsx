@@ -14,7 +14,7 @@ class TaskOverview extends React.Component {
   static propTypes = {
     dispatchFetchAssignedTasks: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
-    assignedTasks: PropTypes.object.isRequired
+    assignedTasks: PropTypes.array.isRequired
   }
 
   componentDidMount() {
@@ -22,6 +22,7 @@ class TaskOverview extends React.Component {
   }
 
   render() {
+    console.log(this.props.assignedTasks);
     return (
       <div>
         <h1>My Task Overview</h1>

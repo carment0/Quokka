@@ -10,9 +10,9 @@ export const receiveTasks = (tasks) => ({
   tasks
 });
 
-export const receiveAssignedTasks = (projects) => ({
+export const receiveAssignedTasks = (tasks) => ({
   type: RECEIVE_ASSIGNED_TASKS,
-  projects
+  tasks
 });
 
 
@@ -40,8 +40,8 @@ export const fetchTasks = (project_id) => (dispatch) => (
 
 export const fetchAssignedTasks = (userId) => (dispatch) => (
   $.ajax({ method: 'GET', url: `/api/users/${userId}/tasks/assigned` })
-    .then((projects) => (
-      dispatch(receiveAssignedTasks(projects))
+    .then((taskList) => (
+      dispatch(receiveAssignedTasks(taskList))
     ))
 );
 
