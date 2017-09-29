@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Components
-import AdministratedProjectIndex from '../components/administrated_project_index';
-import AssignedProjectIndex from '../components/assigned_project_index';
+import AdministratedProjectIndex from '../../components/projects//administrated_project_index';
+import AssignedProjectIndex from '../../components/projects/assigned_project_index';
 
 // Actions
-import { fetchAssignedProjects, fetchAdministratedProjects } from '../actions/project_actions';
+import { fetchAssignedProjects, fetchAdministratedProjects } from '../../actions/project_actions';
 
 
 class ProjectOverview extends React.Component {

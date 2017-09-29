@@ -21,10 +21,10 @@ import DateIcon from 'material-ui/svg-icons/action/date-range';
 import { logout } from '../actions/session_actions';
 
 // Components
-import ProjectOverview from './project_overview';
-import TasksOverview from './tasks_overview';
+import ProjectOverview from './projects/project_overview';
+import ProjectDetail from './projects/project_detail';
+import TasksOverview from './tasks/tasks_overview';
 import Calendar from './calendar';
-import ProjectDetail from './project_detail';
 
 // Style
 import Colors from '../shared/colors';

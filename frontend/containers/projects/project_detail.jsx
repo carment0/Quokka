@@ -8,8 +8,8 @@ import Chip from 'material-ui/Chip';
 import { PieChart, Pie, Tooltip, Cell } from 'recharts';
 
 // Actions
-import { fetchProjectDetail } from '../actions/project_actions';
-import ProjectTaskItem from '../components/project_task_item';
+import { fetchProjectDetail } from '../../actions/project_actions';
+import ProjectTaskItem from '../../components/projects/project_task_item';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 

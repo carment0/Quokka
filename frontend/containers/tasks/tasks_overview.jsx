@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Components
-import AssignedTaskIndex from '../components/assigned_task_index';
+import AssignedTaskIndex from '../../components/tasks/assigned_task_index';
 
 // Actions
-import { fetchAssignedTasks } from '../actions/task_actions';
+import { fetchAssignedTasks } from '../../actions/task_actions';
 
 // This component should be connected just like what we did in ProjectsOverview
 
