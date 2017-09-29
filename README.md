@@ -1,15 +1,30 @@
+
+
 # Quokka
+Quokka is a clone of the project management app Asana. Quokka allows for team members to collaboratively track project and task completion.
 
-## `npm` dependencies
-`babel-plugin-transform-class-properties` : no more binding for handlers
+Quokka home page: https://quokka-app.herokuapp.com
 
-`axios` - no more APIUtil
+## Features
 
-`material-ui` - styling library
+User accounts with secure authentication
+Project Dashboard allowing easy management between projects and tasks
+Ability to view projects assigned or authored by you
+Ability to create and edit tasks by project
 
-`prop-types` - linter to check for required props
+## Project Design
 
-## files
-`.eslint.json` - custom linter rules
+Refer to project wiki
 
-`babelrc` - setup presets translation
+## Technology
+
+Quokka is a single-page application built on Rails and React.js, adhering to Material design guidelines using the material-ui library.
+
+## Future Implementations
+
+Currently Quokka is still a skeleton application. More planned features will be implemented in the future.
+
+## Some Planned Features
+
+ Real time updates on comments and notifications.
+ Calendar showing upcoming Task and Project deadlines
