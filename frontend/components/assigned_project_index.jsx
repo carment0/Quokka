@@ -17,7 +17,7 @@ class AssignedProjectIndex extends React.Component {
       return (
         <li key={project.name}>
           <div className="project-summary">
-            <Link to={`/projects/${project.id}`}
+            <Link to={`/management/projects/${project.id}`}
               className="project-link"
               style={{ textDecoration: 'none', color: 'black' }}>
               <div className="project-detail-1">

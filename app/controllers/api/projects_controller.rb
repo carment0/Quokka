@@ -41,7 +41,7 @@ class Api::ProjectsController < ApplicationController
   def destroy
     @project = current_user.project.find(params[:id])
     @project.destroy
-    render json: @project
+    render "show.json.jbuilder"
   end
 
   def update

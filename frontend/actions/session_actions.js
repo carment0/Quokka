@@ -13,6 +13,11 @@ export const receiveErrors = (errors) => ({
 
 /**
  * @param {object} user User should have username and password as key
+ * @example
+ * const user = {
+ *   username: 'hellokitty',
+ *   password: 'fatcat'
+ * }
  * @return {Promise}
  */
 export const signup = (user) => (dispatch) => (
@@ -27,6 +32,11 @@ export const signup = (user) => (dispatch) => (
 
 /**
  * @param {object} user User should have username and password as key
+ * @example
+ * const user = {
+ *   username: 'hellokitty',
+ *   password: 'fatcat'
+ * }
  * @return {Promise}
  */
 export const login = (user) => (dispatch) => (

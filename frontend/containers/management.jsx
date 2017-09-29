@@ -24,6 +24,7 @@ import { logout } from '../actions/session_actions';
 import ProjectsOverview from './projects_overview';
 import TasksOverview from './tasks_overview';
 import Calendar from './calendar';
+import ProjectDetail from './project_detail';
 
 // Style
 import Colors from '../shared/colors';
@@ -48,6 +49,10 @@ class Management extends React.Component {
     this.props.dispatchLogout();
   }
 
+  /**
+   * Returns the appropriate class name of the management main content section
+   * @returns {string}
+   */
   get managementMainContentClassName() {
     if (this.state.sidebarOpen) {
       return 'main-content content-with-menu-open';
@@ -56,6 +61,10 @@ class Management extends React.Component {
     return 'main-content';
   }
 
+  /**
+   * Returns the appropriate class name of the sidebar section
+   * @returns {string}
+   */
   get sidebarClassName() {
     if (this.state.sidebarOpen) {
       return 'left-side-bar left-side-bar-with-menu-open';
@@ -64,6 +73,10 @@ class Management extends React.Component {
     return 'left-side-bar';
   }
 
+  /**
+   * Returns the icon element that sits on the left side of the app bar
+   * @returns {React.Element}
+   */
   get iconElementLeft() {
     if (this.state.sidebarOpen) {
       return (
@@ -80,6 +93,10 @@ class Management extends React.Component {
     );
   }
 
+  /**
+   * Returns the icon element that sits on the right side of the app bar
+   * @returns {React.Element}
+   */
   get iconElementRight() {
     return (
       <FlatButton label="Log out"
@@ -90,22 +107,22 @@ class Management extends React.Component {
 
   render() {
     return (
-      <div className="management">
-        <div className={this.sidebarClassName}>
+      <management className="management">
+        <section className={this.sidebarClassName}>
           <Drawer open={this.state.sidebarOpen} swipeAreaWidth={50}>
-            <MenuItem>Menu Item</MenuItem>
-            <MenuItem>Menu Item 2</MenuItem>
+            <h2>Quokka</h2>
+            <MenuItem>Create New Project</MenuItem>
+            <MenuItem>Create New Team</MenuItem>
           </Drawer>
-        </div>
-        <div className={this.managementMainContentClassName}>
-          <div className="nav-bar">
+        </section>
+        <section className={this.managementMainContentClassName}>
+          <nav className="nav-bar">
             <AppBar
               iconElementLeft={this.iconElementLeft}
               iconElementRight={this.iconElementRight} />
-          </div>
-
-          <div className="content-body">
-            <Tabs>
+          </nav>
+          <content className="content-body">
+            <Tabs className="tabs-controller">
               <Tab
                 style={{ backgroundColor: Colors.DARK_APPLE_CORE }}
                 icon={<AssignmentIcon />}
@@ -122,17 +139,18 @@ class Management extends React.Component {
                 label="Calendar"
                 onActive={() => { this.props.history.push('/management/calendar'); }} />
             </Tabs>
-            <Paper zDepth={1} className="dash-board">
+            <Paper zDepth={1} className="content-component">
               <Switch>
                 <Route exact path="/management/" component={ProjectsOverview} />
-                <Route path="/management/projects" component={ProjectsOverview} />
+                <Route exact path="/management/projects" component={ProjectsOverview} />
+                <Route path="/management/projects/:id" component={ProjectDetail} />
                 <Route path="/management/tasks" component={TasksOverview} />
                 <Route path="/management/calendar" component={Calendar} />
               </Switch>
             </Paper>
-          </div>
-        </div>
-      </div>
+          </content>
+        </section>
+      </management>
     );
   }
 }
