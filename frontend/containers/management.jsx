@@ -21,7 +21,7 @@ import DateIcon from 'material-ui/svg-icons/action/date-range';
 import { logout } from '../actions/session_actions';
 
 // Components
-import ProjectsOverview from './projects_overview';
+import ProjectOverview from './project_overview';
 import TasksOverview from './tasks_overview';
 import Calendar from './calendar';
 import ProjectDetail from './project_detail';
@@ -139,10 +139,10 @@ class Management extends React.Component {
                 label="Calendar"
                 onActive={() => { this.props.history.push('/management/calendar'); }} />
             </Tabs>
-            <Paper zDepth={1} className="content-component">
+            <Paper zDepth={1} className="content-component" rounded={false}>
               <Switch>
-                <Route exact path="/management/" component={ProjectsOverview} />
-                <Route exact path="/management/projects" component={ProjectsOverview} />
+                <Route exact path="/management/" component={ProjectOverview} />
+                <Route exact path="/management/projects" component={ProjectOverview} />
                 <Route path="/management/projects/:id" component={ProjectDetail} />
                 <Route path="/management/tasks" component={TasksOverview} />
                 <Route path="/management/calendar" component={Calendar} />

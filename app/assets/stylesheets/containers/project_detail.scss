@@ -1,0 +1,65 @@
+.project-detail {
+  height: 100%;
+  width: 100%;
+  display: inherit;
+  flex-direction: column;
+  .project-summary {
+    display: inherit;
+    flex-direction: row;
+    height: 42%;
+    width: 100%;
+
+    .left-container {
+      display: inherit;
+      flex-direction: column;
+      height: 100%;
+      width: 50%;
+      padding: 1rem 1rem 1rem 1rem;
+
+      .project-description {
+        h1 {
+          font-size: 2rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+      }
+
+      .assignees {
+        display: inherit;
+        flex-direction: column;
+        h2 {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+        }
+        .assignee-chips {
+          display: inherit;
+          flex-direction: row;
+
+          .chip {
+            margin-left: 0.1rem;
+            margin-right: 0.1rem;
+          }
+        }
+      }
+    }
+
+    .right-container {
+      display: inherit;
+      flex-direction: column;
+      height: 100%;
+      width: 50%;
+    }
+  }
+
+  .task-summary {
+    display: inherit;
+    flex-direction: column;
+    height: 58%;
+    width: 100%;
+    h1 {
+      font-size: 2rem;
+      margin: 1rem 1rem 1rem 1rem;
+    }
+  }
+}

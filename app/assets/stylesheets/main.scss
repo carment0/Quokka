@@ -5,6 +5,7 @@
 }
 
 html, body {
+  font-size: 13px;
   height: 100vh;
   width: 100vw;
 }
@@ -24,3 +25,16 @@ html, body, h1, h2, h3, h4, h5 {
     width: inherit;
   }
 }
+
+@import "containers/welcome.scss";
+@import "components/login.scss";
+@import "components/signup.scss";
+
+@import "containers/management.scss";
+@import "components/project_overview.scss";
+
+@import "containers/project_detail.scss";
+@import "components/project_task_item.scss";
+
+
+@import "components/task_overview.scss";

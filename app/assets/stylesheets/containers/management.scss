@@ -60,9 +60,9 @@ $apricot: #F7882F;
 
       .content-component {
         display: inherit;
-        height: calc(100% - 72px - 2rem); // The tabs controller always takes up 72px;
+        height: calc(100% - 72px - 1rem); // The tabs controller always takes up 72px;
         width: calc(100% - 4rem);
-        margin: 0rem 2rem 2rem 2rem
+        margin: 0rem 2rem 1rem 2rem
       }
     }
   }
@@ -70,7 +70,6 @@ $apricot: #F7882F;
   .content-with-menu-open {
     width: calc(100% - 256px);
   }
-
 
   .left-side-bar {
     display: inherit;

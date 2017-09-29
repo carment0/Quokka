@@ -12,20 +12,30 @@ admin_2 = User.create(name: "Calvin Feng", username: "cfeng", password: "1234123
 user_1 = User.create(name: "Carmen To", username: "cto", password: "123123")
 user_2 = User.create(name: "Sam Madison", username: "smadison", password: "qweqwe")
 
+
+project_description = %Q(
+The development of therapeutic proteins requires the understanding of the relationship between the dose, exposure,
+efficacy, and toxicity of a moleculeThis is the second line.Several intrinsic and extrinsic factors contribute to the
+challenges for measuring therapeutic In addition, induction of an immune response to therapeutic protein results in
+additional complexities in the analysis of the pharmacokinetic profile, toxicity, safety, and efficacy of an molecule.
+This project is to assess the immunogenicity of a potential therapeutic protein that is required for regulatory license
+filings proteins in a precise and accurate manner.
+)
+
 project_1 = Project.create(name: "Protein ADS122",
-                           description: "Exploring the efficacy of ADS122",
+                           description: project_description,
                            completed: false,
                            admin_id: admin_1.id,
                            deadline: "2017-10-01")
 
 project_2 = Project.create(name: "Protein ADS123",
-                          description: "Exploring the efficacy of ADS123",
+                          description: project_description,
                           completed: false,
                           admin_id: admin_1.id,
                           deadline: "2017-10-02")
 
 project_3 = Project.create(name: "Protein ADS124",
-                          description: "Exploring the efficacy of ADS124",
+                          description: project_description,
                           completed: false,
                           admin_id: admin_2.id,
                           deadline: "2017-10-03")

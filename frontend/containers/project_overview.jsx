@@ -10,7 +10,7 @@ import AssignedProjectIndex from '../components/assigned_project_index';
 import { fetchAssignedProjects, fetchAdministratedProjects } from '../actions/project_actions';
 
 
-class ProjectsOverview extends React.Component {
+class ProjectOverview extends React.Component {
   static propTypes = {
     dispatchFetchAssignedProjects: PropTypes.func.isRequired,
     dispatchFetchAdministratedProjects: PropTypes.func.isRequired,
@@ -46,4 +46,4 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchFetchAdministratedProjects: (userId) => dispatch(fetchAdministratedProjects(userId))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectsOverview);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectOverview);
