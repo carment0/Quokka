@@ -65,20 +65,20 @@ export const fetchProjectDetail = (id) => (dispatch) => (
     ))
 );
 
-export const createProject = (new_project) => (dispatch) => (
-  $.ajax({ method: 'POST', url: 'api/projects', data: { new_project } })
-    .then((project) => (
-      dispatch(receiveProjectDetail(project))
+export const createProject = (project) => (dispatch) => (
+  $.ajax({ method: 'POST', url: 'api/projects', data: { project } })
+    .then((savedProject) => (
+      dispatch(receiveAdministratedProjects([savedProject]))
     ))
     .fail((err) => (
       dispatch(receiveProjectErrors(err.responseJSON))
     ))
 );
 
-export const updateProject = (updated_project) => (dispatch) => (
-  $.ajax({ method: 'PATCH', url: `api/projects/${updated_project.id}`, data: { updated_project } })
-    .then((project) => (
-      dispatch(receiveProjectDetail(project))
+export const updateProject = (project) => (dispatch) => (
+  $.ajax({ method: 'PATCH', url: `api/projects/${project.id}`, data: { project } })
+    .then((updatedProject) => (
+      dispatch(receiveProjectDetail(updatedProject))
     ))
     .fail((err) => (
       dispatch(receiveProjectErrors(err.responseJSON))
@@ -87,7 +87,7 @@ export const updateProject = (updated_project) => (dispatch) => (
 
 export const deleteProject = (id) => (dispatch) => (
   $.ajax({ method: 'DELETE', url: `api/projects/${id}` })
-    .then((project) => (
-      dispatch(removeProject(project))
+    .then((deletedProject) => (
+      dispatch(removeProject(deletedProject))
     ))
 );

@@ -30,7 +30,9 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    @project = current_user.project.new(project_params)
+    @project = Project.new(project_params)
+    @project.admin_id = current_user.id
+
     if @project.save
       render json: @project
     else

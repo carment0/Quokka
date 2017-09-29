@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+  after_initialize :init
   validates :name, :admin_id, :deadline, presence: true
   validates :completed, inclusion: [true, false]
 
@@ -18,4 +19,8 @@ class Project < ApplicationRecord
            -> { distinct },
            through: :task_assignments,
            source: :user
+
+  def init
+    self.completed ||= false
+  end
 end

@@ -12,14 +12,14 @@ class AdminProjectIndex extends React.Component {
     dispatchDeleteProject: PropTypes.func.isRequired
   }
 
-  viewProjectClickHandler(projectId) {
+  createViewProjectHandler(projectId) {
     return (e) => {
       e.preventDefault();
       this.props.history.push(`/management/projects/${projectId}`);
     };
   }
 
-  deleteProjectClickHandler(projectId) {
+  createDeleteProjectHandler(projectId) {
     return (e) => {
       e.preventDefault();
       this.props.dispatchDeleteProject(projectId);
@@ -46,9 +46,9 @@ class AdminProjectIndex extends React.Component {
             style={{ fontWeight: '900', padding: '0.5rem' }} />
           <CardActions
             style={{ display: 'flex', justifyContent: 'flex-end', padding: '0.5rem' }}>
-            <FlatButton label="View" primary={true} onClick={this.viewProjectClickHandler(project.id)} />
+            <FlatButton label="View" primary={true} onClick={this.createViewProjectHandler(project.id)} />
             <FlatButton label="Edit" />
-            <FlatButton label="Delete" secondary={true} onClick={this.deleteProjectClickHandler(project.id)} />
+            <FlatButton label="Delete" secondary={true} onClick={this.createDeleteProjectHandler(project.id)} />
           </CardActions>
           <CardText expandable={true}>{project.description}</CardText>
         </Card>

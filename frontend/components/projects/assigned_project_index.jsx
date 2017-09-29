@@ -11,7 +11,7 @@ class AssignedProjectIndex extends React.Component {
     assignedProjects: PropTypes.object.isRequired
   }
 
-  viewProjectClickHandler(projectId) {
+  createViewProjectHandler(projectId) {
     return (e) => {
       e.preventDefault();
       this.props.history.push(`/management/projects/${projectId}`);
@@ -38,7 +38,7 @@ class AssignedProjectIndex extends React.Component {
             style={{ fontWeight: '900', padding: '0.5rem' }} />
           <CardActions
             style={{ display: 'flex', justifyContent: 'flex-end', padding: '0.5rem' }}>
-            <FlatButton label="View" primary={true} onClick={this.viewProjectClickHandler(project.id)} />
+            <FlatButton label="View" primary={true} onClick={this.createViewProjectHandler(project.id)} />
           </CardActions>
           <CardText expandable={true}>{project.description}</CardText>
         </Card>

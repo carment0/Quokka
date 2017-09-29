@@ -8,6 +8,10 @@ const ProjectTaskItem = ({ task }) => (
     <p>{task.name}</p>
     <p>{task.description}</p>
   </Paper>
-)
+);
+
+ProjectTaskItem.propTypes = {
+  task: PropTypes.object.isRequired
+};
 
 export default ProjectTaskItem;

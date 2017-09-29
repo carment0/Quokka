@@ -16,9 +16,11 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import ListIcon from 'material-ui/svg-icons/action/list';
 import DateIcon from 'material-ui/svg-icons/action/date-range';
 import AssignmentIcon from 'material-ui/svg-icons/action/assignment';
+import Dialog from 'material-ui/Dialog';
 
 // Actions
 import { logout } from '../actions/session_actions';
+import { createProject } from '../actions/project_actions';
 
 // Other Containers
 import ProjectDetail from './projects/project_detail';
@@ -26,23 +28,55 @@ import ProjectOverview from './projects/project_overview';
 import TaskOverview from './tasks/task_overview';
 import CalendarOverview from './calendars/calendar_overview';
 
+// One component
+import CreateProject from '../components/projects/create_project';
+
 // Style
 import Colors from '../shared/colors';
+
+// Dialog content is the white box that pops up during on click
+const dialogContentStyle = {
+  width: '70%',
+  minWidth: '500px',
+  maxWidth: '980px'
+};
+
+// Dialog title is the title section inside content body
+const dialogTitleStyle = {
+  fontWeight: '100',
+  fontSize: '2rem',
+  display: 'flex',
+  justifyContent: 'flex-start',
+};
 
 
 class Management extends React.Component {
   state = {
-    sidebarOpen: false
+    sidebarOpen: false,
+    dialogOpen: false
   };
 
   static propTypes = {
     dispatchLogout: PropTypes.func.isRequired,
+    dispatchCreateProject: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
   };
 
   handleSidebarOpen = () => {
     this.setState({
       sidebarOpen: !this.state.sidebarOpen
+    });
+  }
+
+  handleDialogOpen = () => {
+    this.setState({
+      dialogOpen: true
+    });
+  }
+
+  handleDialogClose = () => {
+    this.setState({
+      dialogOpen: false
     });
   }
 
@@ -111,8 +145,7 @@ class Management extends React.Component {
       <management className="management">
         <section className={this.sidebarClassName}>
           <Drawer open={this.state.sidebarOpen} swipeAreaWidth={50}>
-            <h2>Quokka</h2>
-            <MenuItem>Create New Project</MenuItem>
+            <MenuItem onClick={this.handleDialogOpen}>Create New Project</MenuItem>
             <MenuItem>Create New Team</MenuItem>
           </Drawer>
         </section>
@@ -150,6 +183,17 @@ class Management extends React.Component {
               </Switch>
             </Paper>
           </content>
+          <Dialog
+            titleStyle={dialogTitleStyle}
+            contentStyle={dialogContentStyle}
+            title={'Create New Project'}
+            modal={false}
+            open={this.state.dialogOpen}
+            onRequestClose={this.handleDialogClose}>
+            <CreateProject
+              handleDialogClose={this.handleDialogClose}
+              dispatchCreateProject={this.props.dispatchCreateProject} />
+          </Dialog>
         </section>
       </management>
     );
@@ -161,7 +205,8 @@ const mapStateToProps = ({ sessions }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchLogout: () => dispatch(logout())
+  dispatchLogout: () => dispatch(logout()),
+  dispatchCreateProject: (project) => dispatch(createProject(project))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Management);
