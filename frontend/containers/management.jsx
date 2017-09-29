@@ -17,6 +17,11 @@ import ListIcon from 'material-ui/svg-icons/action/list';
 import DateIcon from 'material-ui/svg-icons/action/date-range';
 import AssignmentIcon from 'material-ui/svg-icons/action/assignment';
 import Dialog from 'material-ui/Dialog';
+import PeopleOutline from 'material-ui/svg-icons/social/people-outline';
+import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
+import AccountCircle from 'material-ui/svg-icons/action/account-circle';
+import Divider from 'material-ui/Divider';
+
 
 // Actions
 import { logout } from '../actions/session_actions';
@@ -145,8 +150,10 @@ class Management extends React.Component {
       <management className="management">
         <section className={this.sidebarClassName}>
           <Drawer open={this.state.sidebarOpen} swipeAreaWidth={50}>
-            <MenuItem onClick={this.handleDialogOpen}>Create New Project</MenuItem>
-            <MenuItem>Create New Team</MenuItem>
+            <MenuItem onClick={this.handleDialogOpen} rightIcon={<AddCircleOutline />}>Create New Project</MenuItem>
+            <MenuItem rightIcon={<PeopleOutline />}>Create New Team</MenuItem>
+            <Divider />
+            <MenuItem rightIcon={<AccountCircle />}>My Profile</MenuItem>
           </Drawer>
         </section>
         <section className={this.managementMainContentClassName}>
