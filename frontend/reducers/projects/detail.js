@@ -1,17 +1,15 @@
 import merge from 'lodash/merge';
 
-import { RECEIVE_ASSIGNED_PROJECTS, REMOVE_PROJECT } from '../../actions/project_actions';
+import { RECEIVE_PROJECT_DETAIL, REMOVE_PROJECT } from '../../actions/project_actions';
 
 export default (oldState = {}, action) => {
   Object.freeze(oldState);
   let newState;
 
   switch (action.type) {
-    case RECEIVE_ASSIGNED_PROJECTS:
+    case RECEIVE_PROJECT_DETAIL:
       newState = {};
-      action.projects.forEach((project) => {
-        newState[project.id] = project;
-      });
+      newState[action.project.id] = action.project;
       return merge({}, oldState, newState);
 
     case REMOVE_PROJECT:

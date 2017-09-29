@@ -30,7 +30,9 @@ class Api::ProjectsController < ApplicationController
   end
 
   def create
-    @project = current_user.project.new(project_params)
+    @project = Project.new(project_params)
+    @project.admin_id = current_user.id
+
     if @project.save
       render json: @project
     else
@@ -39,9 +41,14 @@ class Api::ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = current_user.project.find(params[:id])
-    @project.destroy
-    render json: @project
+    @project = Project.find(params[:id])
+
+    if @project.admin_id == current_user.id
+      @project.destroy
+      render "show.json.jbuilder"
+    else
+      render json: "Unauthorized action", status: 401
+    end
   end
 
   def update

@@ -54,20 +54,23 @@ $apricot: #F7882F;
       height: 95%;
       flex-direction: column;
 
-      .switch-component-section {
-        align-self: center;
-        padding: 20px;
+      .tabs-controller {
+      // More on this later
       }
 
-      .dash-board {
-        margin: 0rem 2rem 2rem 2rem;
+      .content-component {
+        display: inherit;
+        height: calc(100% - 72px - 1rem); // The tabs controller always takes up 72px;
+        width: calc(100% - 4rem);
+        margin: 0rem 2rem 1rem 2rem;
+        overflow: scroll; // Solves the problem temporarily
       }
     }
   }
+
   .content-with-menu-open {
     width: calc(100% - 256px);
   }
-
 
   .left-side-bar {
     display: inherit;

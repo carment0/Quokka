@@ -88,7 +88,6 @@ class Welcome extends React.Component {
         <Paper zDepth={2} className="nav-bar">
           <section className="left-container">
             <div className="logo" />
-            <div className="text" />
           </section>
           <section className="right-container">
             <div className="button-container">
