@@ -141,11 +141,23 @@ task_10 = Task.create(name: "Materials",
                     completed: false,
                     project_id: project_4.id,
                     due_date: "2017-09-23")
+task_11 = Task.create(name: "Experiment",
+                    description: "completed three day PK with ADS124",
+                    completed: false,
+                    project_id: project_4.id,
+                    due_date: "2017-09-26")
+task_12 = Task.create(name: "Presentation slides",
+                    description: "Prepare slides with summarized data for project meeting discussion",
+                    completed: false,
+                    project_id: project_4.id,
+                                        due_date: "2017-10-30")
 
 TaskAssignment.create(user_id: admin_1.id, task_id: task_7.id)
 TaskAssignment.create(user_id: 9, task_id: task_8.id)
 TaskAssignment.create(user_id: 10, task_id: task_9.id)
-TaskAssignment.create(user_id: admin_1.id, task_id: task_10.id)
+TaskAssignment.create(user_id: 10, task_id: task_10.id)
+TaskAssignment.create(user_id: admin_1.id, task_id: task_11.id)
+TaskAssignment.create(user_id: admin_1.id, task_id: task_12.id)
 
 TaskAssignment.create(user_id: 3, task_id: task_1.id)
 TaskAssignment.create(user_id: 4, task_id: task_2.id)
