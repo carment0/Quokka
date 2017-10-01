@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import LinearProgress from 'material-ui/LinearProgress';
 import Chip from 'material-ui/Chip';
 import { PieChart, Pie, Tooltip, Cell } from 'recharts';
+import CircularProgress from 'material-ui/CircularProgress';
 
 // Actions
 import { fetchProjectDetail } from '../../actions/project_actions';
@@ -15,6 +16,11 @@ const COLORS = ['#00C49F', '#0088FE', '#ff2828'];
 
 
 class ProjectDetail extends React.Component {
+  state = {
+    height: null,
+    width: null
+  };
+
   static propTypes = {
     dispatchFetchProjectDetail: PropTypes.func.isRequired,
     project: PropTypes.object.isRequired,
@@ -64,35 +70,43 @@ class ProjectDetail extends React.Component {
 
   get pieChart() {
     // NOTE: When page is refreshed, the pie chart fails to render because the height and width is null
-    const tasks = this.props.project.tasks;
+    const containerHeight = $('#chart-container').height();
+    const containerWidth = $('#chart-container').width();
 
-    const isOverDue = (task) => {
-      const now = new Date().getTime();
-      return !task.completed && new Date(task.due_date).getTime() < now;
-    };
+    if (containerHeight && containerWidth) {
+      const tasks = this.props.project.tasks;
 
-    const record = [
-      { name: 'Completed', value: tasks.filter((task) => task.completed).length },
-      { name: 'In Progress', value: tasks.filter((task) => !task.completed && !isOverDue(task)).length },
-      { name: 'Overdue', value: tasks.filter((task) =>  isOverDue(task)).length }
-    ];
+      const isOverDue = (task) => {
+        const now = new Date().getTime();
+        return !task.completed && new Date(task.due_date).getTime() < now;
+      };
 
-    console.log(this.props.project.tasks, 'rendering pie chart');
-    return (
-      <PieChart width={$('#chart-container').width()} height={$('#chart-container').height()}>
-        <Pie
-          dataKey="value"
-          data={record}
-          cx="50%"
-          cy="50%"
-          outerRadius={120}
-          fill="#8884d8"
-          label>
-          {record.map((entry, index) => <Cell key={entry} fill={COLORS[index % COLORS.length]} />)}
-        </Pie>
-        <Tooltip />
-      </PieChart>
-    );
+      const record = [
+        { name: 'Completed', value: tasks.filter((task) => task.completed).length },
+        { name: 'In Progress', value: tasks.filter((task) => !task.completed && !isOverDue(task)).length },
+        { name: 'Overdue', value: tasks.filter((task) =>  isOverDue(task)).length }
+      ];
+
+      console.log(this.props.project.tasks, 'rendering pie chart');
+      return (
+        <PieChart width={$('#chart-container').width()} height={$('#chart-container').height()}>
+          <Pie
+            dataKey="value"
+            data={record}
+            cx="50%"
+            cy="50%"
+            outerRadius={120}
+            fill="#8884d8"
+            label>
+            {record.map((entry, index) => <Cell key={entry} fill={COLORS[index % COLORS.length]} />)}
+          </Pie>
+          <Tooltip />
+        </PieChart>
+      );
+    }
+    setTimeout(() => {
+      this.setState({ height: containerHeight, width: containerWidth });
+    }, 500);
   }
 
   get projectDescription() {
