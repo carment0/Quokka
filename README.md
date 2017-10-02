@@ -1,5 +1,4 @@
-
-
+![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/app/assets/images/logo.png "Logo")
 # Quokka
 Quokka is a clone of the project management app Asana. Quokka allows for team members to collaboratively track project and task completion.
 
@@ -7,20 +6,27 @@ Quokka home page: https://quokka-app.herokuapp.com
 
 ## Features
 
-User accounts with secure authentication
-Project Dashboard allowing easy management between projects and tasks
-Ability to view projects assigned or authored by you
-Ability to create and edit tasks by project
+- User accounts with secure authentication
+- Project Dashboard allowing easy management between projects and tasks
+- Ability to view projects assigned or authored by you
+- Ability to create and edit tasks by project
+![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/app/assets/images/Screen%20Shot%202017-10-01%20at%2011.06.41%20PM.png "")
+![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/app/assets/images/Screen%20Shot%202017-10-01%20at%2011.07.19%20PM.png "")
 
 ## Project Design
 
-Refer to project wiki
+Refer to project [wiki](https://github.com/carment0/Quokka/wiki)
+
 
 ## Technology
 
-Quokka is a single-page application built on Rails and React.js, adhering to Material and Rechart design guidelines using the material-ui and Recharts library.
+Quokka is a single-page application built on Rails and React.js.
+Uses react components that implement Google's Material design UI.
+Implements Recharts library built with React and D3.
 
-### Real-time chart updates
+### Real-time Pie Chart Updates
+![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/app/assets/images/Screen%20Shot%202017-10-01%20at%2011.07.02%20PM.png "graph")
+
 ``` js
 get pieChart() {
   const tasks = this.props.project.tasks;
@@ -36,7 +42,6 @@ get pieChart() {
     { name: 'Overdue', value: tasks.filter((task) =>  isOverDue(task)).length }
   ];
 
-  console.log(this.props.project.tasks, 'rendering pie chart');
   return (
     <PieChart width={$('#chart-container').width()} height={$('#chart-container').height()}>
       <Pie
