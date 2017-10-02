@@ -20,9 +20,9 @@ Refer to project [wiki](https://github.com/carment0/Quokka/wiki)
 
 ## Technology
 
-Quokka is a single-page application built on Rails and React.js.
-Uses react components that implement Google's Material design UI.
-Implements Recharts library built with React and D3.
+- Quokka is a single-page application built on Rails and React.js.
+- Uses react components that implement Google's Material design UI.
+- Uses Recharts library built with React and D3.
 
 ### Real-time Pie Chart Updates
 ![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/app/assets/images/Screen%20Shot%202017-10-01%20at%2011.07.02%20PM.png "graph")
