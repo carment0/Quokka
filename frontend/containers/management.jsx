@@ -1,3 +1,4 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -13,15 +14,16 @@ import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import Dialog from 'material-ui/Dialog';
+import Divider from 'material-ui/Divider';
+
+// Icons
 import ListIcon from 'material-ui/svg-icons/action/list';
 import DateIcon from 'material-ui/svg-icons/action/date-range';
 import AssignmentIcon from 'material-ui/svg-icons/action/assignment';
-import Dialog from 'material-ui/Dialog';
 import PeopleOutline from 'material-ui/svg-icons/social/people-outline';
 import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
-import Divider from 'material-ui/Divider';
-
 
 // Actions
 import { logout } from '../actions/session_actions';
@@ -33,7 +35,7 @@ import ProjectOverview from './projects/project_overview';
 import TaskOverview from './tasks/task_overview';
 import CalendarOverview from './calendars/calendar_overview';
 
-// One component
+// The one omponent
 import CreateProject from '../components/projects/create_project';
 
 // Style
@@ -48,18 +50,14 @@ const dialogContentStyle = {
 
 // Dialog title is the title section inside content body
 const dialogTitleStyle = {
-  fontWeight: '100',
-  fontSize: '2rem',
   display: 'flex',
   justifyContent: 'flex-start',
+  fontWeight: '100',
+  fontSize: '2rem'
 };
 
-
 class Management extends React.Component {
-  state = {
-    sidebarOpen: false,
-    dialogOpen: false
-  };
+  state = { sidebarOpen: false, dialogOpen: false };
 
   static propTypes = {
     dispatchLogout: PropTypes.func.isRequired,
@@ -67,27 +65,27 @@ class Management extends React.Component {
     history: PropTypes.object.isRequired
   };
 
-  handleSidebarOpen = () => {
+  toggleSidebarExpand = () => {
     this.setState({
       sidebarOpen: !this.state.sidebarOpen
     });
-  }
+  };
 
   handleDialogOpen = () => {
     this.setState({
       dialogOpen: true
     });
-  }
+  };
 
   handleDialogClose = () => {
     this.setState({
       dialogOpen: false
     });
-  }
+  };
 
   handleLogout = () => {
     this.props.dispatchLogout();
-  }
+  };
 
   /**
    * Returns the appropriate class name of the management main content section
@@ -120,14 +118,14 @@ class Management extends React.Component {
   get iconElementLeft() {
     if (this.state.sidebarOpen) {
       return (
-        <IconButton onClick={this.handleSidebarOpen}>
+        <IconButton onClick={this.toggleSidebarExpand}>
           <NavigationClose />
         </IconButton>
       );
     }
 
     return (
-      <IconButton onClick={this.handleSidebarOpen}>
+      <IconButton onClick={this.toggleSidebarExpand}>
         <NavigationMenu />
       </IconButton>
     );

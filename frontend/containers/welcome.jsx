@@ -44,6 +44,10 @@ class Welcome extends React.Component {
     dispatchSignup: PropTypes.func.isRequired
   };
 
+  /**
+   * Returns a handler for either sign up dialog or login dialog
+   * @returns {function}
+   */
   createDialogOpenHandler = (formType) => () => {
     this.setState({ openDialog: true, formType });
   };
