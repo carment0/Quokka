@@ -16,20 +16,18 @@ class Signup extends React.Component {
     dispatchLogin: PropTypes.func.isRequired
   };
 
-  update(field) {
-    return (e) => this.setState({ [field]: e.target.value });
-  }
-
   handleFormSubmission = (e) => {
     e.preventDefault();
     this.props.dispatchSignup(this.state);
-  }
+  };
 
-  demoLogin() {
-    return (e) => {
-      e.preventDefault();
-      this.props.dispatchLogin({ username: 'guestuser', password: '123456' });
-    };
+  handleDemoLogin = (e) => {
+    e.preventDefault();
+    this.props.dispatchLogin({ username: 'guestuser', password: '123456' });
+  };
+
+  update(field) {
+    return (e) => this.setState({ [field]: e.target.value });
   }
 
   render() {
@@ -70,7 +68,11 @@ class Signup extends React.Component {
           <Divider style={fatDividerStyle} />
         </div>
         <div className="demo-signup">
-          <RaisedButton label="Login with Demo Account" secondary={true} fullWidth={true} onClick={this.demoLogin()} />
+          <RaisedButton
+            label="Login with Demo Account"
+            secondary={true}
+            fullWidth={true}
+            onClick={this.handleDemoLogin} />
         </div>
       </div>
     );

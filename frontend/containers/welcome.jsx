@@ -1,15 +1,22 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+// Material UI
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
+
+// Actions
 import { login, signup } from '../actions/session_actions';
-import Login from '../components/login';
-import Signup from '../components/signup';
+
+// Components
+import Login from '../components/auth/login';
+import Signup from '../components/auth/signup';
 
 // Enum
-const FormTypes = {
+const FormType = {
   SIGN_UP: 'SIGN_UP',
   LOG_IN: 'LOG_IN'
 };
@@ -30,37 +37,30 @@ const dialogTitleStyle = {
 };
 
 class Welcome extends React.Component {
-  state = {
-    openDialog: false,
-    type: ''
-  };
+  state = { openDialog: false, formType: '' };
 
   static propTypes = {
     dispatchLogin: PropTypes.func.isRequired,
     dispatchSignup: PropTypes.func.isRequired
   };
 
-  openForm = (formType) => {
-    this.setState({
-      openDialog: true,
-      formType
-    });
-  }
-
-  handleOpenSignup = () => {
-    this.setState({ openDialog: true, type: 'SIGN_UP' });
-  };
-
-  handleOpenLogin = () => {
-    this.setState({ openDialog: true, type: 'LOG_IN' });
+  createDialogOpenHandler = (formType) => () => {
+    this.setState({ openDialog: true, formType });
   };
 
   handleDialogClose = () => {
-    this.setState({ openDialog: false, type: '' });
+    this.setState({ openDialog: false, formType: '' });
   };
 
+  get dialogTitle() {
+    if (this.state.formType === FormType.SIGN_UP) {
+      return 'Sign Up';
+    }
+    return 'Login';
+  }
+
   get form() {
-    if (this.state.type === FormTypes.SIGN_UP) {
+    if (this.state.formType === FormType.SIGN_UP) {
       return (
         <Signup
           dispatchSignup={this.props.dispatchSignup}
@@ -75,13 +75,6 @@ class Welcome extends React.Component {
     );
   }
 
-  get dialogTitle() {
-    if (this.state.type === FormTypes.SIGN_UP) {
-      return 'Sign Up';
-    }
-    return 'Login';
-  }
-
   render() {
     return (
       <section className="welcome-page">
@@ -94,11 +87,11 @@ class Welcome extends React.Component {
               <FlatButton label="Login"
                 className="login-button"
                 primary={true}
-                onClick={this.handleOpenLogin} />
+                onClick={this.createDialogOpenHandler(FormType.LOG_IN)} />
               <FlatButton label="Sign up"
                 className="signup-button"
                 secondary={true}
-                onClick={this.handleOpenSignup} />
+                onClick={this.createDialogOpenHandler(FormType.SIGN_UP)} />
             </div>
           </section>
         </Paper>
