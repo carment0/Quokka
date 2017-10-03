@@ -31,6 +31,7 @@ class AssignedTaskIndex extends React.Component {
         tasks.forEach((task) => {
           task.completed = true;
         });
+        break;
       case 'none':
         tasks.forEach((task) => {
           task.completed = false;
@@ -40,6 +41,7 @@ class AssignedTaskIndex extends React.Component {
         tasks.forEach((task, index) => {
           task.completed = selectedRows.indexOf(index) !== -1;
         });
+        break;
     }
 
     this.setState({ tasks });
