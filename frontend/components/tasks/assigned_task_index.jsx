@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isEqual, assign } from 'lodash';
 import {
   Table,
   TableBody,
@@ -11,24 +12,59 @@ import {
 
 
 class AssignedTaskIndex extends React.Component {
+  state = { tasks: this.props.assignedTasks };
+
   static propTypes = {
-    assignedTasks: PropTypes.array.isRequired
-  }
+    assignedTasks: PropTypes.array.isRequired,
+    dispatchUpdateTask: PropTypes.func.isRequired
+  };
 
   isSelected = (index) => {
     return this.state.selectedRows.indexOf(index) !== -1;
   };
 
   handleRowSelection = (selectedRows) => {
-    console.log(selectedRows);
+    const tasks = this.state.tasks;
+
+    switch (selectedRows) {
+      case 'all':
+        tasks.forEach((task) => {
+          task.completed = true;
+        });
+      case 'none':
+        tasks.forEach((task) => {
+          task.completed = false;
+        });
+        break;
+      default:
+        tasks.forEach((task, index) => {
+          task.completed = selectedRows.indexOf(index) !== -1;
+        });
+    }
+
+    this.setState({ tasks });
+  };
+
+  componentWillReceiveProps(nextProps) {
+    const newTasks = [];
+
+    nextProps.assignedTasks.forEach((assignedTask) => {
+      newTasks.push(assign({}, assignedTask));
+    });
+
+    this.setState({ tasks: newTasks });
   }
 
   componentDidUpdate() {
-    // Send requests to update task completion
+    this.state.tasks.forEach((task, index) => {
+      if (!isEqual(task, this.props.assignedTasks[index])) {
+        this.props.dispatchUpdateTask(task);
+      }
+    });
   }
 
   get taskList() {
-    const tableRows = this.props.assignedTasks.map((task) => (
+    const tableRows = this.state.tasks.map((task) => (
       <TableRow selected={task.completed} key={task.name}>
         <TableRowColumn>{task.name}</TableRowColumn>
         <TableRowColumn>{task.description}</TableRowColumn>

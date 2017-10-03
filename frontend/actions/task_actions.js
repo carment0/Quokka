@@ -62,10 +62,10 @@ export const createTask = (project_id, new_task) => (dispatch) => (
     ))
 );
 
-export const updateTask = (project_id, updated_task) => (dispatch) => (
-  $.ajax({ method: 'PATCH', url: `api/projects/${project_id}/tasks/${updated_task.id}`, data: { updated_task } })
-    .then((task) => (
-      dispatch(receiveTask(task))
+export const updateTask = (task) => (dispatch) => (
+  $.ajax({ method: 'PATCH', url: `api/projects/${task.project_id}/tasks/${task.id}`, data: { task } })
+    .then((updatedTask) => (
+      dispatch(receiveTask(updatedTask))
     ))
     .fail((err) => (
       dispatch(receiveErrors(err.responseJSON))
