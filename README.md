@@ -10,13 +10,12 @@ Quokka home page: https://quokka-app.herokuapp.com
 - Project Dashboard allowing easy management between projects and tasks
 - Ability to view projects assigned or authored by you
 - Ability to create and edit tasks by project
-![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/app/assets/images/Screen%20Shot%202017-10-01%20at%2011.06.41%20PM.png "")
-![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/app/assets/images/Screen%20Shot%202017-10-01%20at%2011.07.19%20PM.png "")
+![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/wiki/screen_shot_2.png "")
+![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/wiki/screen_shot_3.png "")
 
 ## Project Design
 
 Refer to project [wiki](https://github.com/carment0/Quokka/wiki)
-
 
 ## Technology
 
@@ -25,7 +24,7 @@ Refer to project [wiki](https://github.com/carment0/Quokka/wiki)
 - Uses Recharts library built with React and D3.
 
 ### Real-time Pie Chart Updates
-![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/app/assets/images/Screen%20Shot%202017-10-01%20at%2011.07.02%20PM.png "graph")
+![alt text](https://raw.githubusercontent.com/carment0/Quokka/master/wiki/screen_shot_4.png "graph")
 
 ``` js
 get pieChart() {
