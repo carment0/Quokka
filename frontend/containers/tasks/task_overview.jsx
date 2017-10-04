@@ -6,21 +6,21 @@ import { connect } from 'react-redux';
 import AssignedTaskIndex from '../../components/tasks/assigned_task_index';
 
 // Actions
-import { fetchAssignedTasks, updateTask } from '../../actions/task_actions';
+import { fetchAssignedTaskList, updateAssignedTask } from '../../actions/task_actions';
 
 // This component should be connected just like what we did in ProjectsOverview
 
 class TaskOverview extends React.Component {
   static propTypes = {
-    dispatchFetchAssignedTasks: PropTypes.func.isRequired,
-    dispatchUpdateTask: PropTypes.func.isRequired,
+    dispatchFetchAssignedTaskList: PropTypes.func.isRequired,
+    dispatchUpdateAssignedTask: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
-    assignedTasks: PropTypes.array.isRequired
+    assignedTasks: PropTypes.object.isRequired
   }
 
   componentDidMount() {
     console.log('TaskOverview is mounted, now fetching assigned tasks for user');
-    this.props.dispatchFetchAssignedTasks(this.props.currentUser.id);
+    this.props.dispatchFetchAssignedTaskList(this.props.currentUser.id);
   }
 
   render() {
@@ -29,7 +29,7 @@ class TaskOverview extends React.Component {
         <h1>My Task Overview</h1>
         <AssignedTaskIndex
           assignedTasks={this.props.assignedTasks}
-          dispatchUpdateTask={this.props.dispatchUpdateTask} />
+          dispatchUpdateAssignedTask={this.props.dispatchUpdateAssignedTask} />
       </div>
     );
   }
@@ -41,8 +41,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchUpdateTask: (task) => dispatch(updateTask(task)), // TODO: change task action accepted arguments
-  dispatchFetchAssignedTasks: (userId) => dispatch(fetchAssignedTasks(userId))
+  dispatchUpdateAssignedTask: (task) => dispatch(updateAssignedTask(task)), // TODO: change task action accepted arguments
+  dispatchFetchAssignedTaskList: (userId) => dispatch(fetchAssignedTaskList(userId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskOverview);

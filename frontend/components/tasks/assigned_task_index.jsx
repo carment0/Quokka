@@ -12,19 +12,15 @@ import {
 
 
 class AssignedTaskIndex extends React.Component {
-  state = { tasks: this.props.assignedTasks };
-
   static propTypes = {
-    assignedTasks: PropTypes.array.isRequired,
-    dispatchUpdateTask: PropTypes.func.isRequired
-  };
-
-  isSelected = (index) => {
-    return this.state.selectedRows.indexOf(index) !== -1;
+    assignedTasks: PropTypes.object.isRequired,
+    dispatchUpdateAssignedTask: PropTypes.func.isRequired
   };
 
   handleRowSelection = (selectedRows) => {
-    const tasks = this.state.tasks;
+    const taskIdList = Object.keys(this.props.assignedTasks).sort();
+
+    const tasks = taskIdList.map((id) => assign({}, this.props.assignedTasks[id]));
 
     switch (selectedRows) {
       case 'all':
@@ -44,46 +40,38 @@ class AssignedTaskIndex extends React.Component {
         break;
     }
 
-    this.setState({ tasks });
-  };
-
-  componentWillReceiveProps(nextProps) {
-    const newTasks = [];
-
-    nextProps.assignedTasks.forEach((assignedTask) => {
-      newTasks.push(assign({}, assignedTask));
-    });
-
-    this.setState({ tasks: newTasks });
-  }
-
-  componentDidUpdate() {
-    this.state.tasks.forEach((task, index) => {
-      if (!isEqual(task, this.props.assignedTasks[index])) {
-        this.props.dispatchUpdateTask(task);
+    tasks.forEach((task) => {
+      if (!isEqual(task, this.props.assignedTasks[task.id])) {
+        this.props.dispatchUpdateAssignedTask(task);
       }
     });
-  }
+  };
 
   get taskList() {
-    const tableRows = this.state.tasks.map((task) => (
-      <TableRow selected={task.completed} key={task.name}>
-        <TableRowColumn>{task.name}</TableRowColumn>
-        <TableRowColumn>{task.description}</TableRowColumn>
-        <TableRowColumn>{task.due_date}</TableRowColumn>
-      </TableRow>
-    ));
+    const taskIdList = Object.keys(this.props.assignedTasks).sort();
+
+    const tableRows = taskIdList.map((id) => {
+      const task = this.props.assignedTasks[id];
+
+      return (
+        <TableRow selected={task.completed} key={task.name}>
+          <TableRowColumn>{task.name}</TableRowColumn>
+          <TableRowColumn>{task.description}</TableRowColumn>
+          <TableRowColumn>{task.due_date}</TableRowColumn>
+        </TableRow>
+      );
+    });
 
     return (
-      <Table onRowSelection={this.handleRowSelection} multiSelectable={true}>
-        <TableHeader>
+      <Table onRowSelection={this.handleRowSelection} multiSelectable={true} >
+        <TableHeader enableSelectAll={false} displaySelectAll={false} >
           <TableRow>
             <TableHeaderColumn>Name</TableHeaderColumn>
             <TableHeaderColumn>Description</TableHeaderColumn>
             <TableHeaderColumn>Due Date</TableHeaderColumn>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody deselectOnClickaway={false}>
           {tableRows}
         </TableBody>
       </Table>
