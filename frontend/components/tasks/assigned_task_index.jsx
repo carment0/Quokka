@@ -62,7 +62,7 @@ class AssignedTaskIndex extends React.Component {
       );
     });
 
-    return (
+    const table = (
       <Table onRowSelection={this.handleRowSelection} multiSelectable={true} >
         <TableHeader enableSelectAll={false} displaySelectAll={false} >
           <TableRow>
@@ -76,12 +76,19 @@ class AssignedTaskIndex extends React.Component {
         </TableBody>
       </Table>
     );
+
+    return (
+      <div className="task-list">
+        {table}
+      </div>
+    );
   }
 
   render() {
     return (
       <div className="assigned-tasks">
-        <div className="assigned-tasks-list">{this.taskList}</div>
+        <h2>Your Assigned Tasks</h2>
+        {this.taskList}
       </div>
     );
   }

@@ -16,13 +16,13 @@ import {
 
 class ProjectOverview extends React.Component {
   static propTypes = {
-    currentUser: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    dispatchFetchAssignedProjects: PropTypes.func.isRequired,
-    dispatchFetchAdministratedProjects: PropTypes.func.isRequired,
-    dispatchDeleteProject: PropTypes.func.isRequired,
+    currentUser: PropTypes.object.isRequired,
     assignedProjects: PropTypes.object.isRequired,
-    adminProjects: PropTypes.object.isRequired
+    adminProjects: PropTypes.object.isRequired,
+    dispatchDeleteProject: PropTypes.func.isRequired,
+    dispatchFetchAdministratedProjects: PropTypes.func.isRequired,
+    dispatchFetchAssignedProjects: PropTypes.func.isRequired
   }
 
   componentDidMount() {

@@ -35,7 +35,7 @@ html, body, h1, h2, h3, h4, h5 {
 // Application page
 @import "containers/management.scss";
 
-// == Projects
+// ==> Projects
 @import "containers/project_overview.scss";
 @import "components/assigned_project_index.scss";
 @import "components/admin_project_index.scss";
@@ -43,5 +43,6 @@ html, body, h1, h2, h3, h4, h5 {
 @import "containers/project_detail.scss";
 @import "components/project_task_item.scss";
 
-// == Tasks
-@import "components/task_overview.scss";
+// ==> Tasks
+@import "containers/task_overview.scss";
+@import "components/assigned_task_index";

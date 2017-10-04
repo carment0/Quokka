@@ -8,7 +8,6 @@ import AssignedTaskIndex from '../../components/tasks/assigned_task_index';
 // Actions
 import { fetchAssignedTaskList, updateAssignedTask } from '../../actions/task_actions';
 
-// This component should be connected just like what we did in ProjectsOverview
 
 class TaskOverview extends React.Component {
   static propTypes = {
@@ -19,14 +18,13 @@ class TaskOverview extends React.Component {
   }
 
   componentDidMount() {
-    console.log('TaskOverview is mounted, now fetching assigned tasks for user');
     this.props.dispatchFetchAssignedTaskList(this.props.currentUser.id);
   }
 
   render() {
     return (
-      <div>
-        <h1>My Task Overview</h1>
+      <div className="task-overview">
+        <h1>Task Overview</h1>
         <AssignedTaskIndex
           assignedTasks={this.props.assignedTasks}
           dispatchUpdateAssignedTask={this.props.dispatchUpdateAssignedTask} />
