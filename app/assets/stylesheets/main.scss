@@ -43,6 +43,8 @@ html, body, h1, h2, h3, h4, h5 {
 @import "containers/project_detail.scss";
 @import "components/project_task_item.scss";
 
+@import "containers/project_creator.scss";
+
 // ==> Tasks
 @import "containers/task_overview.scss";
 @import "components/assigned_task_index";

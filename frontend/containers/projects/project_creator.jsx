@@ -41,6 +41,7 @@ class ProjectCreator extends React.Component {
   render() {
     return (
       <div className="project-creator">
+        <h1>Create New Project</h1>
         <form className="project-form" onSubmit={this.handleFormSubmission}>
           <h2>Name</h2>
           <TextField hintText={'Project name'} onChange={this.update('name')} />

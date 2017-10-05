@@ -77,7 +77,7 @@ class ProjectOverview extends React.Component {
         <Dialog
           titleStyle={dialogTitleStyle}
           contentStyle={dialogContentStyle}
-          title={'Create New Project'}
+          title={'Edit Project'}
           modal={false}
           open={this.state.dialogOpen}
           onRequestClose={this.handleDialogClose}>
