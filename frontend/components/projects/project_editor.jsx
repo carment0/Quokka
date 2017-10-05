@@ -6,15 +6,21 @@ import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
 
 
-class CreateProject extends React.Component {
+class ProjectEditor extends React.Component {
   state = {
-    name: '',
-    description: ''
-  }
+    name: this.props.selectedProject.name,
+    description: this.props.selectedProject.description,
+    deadline: this.props.selectedProject.deadline
+  };
+
+  static defaultProps = {
+    selectedProject: {}
+  };
 
   static propTypes = {
+    selectedProject: PropTypes.object,
     handleDialogClose: PropTypes.func.isRequired,
-    dispatchCreateProject: PropTypes.func.isRequired
+    dispatchUpdateProject: PropTypes.func.isRequired
   };
 
   update(field) {
@@ -29,7 +35,7 @@ class CreateProject extends React.Component {
 
   handleFormSubmission = (e) => {
     e.preventDefault();
-    this.props.dispatchCreateProject(this.state);
+    this.props.dispatchUpdateProject(this.state);
     this.props.handleDialogClose();
   }
 
@@ -39,16 +45,25 @@ class CreateProject extends React.Component {
     });
   }
 
-  // TODO: Please style this shit
   render() {
     return (
       <form className="create-project" onSubmit={this.handleFormSubmission}>
         <h2>Name</h2>
-        <TextField hintText={'Project name'} onChange={this.update('name')} />
+        <TextField
+          hintText={'Project name'}
+          value={this.state.name}
+          onChange={this.update('name')} />
         <h2>Deadline</h2>
-        <DatePicker hintText="Deadline" container="inline" mode="landscape" onChange={this.handlePickDate} />
+        <DatePicker
+          hintText="Deadline"
+          value={new Date(this.state.deadline)}
+          container="inline"
+          mode="landscape"
+          onChange={this.handlePickDate} />
         <h2>Description</h2>
-        <ReactQuill value={this.state.description} onChange={this.handleTextEditorChange} />
+        <ReactQuill
+          value={this.state.description}
+          onChange={this.handleTextEditorChange} />
         <FlatButton
           type="submit"
           label="Submit"
@@ -62,4 +77,4 @@ class CreateProject extends React.Component {
   }
 }
 
-export default CreateProject;
+export default ProjectEditor;

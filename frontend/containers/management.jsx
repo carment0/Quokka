@@ -14,7 +14,6 @@ import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import Dialog from 'material-ui/Dialog';
 import Divider from 'material-ui/Divider';
 
 // Icons
@@ -32,54 +31,25 @@ import { createProject } from '../actions/project_actions';
 // Other Containers
 import ProjectDetail from './projects/project_detail';
 import ProjectOverview from './projects/project_overview';
+import ProjectCreator from './projects/project_creator';
 import TaskOverview from './tasks/task_overview';
 import CalendarOverview from './calendars/calendar_overview';
-
-// The one omponent
-import CreateProject from '../components/projects/create_project';
 
 // Style
 import Colors from '../shared/colors';
 
-// Dialog content is the white box that pops up during on click
-const dialogContentStyle = {
-  width: '70%',
-  minWidth: '500px',
-  maxWidth: '980px'
-};
-
-// Dialog title is the title section inside content body
-const dialogTitleStyle = {
-  display: 'flex',
-  justifyContent: 'flex-start',
-  fontWeight: '100',
-  fontSize: '2rem'
-};
 
 class Management extends React.Component {
   state = { sidebarOpen: false, dialogOpen: false };
 
   static propTypes = {
     dispatchLogout: PropTypes.func.isRequired,
-    dispatchCreateProject: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
   };
 
   toggleSidebarExpand = () => {
     this.setState({
       sidebarOpen: !this.state.sidebarOpen
-    });
-  };
-
-  handleDialogOpen = () => {
-    this.setState({
-      dialogOpen: true
-    });
-  };
-
-  handleDialogClose = () => {
-    this.setState({
-      dialogOpen: false
     });
   };
 
@@ -148,10 +118,18 @@ class Management extends React.Component {
       <management className="management">
         <section className={this.sidebarClassName}>
           <Drawer open={this.state.sidebarOpen} swipeAreaWidth={50}>
-            <MenuItem onClick={this.handleDialogOpen} rightIcon={<AddCircleOutline />}>Create New Project</MenuItem>
-            <MenuItem rightIcon={<PeopleOutline />}>Create New Team</MenuItem>
+            <MenuItem
+              onClick={() => this.props.history.push('/management/create_project')}
+              rightIcon={<AddCircleOutline />}>
+              Create New Project
+            </MenuItem>
+            <MenuItem rightIcon={<PeopleOutline />}>
+              Create New Team
+            </MenuItem>
             <Divider />
-            <MenuItem rightIcon={<AccountCircle />}>My Profile</MenuItem>
+            <MenuItem rightIcon={<AccountCircle />}>
+              My Profile
+            </MenuItem>
           </Drawer>
         </section>
         <section className={this.managementMainContentClassName}>
@@ -185,20 +163,10 @@ class Management extends React.Component {
                 <Route path="/management/projects/:id" component={ProjectDetail} />
                 <Route path="/management/tasks" component={TaskOverview} />
                 <Route path="/management/calendar" component={CalendarOverview} />
+                <Route path="/management/create_project" component={ProjectCreator} />
               </Switch>
             </Paper>
           </content>
-          <Dialog
-            titleStyle={dialogTitleStyle}
-            contentStyle={dialogContentStyle}
-            title={'Create New Project'}
-            modal={false}
-            open={this.state.dialogOpen}
-            onRequestClose={this.handleDialogClose}>
-            <CreateProject
-              handleDialogClose={this.handleDialogClose}
-              dispatchCreateProject={this.props.dispatchCreateProject} />
-          </Dialog>
         </section>
       </management>
     );
