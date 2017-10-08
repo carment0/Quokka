@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id          :integer          not null, primary key
+#  name        :string           not null
+#  description :text
+#  completed   :boolean          default(FALSE), not null
+#  admin_id    :integer          not null
+#  deadline    :date             not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Project < ApplicationRecord
   after_initialize :init
   validates :name, :admin_id, :deadline, presence: true

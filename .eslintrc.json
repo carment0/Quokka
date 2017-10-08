@@ -26,7 +26,8 @@
     "document": false,
     "WebSocket": false,
     "$": false,
-    "window": false
+    "window": false,
+    "App": false
   },
   "rules": {
     "jsx-a11y/href-no-hash": "off",
