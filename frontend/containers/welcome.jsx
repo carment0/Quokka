@@ -58,6 +58,10 @@ class Welcome extends React.Component {
     return 'Login';
   }
 
+  /**
+   * Returns the form that goes into the modal
+   * @returns {React.Element}
+   */
   get form() {
     if (this.state.formType === FormType.SIGN_UP) {
       return (

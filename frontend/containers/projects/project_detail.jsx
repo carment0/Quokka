@@ -29,8 +29,19 @@ class ProjectDetail extends React.Component {
     match: PropTypes.object.isRequired,
   }
 
+  /**
+   * Whenever window resizes, the dimension of the pie chart shall be updated accordingly
+   */
+  handleWindowResize = () => {
+    this.setState({
+      height: $('#chart-container').height(),
+      width: $('#chart-container').width()
+    });
+  }
+
   componentDidMount() {
     this.props.dispatchFetchProjectDetail(this.props.match.params.id);
+    window.addEventListener('resize', this.handleWindowResize);
   }
 
   /*
@@ -40,6 +51,8 @@ class ProjectDetail extends React.Component {
     if (this.setTimeoutId) {
       clearTimeout(this.setTimeoutId);
     }
+
+    window.removeEventListener('resize', this.handleWindowResize);
   }
 
   /**
@@ -117,7 +130,8 @@ class ProjectDetail extends React.Component {
             data={record}
             cx="50%"
             cy="50%"
-            outerRadius={120}
+            innerRadius={90} // This should be dynamic
+            outerRadius={120} // This should be dynamic
             fill="#8884d8"
             label>
             {record.map((entry, index) => <Cell key={entry} fill={COLORS[index % COLORS.length]} />)}
@@ -128,13 +142,7 @@ class ProjectDetail extends React.Component {
     }
     // To keep shit visually pleasing, it is actually BETTER to make user wait longer for the chart to show up because
     // the circular progress bar should at least complete one cycle of spinning.
-    this.setTimeoutId = setTimeout(() => {
-      this.setState({
-        height: $('#chart-container').height(),
-        width: $('#chart-container').width()
-      });
-    }, 1000);
-
+    this.setTimeoutId = setTimeout(this.handleWindowResize, 1000);
     return <CircularProgress style={circuleProgressStyle} />;
   }
 
