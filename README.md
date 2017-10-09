@@ -2,7 +2,6 @@
 # Quokka
 Quokka is a clone of the project management app Asana. Quokka allows for team members to collaboratively track project and task completion.
 
-Quokka home page: https://quokka-app.herokuapp.com
 
 ## Features
 
