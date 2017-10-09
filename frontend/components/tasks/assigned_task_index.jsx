@@ -1,6 +1,8 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isEqual, assign } from 'lodash';
+// Material UI
 import {
   Table,
   TableBody,

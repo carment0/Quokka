@@ -1,6 +1,7 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
-
+// Material UI
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 

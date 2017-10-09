@@ -1,12 +1,11 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 // Components
 import AssignedTaskIndex from '../../components/tasks/assigned_task_index';
-
 // Actions
-import { fetchAssignedTaskList, updateAssignedTask } from '../../actions/task_actions';
+import { fetchAssignedTaskList, updateAssignedTask } from '../../actions/task_http_actions';
 
 
 class TaskOverview extends React.Component {

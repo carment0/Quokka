@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-
 // Material UI
 import { Tabs, Tab } from 'material-ui/Tabs';
 import Paper from 'material-ui/Paper';
@@ -15,7 +14,6 @@ import FlatButton from 'material-ui/FlatButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import Divider from 'material-ui/Divider';
-
 // Icons
 import ListIcon from 'material-ui/svg-icons/action/list';
 import DateIcon from 'material-ui/svg-icons/action/date-range';
@@ -23,18 +21,15 @@ import AssignmentIcon from 'material-ui/svg-icons/action/assignment';
 import PeopleOutline from 'material-ui/svg-icons/social/people-outline';
 import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
-
 // Actions
 import { logout } from '../actions/session_actions';
 import { createProject } from '../actions/project_actions';
-
 // Other Containers
 import ProjectDetail from './projects/project_detail';
 import ProjectOverview from './projects/project_overview';
 import ProjectCreator from './projects/project_creator';
 import TaskOverview from './tasks/task_overview';
 import CalendarOverview from './calendars/calendar_overview';
-
 // Style
 import Colors from '../shared/colors';
 

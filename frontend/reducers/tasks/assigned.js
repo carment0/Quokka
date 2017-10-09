@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import { RECEIVE_ASSIGNED_TASK_LIST, RECEIVE_ASSIGNED_TASK } from '../../actions/task_actions';
+import { RECEIVE_ASSIGNED_TASK_LIST, RECEIVE_ASSIGNED_TASK } from '../../actions/task_http_actions';
 
 export default (oldState = {}, action) => {
   Object.freeze(oldState);

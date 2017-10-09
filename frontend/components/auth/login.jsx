@@ -1,11 +1,14 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
+// Material UI
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
-
+// Enums
 const fatDividerStyle = { width: '85%', height: '2px', marginTop: '1rem', marginBottom: '1rem' };
+
 
 class Login extends React.Component {
   state = { username: '', password: '' };
