@@ -2,32 +2,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 // Material UI
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
-
 // Actions
 import { login, signup } from '../actions/session_actions';
-
 // Components
 import Login from '../components/auth/login';
 import Signup from '../components/auth/signup';
-
 // Enum
 const FormType = {
   SIGN_UP: 'SIGN_UP',
   LOG_IN: 'LOG_IN'
 };
-
 // Dialog content is the white box that pops up during on click
 const dialogContentStyle = {
   width: '40%',
   minWidth: '350px',
   maxWidth: '500px'
 };
-
 // Dialog title is the title section inside content body
 const dialogTitleStyle = {
   fontWeight: '100',
@@ -35,6 +29,7 @@ const dialogTitleStyle = {
   display: 'flex',
   justifyContent: 'center'
 };
+
 
 class Welcome extends React.Component {
   state = { openDialog: false, formType: '' };
@@ -63,6 +58,10 @@ class Welcome extends React.Component {
     return 'Login';
   }
 
+  /**
+   * Returns the form that goes into the modal
+   * @returns {React.Element}
+   */
   get form() {
     if (this.state.formType === FormType.SIGN_UP) {
       return (

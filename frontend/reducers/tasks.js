@@ -3,7 +3,7 @@ import merge from 'lodash/merge';
 
 import AssignedTaskReducer from './tasks/assigned';
 
-import { RECEIVE_TASK_LIST, RECEIVE_TASK, REMOVE_TASK } from '../actions/task_actions';
+import { RECEIVE_TASK_LIST, RECEIVE_TASK, REMOVE_TASK } from '../actions/task_http_actions';
 
 
 const AllTaskReducer = (oldState = {}, action) => {

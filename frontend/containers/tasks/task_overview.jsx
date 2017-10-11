@@ -1,34 +1,61 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { merge } from 'lodash';
+// Material UI
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 // Components
 import AssignedTaskIndex from '../../components/tasks/assigned_task_index';
-
 // Actions
-import { fetchAssignedTaskList, updateAssignedTask } from '../../actions/task_actions';
+import { fetchAssignedTaskList, updateAssignedTask } from '../../actions/task_http_actions';
+import { updateAssignedTaskViaSocket } from '../../actions/task_socket_actions';
+// Enums
+const refreshIndicatorStyle = {
+  position: 'relative'
+};
+const Status = {
+  READY: 'ready',
+  LOADING: 'loading',
+  HIDE: 'hide'
+};
 
 
 class TaskOverview extends React.Component {
+  state = {
+    socketConnectionStatus: Status.LOADING
+  };
+
   static propTypes = {
-    dispatchFetchAssignedTaskList: PropTypes.func.isRequired,
     dispatchUpdateAssignedTask: PropTypes.func.isRequired,
+    dispatchUpdateAssignedTaskViaSocket: PropTypes.func.isRequired,
+    dispatchFetchAssignedTaskList: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
     assignedTasks: PropTypes.object.isRequired
-  }
+  };
 
   // TODO: Is it possible to have server send me a custom greeting message when connection is opened?
   handleChannelOnConnect = () => {
-    console.log('Channel is connected'); // Anyways, holy shit took me long enough to figure this one out
+    this.setState({ socketConnectionStatus: Status.READY });
     this.socket.perform('receive', { message: 'Hello' });
   };
 
   handleChannelOnDisconnect = (msg) => {
+    this.setState({ socketConnectionStatus: Status.LOADING });
     console.log('Channel is closed', msg);
   }
 
   handleChannelOnReceive = (payload) => {
-    console.log(payload);
+    // TODO: Please use enums
+    switch (payload.status) {
+      case 'updated':
+        if (this.props.assignedTasks[payload.id]) {
+          delete payload.status;
+          this.props.dispatchUpdateAssignedTaskViaSocket(merge({}, this.props.assignedTasks[payload.id], payload));
+        }
+        break;
+      default:
+    }
   }
 
   componentDidMount() {
@@ -51,7 +78,14 @@ class TaskOverview extends React.Component {
   render() {
     return (
       <div className="task-overview">
-        <h1>Task Overview</h1>
+        <section className="title">
+          <h1>Task Overview</h1>
+          <RefreshIndicator
+            status={this.state.socketConnectionStatus}
+            style={refreshIndicatorStyle}
+            top={0}
+            left={0} />
+        </section>
         <AssignedTaskIndex
           assignedTasks={this.props.assignedTasks}
           dispatchUpdateAssignedTask={this.props.dispatchUpdateAssignedTask} />
@@ -66,8 +100,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatchUpdateAssignedTask: (task) => dispatch(updateAssignedTask(task)), // TODO: change task action accepted arguments
-  dispatchFetchAssignedTaskList: (userId) => dispatch(fetchAssignedTaskList(userId))
+  dispatchUpdateAssignedTask: (task) => dispatch(updateAssignedTask(task)),
+  dispatchFetchAssignedTaskList: (userId) => dispatch(fetchAssignedTaskList(userId)),
+  dispatchUpdateAssignedTaskViaSocket: (task) => dispatch(updateAssignedTaskViaSocket(task))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskOverview);

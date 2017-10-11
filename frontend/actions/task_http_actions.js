@@ -1,3 +1,8 @@
+/*
+  HTTP actions rely on AJAX requests to the server to receive the data and then perform dispatch to modify the Redux
+  store.
+*/
+
 export const RECEIVE_TASK = 'RECEIVE_TASK';
 export const receiveTask = (task) => ({
   type: RECEIVE_TASK,

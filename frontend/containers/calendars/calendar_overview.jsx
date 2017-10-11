@@ -1,3 +1,4 @@
+// React
 import React from 'react';
 
 // This component should be connected but we can wait

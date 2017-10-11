@@ -1,12 +1,13 @@
+// React
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+// Material UI
 import ReactQuill from 'react-quill';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
-
+// Actions
 import { createProject } from '../../actions/project_actions';
 
 
