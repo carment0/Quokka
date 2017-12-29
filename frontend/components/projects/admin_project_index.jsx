@@ -59,7 +59,9 @@ class AdminProjectIndex extends React.Component {
             <FlatButton label="Edit" onClick={this.createEditProjectHandler(project.id)} />
             <FlatButton label="Delete" secondary={true} onClick={this.createDeleteProjectHandler(project.id)} />
           </CardActions>
-          <CardText expandable={true}>{project.description}</CardText>
+          <CardText expandable={true}>
+            <div dangerouslySetInnerHTML={{ __html: project.description }} />
+          </CardText>
         </Card>
       );
     });

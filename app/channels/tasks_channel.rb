@@ -5,8 +5,8 @@ class TasksChannel < ApplicationCable::Channel
     stream_from 'tasks'
   end
 
-  def receive(data)
-    puts "#receive is called!!! with data #{data}"
+  def received(data)
+    puts "TaskChannel method #received is called!!! with data #{data}"
   end
 
   def unsubscribed

@@ -37,7 +37,7 @@ class TaskOverview extends React.Component {
   // TODO: Is it possible to have server send me a custom greeting message when connection is opened?
   handleChannelOnConnect = () => {
     this.setState({ socketConnectionStatus: Status.READY });
-    this.socket.perform('receive', { message: 'Hello' });
+    this.socket.perform('received', { message: 'Hello' });
   };
 
   handleChannelOnDisconnect = (msg) => {

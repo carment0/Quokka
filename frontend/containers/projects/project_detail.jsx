@@ -7,6 +7,8 @@ import { PieChart, Pie, Tooltip, Cell } from 'recharts';
 import Chip from 'material-ui/Chip';
 import LinearProgress from 'material-ui/LinearProgress';
 import CircularProgress from 'material-ui/CircularProgress';
+// Quill
+import ReactQuill from 'react-quill';
 // Actions
 import { fetchProjectDetail } from '../../actions/project_actions';
 import ProjectTaskItem from '../../components/projects/project_task_item';
@@ -16,12 +18,17 @@ const circuleProgressStyle = {
   top: '50%',
   left: '50%'
 };
+const modules = {
+  toolbar: []
+};
+
 
 class ProjectDetail extends React.Component {
   state = {
     height: null,
-    width: null
+    width: null,
   };
+
 
   static propTypes = {
     dispatchFetchProjectDetail: PropTypes.func.isRequired,
@@ -154,7 +161,7 @@ class ProjectDetail extends React.Component {
     return (
       <div className="project-description">
         <h1>{this.props.project.name}</h1>
-        <p>{this.props.project.description}</p>
+        <ReactQuill value={this.props.project.description} theme="bubble" readOnly={true} modules={modules} />
       </div>
     );
   }
