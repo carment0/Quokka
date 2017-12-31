@@ -9,14 +9,43 @@ import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
 // Actions
 import { createProject } from '../../actions/project_actions';
+// Enums
+const modules = {
+  toolbar: [
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],       // header dropdown
+    [{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
+    [{ 'font': [] }],                                // font family
+    ['bold', 'italic', 'underline'],       // toggled buttons
+    [{ 'color': [] }, { 'background': [] }],         // dropdown with defaults
+    [{ 'align': [] }],                               // text align
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],    // lists
+    [{ 'indent': '-1'}, { 'indent': '+1' }],         // outdent/indent
+    [{ 'script': 'sub'}, { 'script': 'super' }],     // superscript/subscript
+    ['blockquote', 'code-block'],                    // blocks
+    ['link'],                                        // address link
+    ['clean']                                        // remove formatting
+  ]
+};
+
+const formats = [
+  'header', 'font', 'background', 'color', 'code', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent', 'script', 'align', 'direction',
+  'link', 'image', 'code-block', 'formula', 'video'
+];
 
 
 class ProjectCreator extends React.Component {
-  state = { name: '', description: '' };
+  state = {
+    name: '',
+    description: '',
+    defaultValue: 'Insert project description...'
+  };
 
   static propTypes = {
     dispatchCreateProject: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
+    placeholder: React.PropTypes.string
   };
 
   handleTextEditorChange = (value) => {
@@ -51,7 +80,14 @@ class ProjectCreator extends React.Component {
           <h2>Deadline</h2>
           <DatePicker hintText="Deadline" container="inline" mode="landscape" onChange={this.handlePickDate} />
           <h2>Description</h2>
-          <ReactQuill value={this.state.description} onChange={this.handleTextEditorChange} />
+          <ReactQuill
+            theme={'snow'}
+            onChange={this.handleTextEditorChange}
+            modules={modules}
+            formats={formats}
+            defaultValue={this.state.default}
+            placeholder={this.props.placeholder} />
+
           <FlatButton
             type="submit"
             label="Submit"

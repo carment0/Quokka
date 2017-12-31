@@ -52,6 +52,11 @@ class Management extends React.Component {
     this.props.dispatchLogout();
   };
 
+  handleCreateProject = () => {
+    if (this.props.history.location.pathname !== '/management/create_project') {
+      this.props.history.push('/management/create_project');
+    }
+  }
   /**
    * Returns the appropriate class name of the management main content section
    * @returns {string}
@@ -114,7 +119,7 @@ class Management extends React.Component {
         <section className={this.sidebarClassName}>
           <Drawer open={this.state.sidebarOpen} swipeAreaWidth={50}>
             <MenuItem
-              onClick={() => this.props.history.push('/management/create_project')}
+              onClick={this.handleCreateProject}
               rightIcon={<AddCircleOutline />}>
               Create New Project
             </MenuItem>

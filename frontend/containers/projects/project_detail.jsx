@@ -65,6 +65,22 @@ class ProjectDetail extends React.Component {
     });
   }
 
+  handleDialogOpen(project) {
+    return (e) => {
+      e.preventDefault();
+      this.setState({
+        selectedProject: project,
+        dialogOpen: true
+      });
+    };
+  }
+
+  handleDialogClose = () => {
+    this.setState({
+      dialogOpen: false
+    });
+  };
+
   componentDidMount() {
     this.props.dispatchFetchProjectDetail(this.props.match.params.id);
     window.addEventListener('resize', this.handleWindowResize);
@@ -177,30 +193,15 @@ class ProjectDetail extends React.Component {
    * @returns {React.Element}
    */
   get projectDescription() {
+    console.log(this.props.project.description);
     return (
       <div className="project-description">
         <h1>{this.props.project.name}</h1>
         <FlatButton label="Edit" onClick={this.handleDialogOpen(this.props.project)} />
-        <ReactQuill value={this.props.project.description} theme="bubble" readOnly={true} modules={modules} />
+        <ReactQuill value={this.props.project.description} readOnly={true} theme="bubble" modules={modules} />
       </div>
     );
   }
-
-  handleDialogOpen(project) {
-    return (e) => {
-      e.preventDefault();
-      this.setState({
-        selectedProject: project,
-        dialogOpen: true
-      });
-    };
-  }
-
-  handleDialogClose = () => {
-    this.setState({
-      dialogOpen: false
-    });
-  };
 
   /**
    * Returns a list of people who are assigned to the project.
