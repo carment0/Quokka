@@ -10,6 +10,7 @@ import DatePicker from 'material-ui/DatePicker';
 
 class ProjectEditor extends React.Component {
   state = {
+    id: this.props.selectedProject.id,
     name: this.props.selectedProject.name,
     description: this.props.selectedProject.description,
     deadline: this.props.selectedProject.deadline
@@ -37,6 +38,7 @@ class ProjectEditor extends React.Component {
 
   handleFormSubmission = (e) => {
     e.preventDefault();
+    console.log(this.state);
     this.props.dispatchUpdateProject(this.state);
     this.props.handleDialogClose();
   }

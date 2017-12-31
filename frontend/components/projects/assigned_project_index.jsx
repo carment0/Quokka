@@ -37,13 +37,14 @@ class AssignedProjectIndex extends React.Component {
             actAsExpander={true}
             showExpandableButton={true}
             style={{ fontWeight: '900', padding: '0.5rem' }} />
+          <CardText expandable={true}>
+            <p>Project Summary:</p>
+            <div dangerouslySetInnerHTML={{ __html: project.description }} />
+          </CardText>
           <CardActions
             style={{ display: 'flex', justifyContent: 'flex-end', padding: '0.5rem' }}>
             <FlatButton label="View" primary={true} onClick={this.createViewProjectHandler(project.id)} />
           </CardActions>
-          <CardText expandable={true}>
-            <div dangerouslySetInnerHTML={{ __html: project.description }} />
-          </CardText>
         </Card>
       );
     });

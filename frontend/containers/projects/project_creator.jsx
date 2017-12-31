@@ -15,7 +15,8 @@ class ProjectCreator extends React.Component {
   state = { name: '', description: '' };
 
   static propTypes = {
-    dispatchCreateProject: PropTypes.func.isRequired
+    dispatchCreateProject: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
   };
 
   handleTextEditorChange = (value) => {
@@ -27,6 +28,7 @@ class ProjectCreator extends React.Component {
   handleFormSubmission = (e) => {
     e.preventDefault();
     this.props.dispatchCreateProject(this.state);
+    this.props.history.push('/management/projects');
   };
 
   handlePickDate = (nullVal, date) => {

@@ -7,11 +7,15 @@ import { PieChart, Pie, Tooltip, Cell } from 'recharts';
 import Chip from 'material-ui/Chip';
 import LinearProgress from 'material-ui/LinearProgress';
 import CircularProgress from 'material-ui/CircularProgress';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 // Quill
 import ReactQuill from 'react-quill';
 // Actions
-import { fetchProjectDetail } from '../../actions/project_actions';
+import { fetchProjectDetail, updateProject } from '../../actions/project_actions';
 import ProjectTaskItem from '../../components/projects/project_task_item';
+// Components
+import ProjectEditor from '../../components/projects/project_editor';
 // Enums
 const COLORS = ['#00C49F', '#0088FE', '#ff2828'];
 const circuleProgressStyle = {
@@ -21,12 +25,26 @@ const circuleProgressStyle = {
 const modules = {
   toolbar: []
 };
+// Dialog content is the white box that pops up during on click
+const dialogContentStyle = {
+  width: '70%',
+  minWidth: '500px',
+  maxWidth: '980px'
+};
+// Dialog title is the title section inside content body
+const dialogTitleStyle = {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  fontWeight: '100',
+  fontSize: '2rem'
+};
 
 
 class ProjectDetail extends React.Component {
   state = {
     height: null,
     width: null,
+    dialogOpen: false
   };
 
 
@@ -34,6 +52,7 @@ class ProjectDetail extends React.Component {
     dispatchFetchProjectDetail: PropTypes.func.isRequired,
     project: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
+    dispatchUpdateProject: PropTypes.func.isRequired,
   }
 
   /**
@@ -161,10 +180,27 @@ class ProjectDetail extends React.Component {
     return (
       <div className="project-description">
         <h1>{this.props.project.name}</h1>
+        <FlatButton label="Edit" onClick={this.handleDialogOpen(this.props.project)} />
         <ReactQuill value={this.props.project.description} theme="bubble" readOnly={true} modules={modules} />
       </div>
     );
   }
+
+  handleDialogOpen(project) {
+    return (e) => {
+      e.preventDefault();
+      this.setState({
+        selectedProject: project,
+        dialogOpen: true
+      });
+    };
+  }
+
+  handleDialogClose = () => {
+    this.setState({
+      dialogOpen: false
+    });
+  };
 
   /**
    * Returns a list of people who are assigned to the project.
@@ -227,6 +263,18 @@ class ProjectDetail extends React.Component {
         {this.progressIndicator}
         {this.projectSummary}
         {this.taskSummary}
+        <Dialog
+          titleStyle={dialogTitleStyle}
+          contentStyle={dialogContentStyle}
+          title={'Edit Project'}
+          modal={false}
+          open={this.state.dialogOpen}
+          onRequestClose={this.handleDialogClose}>
+          <ProjectEditor
+            selectedProject={this.state.selectedProject}
+            handleDialogClose={this.handleDialogClose}
+            dispatchUpdateProject={this.props.dispatchUpdateProject} />
+        </Dialog>
       </section>
     );
   }
@@ -248,6 +296,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchFetchProjectDetail: (projectId) => dispatch(fetchProjectDetail(projectId)),
+  dispatchUpdateProject: (project) => dispatch(updateProject(project))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail);
