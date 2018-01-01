@@ -6,6 +6,30 @@ import ReactQuill from 'react-quill';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
+// Enums
+const modules = {
+  toolbar: [
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],       // header dropdown
+    [{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
+    [{ 'font': [] }],                                // font family
+    ['bold', 'italic', 'underline'],       // toggled buttons
+    [{ 'color': [] }, { 'background': [] }],         // dropdown with defaults
+    [{ 'align': [] }],                               // text align
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],    // lists
+    [{ 'indent': '-1'}, { 'indent': '+1' }],         // outdent/indent
+    [{ 'script': 'sub'}, { 'script': 'super' }],     // superscript/subscript
+    ['blockquote', 'code-block'],                    // blocks
+    ['link'],                                        // address link
+    ['clean']                                        // remove formatting
+  ]
+};
+
+const formats = [
+  'header', 'font', 'background', 'color', 'code', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent', 'script', 'align', 'direction',
+  'link', 'image', 'code-block', 'formula', 'video'
+];
 
 
 class ProjectEditor extends React.Component {
@@ -66,8 +90,11 @@ class ProjectEditor extends React.Component {
           onChange={this.handlePickDate} />
         <h2>Description</h2>
         <ReactQuill
+          theme={'snow'}
           value={this.state.description}
-          onChange={this.handleTextEditorChange} />
+          onChange={this.handleTextEditorChange}
+          modules={modules}
+          formats={formats} />
         <FlatButton
           type="submit"
           label="Submit"

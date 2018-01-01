@@ -4,9 +4,27 @@ import PropTypes from 'prop-types';
 // Material UI
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-
+import Dialog from 'material-ui/Dialog';
+// Enums
+// Dialog content is the white box that pops up during on click
+const dialogContentStyle = {
+  width: '70%',
+  minWidth: '500px',
+  maxWidth: '980px'
+};
+// Dialog title is the title section inside content body
+const dialogTitleStyle = {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  fontWeight: '100',
+  fontSize: '2rem'
+};
 
 class AdminProjectIndex extends React.Component {
+  state = {
+    dialogOpen: false
+  }
+
   static propTypes = {
     history: PropTypes.object.isRequired,
     adminProjects: PropTypes.object.isRequired,
@@ -21,10 +39,13 @@ class AdminProjectIndex extends React.Component {
     };
   }
 
-  createDeleteProjectHandler(projectId) {
+  createDeleteProjectHandler() {
     return (e) => {
       e.preventDefault();
-      this.props.dispatchDeleteProject(projectId);
+      this.props.dispatchDeleteProject(this.state.projectSelected);
+      this.setState({
+        dialogOpen: false
+      });
     };
   }
 
@@ -34,6 +55,23 @@ class AdminProjectIndex extends React.Component {
       this.props.handleDialogOpen(projectId);
     };
   }
+
+  handleDialogOpen(projectId) {
+    return (e) => {
+      e.preventDefault();
+      this.setState({
+        dialogOpen: true,
+        projectSelected: projectId
+      });
+    };
+  }
+
+  handleDialogClose = () => {
+    this.setState({
+      dialogOpen: false,
+      projectSelected: ''
+    });
+  };
 
   get projectCardList() {
     const projectIds = Object.keys(this.props.adminProjects);
@@ -61,8 +99,9 @@ class AdminProjectIndex extends React.Component {
             style={{ display: 'flex', justifyContent: 'flex-end', padding: '0.5rem' }}>
             <FlatButton label="View" primary={true} onClick={this.createViewProjectHandler(project.id)} />
             <FlatButton label="Edit" onClick={this.createEditProjectHandler(project.id)} />
-            <FlatButton label="Delete" secondary={true} onClick={this.createDeleteProjectHandler(project.id)} />
+            <FlatButton label="Delete" secondary={true} onClick={this.handleDialogOpen(project.id)} />
           </CardActions>
+
         </Card>
       );
     });
@@ -79,6 +118,25 @@ class AdminProjectIndex extends React.Component {
       <div className="admin-projects">
         <h2>Your Administrated Projects</h2>
         {this.projectCardList}
+        <Dialog
+          titleStyle={dialogTitleStyle}
+          contentStyle={dialogContentStyle}
+          modal={false}
+          title={'Are you sure you want to delete this project?'}
+          open={this.state.dialogOpen}
+          onRequestClose={this.handleDialogClose}>
+          <div>
+            <FlatButton
+              type="delete"
+              label="Confirm Delete"
+              primary={true}
+              keyboardFocused={true}
+              onClick={this.createDeleteProjectHandler()} />
+            <FlatButton label="Cancel"
+              primary={true}
+              onClick={this.handleDialogClose} />
+          </div>
+        </Dialog>
       </div>
     );
   }

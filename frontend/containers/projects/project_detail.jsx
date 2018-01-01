@@ -53,6 +53,7 @@ class ProjectDetail extends React.Component {
     project: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
     dispatchUpdateProject: PropTypes.func.isRequired,
+    currentUser: PropTypes.object.isRequired
   }
 
   /**
@@ -193,13 +194,22 @@ class ProjectDetail extends React.Component {
    * @returns {React.Element}
    */
   get projectDescription() {
-    console.log(this.props.project.description);
+    console.log(this.props.project.admin_id);
     return (
       <div className="project-description">
         <h1>{this.props.project.name}</h1>
-        <FlatButton label="Edit" onClick={this.handleDialogOpen(this.props.project)} />
+        {this.editProject}
         <ReactQuill value={this.props.project.description} readOnly={true} theme="bubble" modules={modules} />
       </div>
+    );
+  }
+
+  get editProject() {
+    if (this.props.project.admin_id !== this.props.currentUser.id) {
+      return;
+    }
+    return (
+      <FlatButton label="Edit" primary={true} onClick={this.handleDialogOpen(this.props.project)} />
     );
   }
 
