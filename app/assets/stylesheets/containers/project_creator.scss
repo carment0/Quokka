@@ -1,14 +1,22 @@
 .project-creator {
-  height: 100%;
   width: 100%;
   display: inherit;
   flex-direction: column;
+  padding: 1rem;
 
   h1 {
     font-size: 2rem;
   }
-  
-  .project-form {
 
+  .project-form {
+    padding: 1rem 2rem;
+
+    .form-box {
+      padding: 1rem 3rem;
+
+      .description {
+        padding: 0rem 0rem 1.5rem 0rem;
+      }
+    }
   }
 }

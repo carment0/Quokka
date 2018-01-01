@@ -75,24 +75,31 @@ class ProjectCreator extends React.Component {
       <div className="project-creator">
         <h1>Create New Project</h1>
         <form className="project-form" onSubmit={this.handleFormSubmission}>
-          <h2>Name</h2>
-          <TextField hintText={'Project name'} onChange={this.update('name')} />
-          <h2>Deadline</h2>
-          <DatePicker hintText="Deadline" container="inline" mode="landscape" onChange={this.handlePickDate} />
-          <h2>Description</h2>
-          <ReactQuill
-            theme={'snow'}
-            onChange={this.handleTextEditorChange}
-            modules={modules}
-            formats={formats}
-            defaultValue={this.state.default}
-            placeholder={this.props.placeholder} />
-
-          <FlatButton
-            type="submit"
-            label="Submit"
-            primary={true}
-            keyboardFocused={true} />
+          <div className="form-box">
+            <h2>Name</h2>
+            <TextField hintText={'Project name'} onChange={this.update('name')} />
+          </div>
+          <div className="form-box">
+            <h2>Deadline</h2>
+            <DatePicker hintText="Deadline" container="inline" mode="landscape" onChange={this.handlePickDate} />
+          </div>
+          <div className="form-box">
+            <h2 className="description">Description</h2>
+            <ReactQuill
+              theme={'snow'}
+              onChange={this.handleTextEditorChange}
+              modules={modules}
+              formats={formats}
+              defaultValue={this.state.default}
+              placeholder={this.props.placeholder} />
+          </div>
+          <div className="form-box">
+            <FlatButton
+              type="submit"
+              label="Submit"
+              primary={true}
+              keyboardFocused={true} />
+          </div>
         </form>
       </div>
     );
