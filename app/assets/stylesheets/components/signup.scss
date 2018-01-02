@@ -27,6 +27,10 @@
     display: inherit;
     flex-direction: column;
 
+    .session-errors {
+      color: red;
+    }
+
     .button-container {
       display: inherit;
       flex-direction: row;

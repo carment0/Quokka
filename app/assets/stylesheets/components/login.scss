@@ -15,7 +15,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    
+
     .text {
       font-size: 1rem;
       margin-bottom: 1rem;
@@ -27,6 +27,10 @@
     display: inherit;
     flex-direction: column;
 
+    .session-errors {
+      color: red;
+    }
+    
     .button-container {
       display: inherit;
       flex-direction: row;

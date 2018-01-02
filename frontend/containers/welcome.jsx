@@ -7,7 +7,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 // Actions
-import { login, signup } from '../actions/session_actions';
+import { login, signup, clearSessionErrors } from '../actions/session_actions';
 // Components
 import Login from '../components/auth/login';
 import Signup from '../components/auth/signup';
@@ -37,7 +37,8 @@ class Welcome extends React.Component {
   static propTypes = {
     dispatchLogin: PropTypes.func.isRequired,
     dispatchSignup: PropTypes.func.isRequired,
-    errors: PropTypes.array.isRequired
+    errors: PropTypes.array.isRequired,
+    clearSessionErrors: PropTypes.func.isRequired
   };
 
   /**
@@ -70,14 +71,16 @@ class Welcome extends React.Component {
           dispatchSignup={this.props.dispatchSignup}
           dispatchLogin={this.props.dispatchLogin}
           handleDialogClose={this.handleDialogClose}
-          sessionErrors={this.props.errors} />
+          sessionErrors={this.props.errors}
+          clearErrors={this.props.clearSessionErrors} />
       );
     }
     return (
       <Login
         dispatchLogin={this.props.dispatchLogin}
         handleDialogClose={this.handleDialogClose}
-        sessionErrors={this.props.errors} />
+        sessionErrors={this.props.errors}
+        clearErrors={this.props.clearSessionErrors} />
     );
   }
 
@@ -140,7 +143,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchLogin: (user) => dispatch(login(user)),
-  dispatchSignup: (user) => dispatch(signup(user))
+  dispatchSignup: (user) => dispatch(signup(user)),
+  clearSessionErrors: () => dispatch(clearSessionErrors())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

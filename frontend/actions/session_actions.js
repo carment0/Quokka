@@ -11,6 +11,11 @@ export const receiveErrors = (errors) => ({
   errors
 });
 
+export const clearSessionErrors = () => ({
+  type: RECEIVE_SESSION_ERRORS,
+  errors: []
+});
+
 /**
  * @param {object} user User should have username and password as key
  * @example

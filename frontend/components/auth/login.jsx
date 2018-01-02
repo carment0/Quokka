@@ -16,8 +16,13 @@ class Login extends React.Component {
   static propTypes = {
     handleDialogClose: PropTypes.func.isRequired,
     dispatchLogin: PropTypes.func.isRequired,
-    sessionErrors: PropTypes.array.isRequired
+    sessionErrors: PropTypes.array.isRequired,
+    clearErrors: PropTypes.func.isRequired
   };
+
+  componentDidMount() {
+    this.props.clearErrors();
+  }
 
   handleFormSubmission = (e) => {
     e.preventDefault();
