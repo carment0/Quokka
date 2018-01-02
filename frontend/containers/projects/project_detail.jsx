@@ -241,7 +241,7 @@ class ProjectDetail extends React.Component {
 
     return (
       <div className="assignees">
-        <h2>Assignees</h2>
+        <h2>Team Members</h2>
         <div className="assignee-chips">{chips}</div>
       </div>
     );

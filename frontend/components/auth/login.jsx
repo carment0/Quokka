@@ -15,7 +15,8 @@ class Login extends React.Component {
 
   static propTypes = {
     handleDialogClose: PropTypes.func.isRequired,
-    dispatchLogin: PropTypes.func.isRequired
+    dispatchLogin: PropTypes.func.isRequired,
+    sessionErrors: PropTypes.array.isRequired
   };
 
   handleFormSubmission = (e) => {
@@ -32,10 +33,26 @@ class Login extends React.Component {
     return (e) => this.setState({ [field]: e.currentTarget.value });
   }
 
+  get renderErrors() {
+    if (this.props.sessionErrors === []) {
+      return;
+    }
+    return (
+      <ul className="session-errors">
+        {this.props.sessionErrors.map((error, i) => (
+          <li key={`error-${i}`} >
+            {error}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
     return (
       <div className="login">
         <form className="login-form" onSubmit={this.handleFormSubmission}>
+          {this.renderErrors}
           <TextField
             fullWidth={true}
             value={this.state.username}

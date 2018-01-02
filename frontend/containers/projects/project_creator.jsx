@@ -106,13 +106,11 @@ class ProjectCreator extends React.Component {
   }
 }
 
-// Current user doesn't seem necessary, we can get rid of this
-const mapStateToProps = ({ sessions }) => ({
-  currentUser: sessions.currentUser
-});
+// const mapStateToProps = ({ state }) => ({
+// });
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchCreateProject: (project) => dispatch(createProject(project))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectCreator);
+export default connect(mapDispatchToProps)(ProjectCreator);

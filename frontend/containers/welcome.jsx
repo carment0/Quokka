@@ -36,7 +36,8 @@ class Welcome extends React.Component {
 
   static propTypes = {
     dispatchLogin: PropTypes.func.isRequired,
-    dispatchSignup: PropTypes.func.isRequired
+    dispatchSignup: PropTypes.func.isRequired,
+    errors: PropTypes.array.isRequired
   };
 
   /**
@@ -68,13 +69,15 @@ class Welcome extends React.Component {
         <Signup
           dispatchSignup={this.props.dispatchSignup}
           dispatchLogin={this.props.dispatchLogin}
-          handleDialogClose={this.handleDialogClose} />
+          handleDialogClose={this.handleDialogClose}
+          sessionErrors={this.props.errors} />
       );
     }
     return (
       <Login
         dispatchLogin={this.props.dispatchLogin}
-        handleDialogClose={this.handleDialogClose} />
+        handleDialogClose={this.handleDialogClose}
+        sessionErrors={this.props.errors} />
     );
   }
 
