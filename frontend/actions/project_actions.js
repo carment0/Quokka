@@ -5,6 +5,11 @@ export const receiveProjectErrors = (errors) => ({
   errors
 });
 
+export const clearProjectErrors = () => ({
+  type: RECEIVE_PROJECT_ERRORS,
+  errors: []
+});
+
 // For list of projects
 export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS';
 export const receiveProjects = (projects) => ({

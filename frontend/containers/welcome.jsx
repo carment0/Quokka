@@ -38,7 +38,7 @@ class Welcome extends React.Component {
     dispatchLogin: PropTypes.func.isRequired,
     dispatchSignup: PropTypes.func.isRequired,
     errors: PropTypes.array.isRequired,
-    clearSessionErrors: PropTypes.func.isRequired
+    dispatchClearSessionErrors: PropTypes.func.isRequired
   };
 
   /**
@@ -72,7 +72,7 @@ class Welcome extends React.Component {
           dispatchLogin={this.props.dispatchLogin}
           handleDialogClose={this.handleDialogClose}
           sessionErrors={this.props.errors}
-          clearErrors={this.props.clearSessionErrors} />
+          clearErrors={this.props.dispatchClearSessionErrors} />
       );
     }
     return (
@@ -80,7 +80,7 @@ class Welcome extends React.Component {
         dispatchLogin={this.props.dispatchLogin}
         handleDialogClose={this.handleDialogClose}
         sessionErrors={this.props.errors}
-        clearErrors={this.props.clearSessionErrors} />
+        clearErrors={this.props.dispatchClearSessionErrors} />
     );
   }
 
@@ -144,7 +144,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchLogin: (user) => dispatch(login(user)),
   dispatchSignup: (user) => dispatch(signup(user)),
-  clearSessionErrors: () => dispatch(clearSessionErrors())
+  dispatchClearSessionErrors: () => dispatch(clearSessionErrors())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

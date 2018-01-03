@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
 // Actions
-import { createProject } from '../../actions/project_actions';
+import { createProject, clearProjectErrors } from '../../actions/project_actions';
 // Enums
 const modules = {
   toolbar: [
@@ -45,8 +45,14 @@ class ProjectCreator extends React.Component {
   static propTypes = {
     dispatchCreateProject: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    placeholder: React.PropTypes.string
+    placeholder: React.PropTypes.string,
+    dispatchClearProjectErrors: PropTypes.func.isRequired,
+    errors: PropTypes.array.isRequired
   };
+
+  componentDidMount() {
+    this.props.dispatchClearProjectErrors();
+  }
 
   handleTextEditorChange = (value) => {
     this.setState({
@@ -56,8 +62,7 @@ class ProjectCreator extends React.Component {
 
   handleFormSubmission = (e) => {
     e.preventDefault();
-    this.props.dispatchCreateProject(this.state);
-    this.props.history.push('/management/projects');
+    this.props.dispatchCreateProject(this.state).then(() => this.props.history.push('/management/projects'));
   };
 
   handlePickDate = (nullVal, date) => {
@@ -70,11 +75,24 @@ class ProjectCreator extends React.Component {
     return (e) => this.setState({ [field]: e.currentTarget.value });
   }
 
+  get renderErrors() {
+    return (
+      <ul className="session-errors">
+        {this.props.errors.map((error, i) => (
+          <li key={`error-${i}`} >
+            {error}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
     return (
       <div className="project-creator">
         <h1>Create New Project</h1>
         <form className="project-form" onSubmit={this.handleFormSubmission}>
+          {this.renderErrors}
           <div className="form-box">
             <h2>Name</h2>
             <TextField hintText={'Project name'} onChange={this.update('name')} />
@@ -90,7 +108,7 @@ class ProjectCreator extends React.Component {
               onChange={this.handleTextEditorChange}
               modules={modules}
               formats={formats}
-              defaultValue={this.state.default}
+              defaultValue={this.state.defaultValue}
               placeholder={this.props.placeholder} />
           </div>
           <div className="form-box">
@@ -106,11 +124,13 @@ class ProjectCreator extends React.Component {
   }
 }
 
-// const mapStateToProps = ({ state }) => ({
-// });
-
-const mapDispatchToProps = (dispatch) => ({
-  dispatchCreateProject: (project) => dispatch(createProject(project))
+const mapStateToProps = (state) => ({
+  errors: state.errors.project
 });
 
-export default connect(mapDispatchToProps)(ProjectCreator);
+const mapDispatchToProps = (dispatch) => ({
+  dispatchCreateProject: (project) => dispatch(createProject(project)),
+  dispatchClearProjectErrors: () => dispatch(clearProjectErrors())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectCreator);
