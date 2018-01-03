@@ -3,22 +3,23 @@
   store.
 */
 
-export const RECEIVE_TASK = 'RECEIVE_TASK';
-export const receiveTask = (task) => ({
-  type: RECEIVE_TASK,
-  task
+// Error handling
+export const RECEIVE_TASK_ERRORS = 'RECEIVE_TASK_ERRORS';
+export const receiveTaskErrors = (errors) => ({
+  type: RECEIVE_TASK_ERRORS,
+  errors
 });
 
+export const clearTaskErrors = () => ({
+  type: RECEIVE_TASK_ERRORS,
+  errors: []
+});
+
+// For list of tasks
 export const RECEIVE_TASK_LIST = 'RECEIVE_TASK_LIST';
 export const receiveTaskList = (taskList) => ({
   type: RECEIVE_TASK_LIST,
   taskList
-});
-
-export const RECEIVE_ASSIGNED_TASK = 'RECEIVE_ASSIGNED_TASK';
-export const receiveAssignedTask = (task) => ({
-  type: RECEIVE_ASSIGNED_TASK,
-  task
 });
 
 export const RECEIVE_ASSIGNED_TASK_LIST = 'RECEIVE_ASSIGNED_TASK_LIST';
@@ -27,17 +28,33 @@ export const receiveAssignedTaskList = (taskList) => ({
   taskList
 });
 
+export const fetchAssignedTaskList = (userId) => (dispatch) => (
+  $.ajax({ method: 'GET', url: `/api/users/${userId}/tasks/assigned` })
+    .then((taskList) => (
+      dispatch(receiveAssignedTaskList(taskList))
+    ))
+);
+
+// For a single task
+export const RECEIVE_TASK = 'RECEIVE_TASK';
+export const receiveTask = (task) => ({
+  type: RECEIVE_TASK,
+  task
+});
+
+export const RECEIVE_ASSIGNED_TASK = 'RECEIVE_ASSIGNED_TASK';
+export const receiveAssignedTask = (task) => ({
+  type: RECEIVE_ASSIGNED_TASK,
+  task
+});
+
 export const REMOVE_TASK = 'REMOVE_TASK';
 export const removeTask = (task) => ({
   type: REMOVE_TASK,
   task
 });
 
-export const RECEIVE_TASK_ERRORS = 'RECEIVE_TASK_ERRORS';
-export const receiveTaskErrors = (errors) => ({
-  type: RECEIVE_TASK_ERRORS,
-  errors
-});
+
 
 export const fetchTask = (project_id, task_id) => (dispatch) => (
   $.ajax({ method: 'GET', url: `/api/projects/${project_id}/tasks/${task_id}` })
@@ -53,12 +70,7 @@ export const fetchTaskList = (project_id) => (dispatch) => (
     ))
 );
 
-export const fetchAssignedTaskList = (userId) => (dispatch) => (
-  $.ajax({ method: 'GET', url: `/api/users/${userId}/tasks/assigned` })
-    .then((taskList) => (
-      dispatch(receiveAssignedTaskList(taskList))
-    ))
-);
+
 
 export const createTask = (project_id, new_task) => (dispatch) => (
   $.ajax({ method: 'POST', url: `api/projects/${project_id}/tasks`, data: { new_task } })

@@ -11,11 +11,11 @@ export const clearProjectErrors = () => ({
 });
 
 // For list of projects
-export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS';
-export const receiveProjects = (projects) => ({
-  type: RECEIVE_PROJECTS,
-  projects
-});
+// export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS';
+// export const receiveProjects = (projects) => ({
+//   type: RECEIVE_PROJECTS,
+//   projects
+// });
 
 export const RECEIVE_ASSIGNED_PROJECTS = 'RECEIVE_ASSIGNED_PROJECTS';
 export const receiveAssignedProjects = (projects) => ({
@@ -29,12 +29,12 @@ export const receiveAdministratedProjects = (projects) => ({
   projects
 });
 
-export const fetchProjects = () => (dispatch) => (
-  $.ajax({ method: 'GET', url: '/api/projects' })
-    .then((projects) => (
-      dispatch(receiveProjects(projects))
-    ))
-);
+// export const fetchProjects = () => (dispatch) => (
+//   $.ajax({ method: 'GET', url: '/api/projects' })
+//     .then((projects) => (
+//       dispatch(receiveProjects(projects))
+//     ))
+// );
 
 export const fetchAssignedProjects = (userId) => (dispatch) => (
   $.ajax({ method: 'GET', url: `/api/users/${userId}/projects/assigned` })
