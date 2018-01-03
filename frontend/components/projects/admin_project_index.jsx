@@ -28,7 +28,6 @@ class AdminProjectIndex extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
     adminProjects: PropTypes.object.isRequired,
-    handleDialogOpen: PropTypes.func.isRequired,
     dispatchDeleteProject: PropTypes.func.isRequired
   }
 
@@ -46,13 +45,6 @@ class AdminProjectIndex extends React.Component {
       this.setState({
         dialogOpen: false
       });
-    };
-  }
-
-  createEditProjectHandler(projectId) {
-    return (e) => {
-      e.preventDefault();
-      this.props.handleDialogOpen(projectId);
     };
   }
 
@@ -98,7 +90,6 @@ class AdminProjectIndex extends React.Component {
           <CardActions
             style={{ display: 'flex', justifyContent: 'flex-end', padding: '0.5rem' }}>
             <FlatButton label="View" primary={true} onClick={this.createViewProjectHandler(project.id)} />
-            <FlatButton label="Edit" onClick={this.createEditProjectHandler(project.id)} />
             <FlatButton label="Delete" secondary={true} onClick={this.handleDialogOpen(project.id)} />
           </CardActions>
 

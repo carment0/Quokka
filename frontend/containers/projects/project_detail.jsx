@@ -12,7 +12,7 @@ import Dialog from 'material-ui/Dialog';
 // Quill
 import ReactQuill from 'react-quill';
 // Actions
-import { fetchProjectDetail, updateProject } from '../../actions/project_actions';
+import { fetchProjectDetail, updateProject, clearProjectErrors } from '../../actions/project_actions';
 import ProjectTaskItem from '../../components/projects/project_task_item';
 // Components
 import ProjectEditor from '../../components/projects/project_editor';
@@ -47,13 +47,14 @@ class ProjectDetail extends React.Component {
     dialogOpen: false
   };
 
-
   static propTypes = {
     dispatchFetchProjectDetail: PropTypes.func.isRequired,
     project: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
     dispatchUpdateProject: PropTypes.func.isRequired,
-    currentUser: PropTypes.object.isRequired
+    currentUser: PropTypes.object.isRequired,
+    dispatchClearProjectErrors: PropTypes.func.isRequired,
+    errors: PropTypes.func.isRequired
   }
 
   /**
@@ -284,7 +285,9 @@ class ProjectDetail extends React.Component {
           <ProjectEditor
             selectedProject={this.state.selectedProject}
             handleDialogClose={this.handleDialogClose}
-            dispatchUpdateProject={this.props.dispatchUpdateProject} />
+            dispatchUpdateProject={this.props.dispatchUpdateProject}
+            errors={this.props.errors}
+            dispatchClearProjectErrors={this.props.dispatchClearProjectErrors}/>
         </Dialog>
       </section>
     );
@@ -301,13 +304,15 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     currentUser: state.sessions.currentUser,
+    errors: state.errors.project,
     project
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchFetchProjectDetail: (projectId) => dispatch(fetchProjectDetail(projectId)),
-  dispatchUpdateProject: (project) => dispatch(updateProject(project))
+  dispatchUpdateProject: (project) => dispatch(updateProject(project)),
+  dispatchClearProjectErrors: () => dispatch(clearProjectErrors())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail);

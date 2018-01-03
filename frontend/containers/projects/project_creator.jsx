@@ -94,7 +94,7 @@ class ProjectCreator extends React.Component {
         <form className="project-form" onSubmit={this.handleFormSubmission}>
           {this.renderErrors}
           <div className="form-box">
-            <h2>Name</h2>
+            <h2>Project Name</h2>
             <TextField hintText={'Project name'} onChange={this.update('name')} />
           </div>
           <div className="form-box">

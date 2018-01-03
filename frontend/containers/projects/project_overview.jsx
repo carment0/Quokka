@@ -72,18 +72,6 @@ class ProjectOverview extends React.Component {
           handleDialogOpen={this.handleDialogOpen}
           dispatchDeleteProject={this.props.dispatchDeleteProject} />
         <AssignedProjectIndex assignedProjects={this.props.assignedProjects} history={this.props.history} />
-        <Dialog
-          titleStyle={dialogTitleStyle}
-          contentStyle={dialogContentStyle}
-          title={'Edit Project'}
-          modal={false}
-          open={this.state.dialogOpen}
-          onRequestClose={this.handleDialogClose}>
-          <ProjectEditor
-            selectedProject={this.state.selectedProject}
-            handleDialogClose={this.handleDialogClose}
-            dispatchUpdateProject={this.props.dispatchUpdateProject} />
-        </Dialog>
       </div>
     );
   }

@@ -47,8 +47,14 @@ class ProjectEditor extends React.Component {
   static propTypes = {
     selectedProject: PropTypes.object,
     handleDialogClose: PropTypes.func.isRequired,
-    dispatchUpdateProject: PropTypes.func.isRequired
+    dispatchUpdateProject: PropTypes.func.isRequired,
+    errors: PropTypes.func.isRequired,
+    dispatchClearProjectErrors: PropTypes.func.isRequired,
   };
+
+  componentDidMount() {
+    this.props.dispatchClearProjectErrors();
+  }
 
   update(field) {
     return (e) => this.setState({ [field]: e.currentTarget.value });
@@ -62,9 +68,9 @@ class ProjectEditor extends React.Component {
 
   handleFormSubmission = (e) => {
     e.preventDefault();
-    console.log(this.state);
-    this.props.dispatchUpdateProject(this.state);
-    this.props.handleDialogClose();
+    this.props.dispatchUpdateProject(this.state).then(() =>
+      this.props.handleDialogClose()
+    );
   }
 
   handlePickDate = (nullVal, date) => {
@@ -73,9 +79,22 @@ class ProjectEditor extends React.Component {
     });
   }
 
+  get renderErrors() {
+    return (
+      <ul className="session-errors">
+        {this.props.errors.map((error, i) => (
+          <li key={`error-${i}`} >
+            {error}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
     return (
       <form className="create-project" onSubmit={this.handleFormSubmission}>
+        {this.renderErrors}
         <h2>Name</h2>
         <TextField
           hintText={'Project name'}
