@@ -28,6 +28,13 @@ export const receiveAssignedTaskList = (taskList) => ({
   taskList
 });
 
+export const fetchTaskList = (project_id) => (dispatch) => (
+  $.ajax({ method: 'GET', url: `/api/projects/${project_id}/tasks` })
+    .then((tasks) => (
+      dispatch(receiveTaskList(tasks))
+    ))
+);
+
 export const fetchAssignedTaskList = (userId) => (dispatch) => (
   $.ajax({ method: 'GET', url: `/api/users/${userId}/tasks/assigned` })
     .then((taskList) => (
@@ -54,23 +61,12 @@ export const removeTask = (task) => ({
   task
 });
 
-
-
 export const fetchTask = (project_id, task_id) => (dispatch) => (
   $.ajax({ method: 'GET', url: `/api/projects/${project_id}/tasks/${task_id}` })
     .then((task) => (
       dispatch(receiveTask(task))
     ))
 );
-
-export const fetchTaskList = (project_id) => (dispatch) => (
-  $.ajax({ method: 'GET', url: `/api/projects/${project_id}/tasks` })
-    .then((tasks) => (
-      dispatch(receiveTaskList(tasks))
-    ))
-);
-
-
 
 export const createTask = (project_id, new_task) => (dispatch) => (
   $.ajax({ method: 'POST', url: `api/projects/${project_id}/tasks`, data: { new_task } })
