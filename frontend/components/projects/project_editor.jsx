@@ -48,7 +48,7 @@ class ProjectEditor extends React.Component {
     selectedProject: PropTypes.object,
     handleDialogClose: PropTypes.func.isRequired,
     dispatchUpdateProject: PropTypes.func.isRequired,
-    errors: PropTypes.func.isRequired,
+    errors: PropTypes.array.isRequired,
     dispatchClearProjectErrors: PropTypes.func.isRequired,
   };
 

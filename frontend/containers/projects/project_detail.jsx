@@ -9,13 +9,17 @@ import LinearProgress from 'material-ui/LinearProgress';
 import CircularProgress from 'material-ui/CircularProgress';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+
 // Quill
 import ReactQuill from 'react-quill';
 // Actions
 import { fetchProjectDetail, updateProject, clearProjectErrors } from '../../actions/project_actions';
-import ProjectTaskItem from '../../components/projects/project_task_item';
+import { clearTaskErrors, createTask, updateTask, deleteTask } from '../../actions/task_http_actions';
 // Components
+import ProjectTaskItem from '../../components/projects/project_task_item';
 import ProjectEditor from '../../components/projects/project_editor';
+import CreateTask from '../../components/tasks/task_creator';
+
 // Enums
 const COLORS = ['#00C49F', '#0088FE', '#ff2828'];
 const circuleProgressStyle = {
@@ -54,7 +58,12 @@ class ProjectDetail extends React.Component {
     dispatchUpdateProject: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
     dispatchClearProjectErrors: PropTypes.func.isRequired,
-    errors: PropTypes.func.isRequired
+    projectErrors: PropTypes.array.isRequired,
+    taskErrors: PropTypes.array.isRequired,
+    dispatchClearTaskErrors: PropTypes.func.isRequired,
+    dispatchCreateTask: PropTypes.func.isRequired,
+    dispatchDeleteTask: PropTypes.func.isRequired,
+    dispatchUpdateTask: PropTypes.func.isRequired
   }
 
   /**
@@ -195,7 +204,6 @@ class ProjectDetail extends React.Component {
    * @returns {React.Element}
    */
   get projectDescription() {
-    console.log(this.props.project.admin_id);
     return (
       <div className="project-description">
         <h1>{this.props.project.name}</h1>
@@ -210,7 +218,9 @@ class ProjectDetail extends React.Component {
       return;
     }
     return (
-      <FlatButton label="Edit" primary={true} onClick={this.handleDialogOpen(this.props.project)} />
+      <div>
+        <FlatButton label="Edit" primary={true} onClick={this.handleDialogOpen(this.props.project)} />
+      </div>
     );
   }
 
@@ -264,6 +274,11 @@ class ProjectDetail extends React.Component {
     return (
       <div className="task-summary">
         <h1>Tasks</h1>
+        <CreateTask
+          projectId={this.props.project.id}
+          errors={this.props.taskErrors}
+          clearErrors={this.props.dispatchClearTaskErrors}
+          createTask={this.props.dispatchCreateTask} />
         {projectTaskItems}
       </div>
     );
@@ -286,8 +301,8 @@ class ProjectDetail extends React.Component {
             selectedProject={this.state.selectedProject}
             handleDialogClose={this.handleDialogClose}
             dispatchUpdateProject={this.props.dispatchUpdateProject}
-            errors={this.props.errors}
-            dispatchClearProjectErrors={this.props.dispatchClearProjectErrors}/>
+            errors={this.props.projectErrors}
+            dispatchClearProjectErrors={this.props.dispatchClearProjectErrors} />
         </Dialog>
       </section>
     );
@@ -304,7 +319,8 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     currentUser: state.sessions.currentUser,
-    errors: state.errors.project,
+    projectErrors: state.errors.project,
+    taskErrors: state.errors.task,
     project
   };
 };
@@ -312,7 +328,11 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   dispatchFetchProjectDetail: (projectId) => dispatch(fetchProjectDetail(projectId)),
   dispatchUpdateProject: (project) => dispatch(updateProject(project)),
-  dispatchClearProjectErrors: () => dispatch(clearProjectErrors())
+  dispatchClearProjectErrors: () => dispatch(clearProjectErrors()),
+  dispatchClearTaskErrors: () => dispatch(clearTaskErrors()),
+  dispatchCreateTask: (projectId, task) => dispatch(createTask(projectId, task)),
+  dispatchUpdateTask: (task) => dispatch(updateTask(task)),
+  dispatchDeleteTask: (projectId, taskId) => dispatch(deleteTask(projectId, taskId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail);

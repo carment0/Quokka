@@ -2,12 +2,13 @@ class Api::TasksController < ApplicationController
   before_action :require_logged_in
 
   def index
-    @tasks = Task.all
+    project_id = params[:project_id]
+    @tasks = Task.where("project_id = ?", project_id)
     render "index.json.jbuilder"
   end
 
   def user_assigned_tasks
-    @assigned_tasks = Task.joins(:task_assignments).where("user_id = ?", params[:user_id])
+    @tasks = Task.joins(:task_assignments).where("user_id = ?", params[:user_id])
     render "index.json.jbuilder"
   end
 
