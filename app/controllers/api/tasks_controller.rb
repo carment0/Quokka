@@ -40,7 +40,7 @@ class Api::TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    if @task.update(project_params)
+    if @task.update(task_params)
       render json: @task
     else
       render json: @task.errors.full_messages, status: 422

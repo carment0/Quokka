@@ -94,7 +94,8 @@ export const updateAssignedTask = (task) => (dispatch) => (
       dispatch(receiveAssignedTask(updatedTask))
     ))
     .fail((err) => (
-      dispatch(receiveTaskErrors(err.responseJSON))
+      console.log(err)
+      // dispatch(receiveTaskErrors(err.responseJSON))
     ))
 );
 

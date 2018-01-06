@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   attr_reader :password
 
-  validates :username, :password_digest, :session_token, :name, presence: true
+  validates :username, :password_digest, :session_token, :first_name, :last_name, :position, :company, :email, presence: true
   validates :username, uniqueness: true
   validates :password, length: { minimum: 6 }, allow_nil: true
 
@@ -24,6 +24,8 @@ class User < ApplicationRecord
   has_many :task_assignments
   has_many :assigned_tasks, through: :task_assignments, source: :task
   has_many :projects, through: :assigned_tasks, source: :project
+
+  has_many :project_teams, through: : 
 
   after_initialize :ensure_session_token
 

@@ -41,10 +41,6 @@ class CreateTask extends React.Component {
     createTask: PropTypes.func.isRequired,
   };
 
-  componentDidMount() {
-    this.props.clearErrors();
-  }
-
   handleTaskForm = (e) => {
     e.preventDefault();
     this.setState({ dialogOpen: true });
@@ -52,7 +48,7 @@ class CreateTask extends React.Component {
 
   handleFormSubmission = (e) => {
     e.preventDefault();
-    this.props.createTask(this.props.projectId, this.state.task).then(() =>
+    this.props.createTask(this.props.projectId, this.state.task).then(() => this.props.clearErrors()).then(() =>
       this.handleDialogClose()
     );
   };
@@ -72,6 +68,7 @@ class CreateTask extends React.Component {
   };
 
   handleDialogClose = () => {
+    this.props.clearErrors();
     this.setState({
       dialogOpen: false
     });

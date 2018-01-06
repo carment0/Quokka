@@ -22,8 +22,8 @@ class ProjectTaskItem extends React.Component {
   get taskControls() {
     return (
       <div>
-        <FlatButton label="Delete" primary={true} onClick={this.handleDeleteTask(this.props.projectId, this.props.task.id)} />
-        <FlatButton label="Edit" primary={true}  />
+        <FlatButton label="Delete" secondary={true} onClick={this.handleDeleteTask(this.props.projectId, this.props.task.id)} />
+        <FlatButton label="Edit" secondary={true}  />
       </div>
     );
   }
@@ -33,7 +33,8 @@ class ProjectTaskItem extends React.Component {
       <Paper className="project-task-item" zDepth={1} rounded={false}>
         <p>{this.props.task.name}</p>
         <p>{this.props.task.description}</p>
-        <p>{this.props.task.completed ? 'completed' : 'In progress'}</p>
+        <p>{this.props.task.due_date}</p>
+        <p>{this.props.task.completed ? 'Completed' : 'In progress'}</p>
         {this.taskControls}
       </Paper>
     );

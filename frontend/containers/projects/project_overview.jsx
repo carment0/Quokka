@@ -2,12 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// Material UI
-import Dialog from 'material-ui/Dialog';
 // Components
 import AdminProjectIndex from '../../components/projects//admin_project_index';
 import AssignedProjectIndex from '../../components/projects/assigned_project_index';
-import ProjectEditor from '../../components/projects/project_editor';
 // Actions
 import {
   fetchAssignedProjects,
@@ -15,19 +12,6 @@ import {
   updateProject,
   deleteProject
 } from '../../actions/project_actions';
-// Dialog content is the white box that pops up during on click
-const dialogContentStyle = {
-  width: '70%',
-  minWidth: '500px',
-  maxWidth: '980px'
-};
-// Dialog title is the title section inside content body
-const dialogTitleStyle = {
-  display: 'flex',
-  justifyContent: 'flex-start',
-  fontWeight: '100',
-  fontSize: '2rem'
-};
 
 
 class ProjectOverview extends React.Component {

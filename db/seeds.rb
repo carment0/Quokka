@@ -7,15 +7,32 @@ require 'faker'
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-admin_1 = User.create(name: "Guest User", username: "guestuser", password: "123456")
-admin_2 = User.create(name: "Calvin Feng", username: "cfeng", password: "12341234")
+admin_1 = User.create(first_name: "Guest",
+                      last_name: "User",
+                      position: "Scientist",
+                      company: "BioGen",
+                      email: "guest_user@gmail.com",
+                      username: "guestuser",
+                      password: "123456")
+admin_2 = User.create(first_name: "Calvin",
+                      last_name: "Feng",
+                      position: "Scientist"
+                      company: "BioGen",
+                      email: "calvin_feng@gmail.com"
+                      username: "calvin_feng",
+                      password: "123456")
 
-8.times do
+
+20.times do
   fname = Faker::Name.first_name
   lname = Faker::Name.last_name
   User.create!(
-    name: "#{fname}".concat(" #{lname}"),
-    username: "#{fname}".concat("#{lname}"),
+    first_name: "#{fname}",
+    last_name: "#{lname}",
+    position: "Research Associate"
+    company: "BioGen",
+    email: "#{fname}_#{lname}@gmail.com"
+    username: "#{fname}".concat("_#{lname}"),
     password: "password"
   )
 end

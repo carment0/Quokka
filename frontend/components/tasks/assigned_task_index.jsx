@@ -57,6 +57,7 @@ class AssignedTaskIndex extends React.Component {
 
       return (
         <TableRow selected={task.completed} key={task.name}>
+          <TableRowColumn>{task.project.name}</TableRowColumn>
           <TableRowColumn>{task.name}</TableRowColumn>
           <TableRowColumn>{task.description}</TableRowColumn>
           <TableRowColumn>{task.due_date}</TableRowColumn>
@@ -68,7 +69,8 @@ class AssignedTaskIndex extends React.Component {
       <Table onRowSelection={this.handleRowSelection} multiSelectable={true} >
         <TableHeader enableSelectAll={false} displaySelectAll={false} >
           <TableRow>
-            <TableHeaderColumn>Name</TableHeaderColumn>
+            <TableHeaderColumn>Project Name</TableHeaderColumn>
+            <TableHeaderColumn>Task Name</TableHeaderColumn>
             <TableHeaderColumn>Description</TableHeaderColumn>
             <TableHeaderColumn>Due Date</TableHeaderColumn>
           </TableRow>
