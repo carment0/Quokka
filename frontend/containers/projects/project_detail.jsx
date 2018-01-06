@@ -268,7 +268,11 @@ class ProjectDetail extends React.Component {
     }
 
     const projectTaskItems = this.props.project.tasks.map((task) => (
-      <ProjectTaskItem task={task} key={task.name} />
+      <ProjectTaskItem
+        task={task}
+        key={task.name}
+        deleteTask={this.props.dispatchDeleteTask}
+        projectId={this.props.project.id} />
     ));
 
     return (

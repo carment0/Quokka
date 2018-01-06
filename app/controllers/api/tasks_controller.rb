@@ -1,3 +1,4 @@
+# require 'byebug'
 class Api::TasksController < ApplicationController
   before_action :require_logged_in
 
@@ -19,18 +20,22 @@ class Api::TasksController < ApplicationController
   end
 
   def create
-    @task = current_user.task.new(task_params)
+    # byebug
+    @task = Task.new(task_params)
     if @task.save
-      render json: @task
+      render "index.json.jbuilder"
     else
       render json: @task.errors.full_messages, status: 422
     end
   end
 
   def destroy
-    @task = current_user.task.find(params[:id])
-    @task.destroy
-    render json: @task
+    if @task = Task.find(params[:id])
+      @task.destroy
+      render "show.json.jbuilder"
+    else
+      render json: "Unauthorized action", status: 401
+    end
   end
 
   def update
@@ -44,7 +49,7 @@ class Api::TasksController < ApplicationController
 
   private
 
-  def project_params
+  def task_params
     params.require(:task).permit(:name, :description, :completed, :project_id, :due_date)
   end
 end

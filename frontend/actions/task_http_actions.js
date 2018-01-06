@@ -68,10 +68,10 @@ export const fetchTask = (project_id, task_id) => (dispatch) => (
     ))
 );
 
-export const createTask = (project_id, new_task) => (dispatch) => (
-  $.ajax({ method: 'POST', url: `api/projects/${project_id}/tasks`, data: { new_task } })
-    .then((task) => (
-      dispatch(receiveTask(task))
+export const createTask = (project_id, task) => (dispatch) => (
+  $.ajax({ method: 'POST', url: `api/projects/${project_id}/tasks`, data: { task } })
+    .then((savedTask) => (
+      dispatch(receiveTask(savedTask))
     ))
     .fail((err) => (
       dispatch(receiveTaskErrors(err.responseJSON))
@@ -102,5 +102,7 @@ export const deleteTask = (project_id, task_id) => (dispatch) => (
   $.ajax({ method: 'DELETE', url: `api/projects/${project_id}/tasks/${task_id}` })
     .then((task) => (
       dispatch(removeTask(task))
+    )).fail((err) => (
+      console.log(err)
     ))
 );

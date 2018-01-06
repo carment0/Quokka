@@ -1,18 +1,43 @@
 // React
 import React from 'react';
 import PropTypes from 'prop-types';
+// Material UI
 import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
 
+class ProjectTaskItem extends React.Component {
+  static propTypes = {
+    task: PropTypes.object.isRequired,
+    projectId: PropTypes.number.isRequired,
+    deleteTask: PropTypes.func.isRequired
+  }
 
-const ProjectTaskItem = ({ task }) => (
-  <Paper className="project-task-item" zDepth={1} rounded={false}>
-    <p>{task.name}</p>
-    <p>{task.description}</p>
-  </Paper>
-);
+  handleDeleteTask(projectId, taskId) {
+    return (e) => {
+      e.preventDefault();
+      this.props.deleteTask(projectId, taskId);
+    };
+  }
 
-ProjectTaskItem.propTypes = {
-  task: PropTypes.object.isRequired
-};
+  get taskControls() {
+    return (
+      <div>
+        <FlatButton label="Delete" primary={true} onClick={this.handleDeleteTask(this.props.projectId, this.props.task.id)} />
+        <FlatButton label="Edit" primary={true}  />
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <Paper className="project-task-item" zDepth={1} rounded={false}>
+        <p>{this.props.task.name}</p>
+        <p>{this.props.task.description}</p>
+        <p>{this.props.task.completed ? 'completed' : 'In progress'}</p>
+        {this.taskControls}
+      </Paper>
+    );
+  }
+}
 
 export default ProjectTaskItem;

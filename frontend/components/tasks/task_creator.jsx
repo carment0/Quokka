@@ -29,7 +29,8 @@ class CreateTask extends React.Component {
       name: '',
       description: '',
       completed: false,
-      due_date: ''
+      due_date: '',
+      assignees: []
     }
   }
 
@@ -51,7 +52,7 @@ class CreateTask extends React.Component {
 
   handleFormSubmission = (e) => {
     e.preventDefault();
-    this.props.createTask(this.state.task).then(() =>
+    this.props.createTask(this.props.projectId, this.state.task).then(() =>
       this.handleDialogClose()
     );
   };
