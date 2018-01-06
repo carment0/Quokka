@@ -23,7 +23,7 @@ class Api::TasksController < ApplicationController
     # byebug
     @task = Task.new(task_params)
     if @task.save
-      render "index.json.jbuilder"
+      render "show.json.jbuilder"
     else
       render json: @task.errors.full_messages, status: 422
     end

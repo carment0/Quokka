@@ -22,6 +22,7 @@ export default (oldState = {}, action) => {
       const idx = project.tasks.map((task) => task.id).indexOf(action.task.id);
       project.tasks.splice(idx, 1);
       newState[project.id] = project;
+      return merge({}, oldState, newState);
 
     case RECEIVE_PROJECT_DETAIL:
       newState = {};
