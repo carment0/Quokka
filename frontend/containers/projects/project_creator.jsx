@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+// creates keys for mapping
+import uuid from 'uuid/v1';
 // Material UI
 import ReactQuill from 'react-quill';
 import TextField from 'material-ui/TextField';
@@ -79,7 +81,7 @@ class ProjectCreator extends React.Component {
     return (
       <ul className="session-errors">
         {this.props.errors.map((error, i) => (
-          <li key={`error-${i}`} >
+          <li key={uuid()} >
             {error}
           </li>
         ))}
@@ -95,7 +97,7 @@ class ProjectCreator extends React.Component {
           {this.renderErrors}
           <div className="form-box">
             <h2>Project Name</h2>
-            <TextField hintText={'Project name'} onChange={this.update('name')} />
+            <TextField hintText={'Project name'} fullWidth={true} onChange={this.update('name')} />
           </div>
           <div className="form-box">
             <h2>Deadline</h2>

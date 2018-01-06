@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       get 'tasks/assigned', to: 'tasks#user_assigned_tasks'
     end
 
+    get 'users/by_company', to: 'users#list_by_company'
+
     resource :session, only: [:create, :destroy, :show]
     resources :projects, only: [:create, :destroy, :show, :index, :update] do
       resources :tasks, only: [:create, :destroy, :show, :index, :update]

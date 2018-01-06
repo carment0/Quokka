@@ -1,11 +1,16 @@
 // React
 import React from 'react';
 import PropTypes from 'prop-types';
+// creates keys for mapping
+import uuid from 'uuid/v1';
 // Material UI
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import Dialog from 'material-ui/Dialog';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+
 // Enums
 // Dialog content is the white box that pops up during on click
 const dialogContentStyle = {
@@ -77,8 +82,8 @@ class CreateTask extends React.Component {
   get renderErrors() {
     return (
       <ul className="session-errors">
-        {this.props.errors.map((error, i) => (
-          <li key={`error-${i}`} >
+        {this.props.errors.map((error) => (
+          <li key={uuid()} >
             {error}
           </li>
         ))}
@@ -96,22 +101,19 @@ class CreateTask extends React.Component {
         <Dialog
           titleStyle={dialogTitleStyle}
           contentStyle={dialogContentStyle}
-          title={'Edit Project'}
+          title={'Add a task'}
           modal={false}
           open={this.state.dialogOpen}
           onRequestClose={this.handleDialogClose}>
           <form className="project-form" onSubmit={this.handleFormSubmission}>
             {this.renderErrors}
             <div className="form-box">
-              <h2>Task Name</h2>
-              <TextField hintText={'Task name'} onChange={this.update('name')} />
+              <TextField hintText={'Task name'} fullWidth={true} onChange={this.update('name')} />
             </div>
             <div className="form-box">
-              <h2>Description</h2>
-              <TextField hintText={'Description'} onChange={this.update('description')} />
+              <TextField hintText={'Description'} fullWidth={true} onChange={this.update('description')} />
             </div>
             <div className="form-box">
-              <h2>Deadline</h2>
               <DatePicker hintText="Deadline" container="inline" mode="landscape" onChange={this.handlePickDate} />
             </div>
             <FlatButton

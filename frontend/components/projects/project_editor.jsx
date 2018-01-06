@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
+// creates keys for mapping
+import uuid from 'uuid/v1';
 // Material UI
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
@@ -82,8 +84,8 @@ class ProjectEditor extends React.Component {
   get renderErrors() {
     return (
       <ul className="session-errors">
-        {this.props.errors.map((error, i) => (
-          <li key={`error-${i}`} >
+        {this.props.errors.map((error) => (
+          <li key={uuid()} >
             {error}
           </li>
         ))}

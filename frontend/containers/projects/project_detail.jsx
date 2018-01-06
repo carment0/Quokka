@@ -9,12 +9,14 @@ import LinearProgress from 'material-ui/LinearProgress';
 import CircularProgress from 'material-ui/CircularProgress';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-
+// creates keys for mapping
+import uuid from 'uuid/v1';
 // Quill
 import ReactQuill from 'react-quill';
 // Actions
 import { fetchProjectDetail, updateProject, clearProjectErrors } from '../../actions/project_actions';
 import { clearTaskErrors, createTask, updateTask, deleteTask } from '../../actions/task_http_actions';
+import { fetchUsersFromCompany } from '../../actions/users_by_company_actions';
 // Components
 import ProjectTaskItem from '../../components/projects/project_task_item';
 import ProjectEditor from '../../components/projects/project_editor';
@@ -63,7 +65,8 @@ class ProjectDetail extends React.Component {
     dispatchClearTaskErrors: PropTypes.func.isRequired,
     dispatchCreateTask: PropTypes.func.isRequired,
     dispatchDeleteTask: PropTypes.func.isRequired,
-    dispatchUpdateTask: PropTypes.func.isRequired
+    dispatchUpdateTask: PropTypes.func.isRequired,
+    dispatchUsersByCompany: PropTypes.func.isRequired
   }
 
   /**
@@ -236,7 +239,7 @@ class ProjectDetail extends React.Component {
     const names = new Set();
     this.props.project.tasks.forEach((task) => {
       task.assignees.forEach((person) => {
-        names.add(person.name);
+        names.add(person.first_name.concat(' ' + person.last_name));
       });
     });
 
@@ -252,7 +255,7 @@ class ProjectDetail extends React.Component {
 
     return (
       <div className="assignees">
-        <h2>Team Members</h2>
+        <h2>Members working on project</h2>
         <div className="assignee-chips">{chips}</div>
       </div>
     );
@@ -270,9 +273,11 @@ class ProjectDetail extends React.Component {
     const projectTaskItems = this.props.project.tasks.map((task) => (
       <ProjectTaskItem
         task={task}
-        key={task.name}
+        key={uuid()}
         deleteTask={this.props.dispatchDeleteTask}
-        projectId={this.props.project.id} />
+        projectId={this.props.project.id}
+        updateTask={this.props.dispatchUpdateTask}
+        staff={this.props.dispatchUsersByCompany} />
     ));
 
     return (
@@ -282,7 +287,8 @@ class ProjectDetail extends React.Component {
           projectId={this.props.project.id}
           errors={this.props.taskErrors}
           clearErrors={this.props.dispatchClearTaskErrors}
-          createTask={this.props.dispatchCreateTask} />
+          createTask={this.props.dispatchCreateTask}
+          staff={this.props.dispatchUsersByCompany} />
         {projectTaskItems}
       </div>
     );
@@ -336,7 +342,8 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchClearTaskErrors: () => dispatch(clearTaskErrors()),
   dispatchCreateTask: (projectId, task) => dispatch(createTask(projectId, task)),
   dispatchUpdateTask: (task) => dispatch(updateTask(task)),
-  dispatchDeleteTask: (projectId, taskId) => dispatch(deleteTask(projectId, taskId))
+  dispatchDeleteTask: (projectId, taskId) => dispatch(deleteTask(projectId, taskId)),
+  dispatchUsersByCompany: (companyName) => dispatch(fetchUsersFromCompany(companyName))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail);

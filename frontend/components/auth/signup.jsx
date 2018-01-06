@@ -1,6 +1,8 @@
 // React
 import React from 'react';
 import PropTypes from 'prop-types';
+// creates keys for mapping
+import uuid from 'uuid/v1';
 // Material UI
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
@@ -45,8 +47,8 @@ class Signup extends React.Component {
     }
     return (
       <ul className="session-errors">
-        {this.props.sessionErrors.map((error, i) => (
-          <li key={`error-${i}`} >
+        {this.props.sessionErrors.map((error) => (
+          <li key={uuid()} >
             {error}
           </li>
         ))}

@@ -16,9 +16,9 @@ admin_1 = User.create(first_name: "Guest",
                       password: "123456")
 admin_2 = User.create(first_name: "Calvin",
                       last_name: "Feng",
-                      position: "Scientist"
+                      position: "Scientist",
                       company: "BioGen",
-                      email: "calvin_feng@gmail.com"
+                      email: "calvin_feng@gmail.com",
                       username: "calvin_feng",
                       password: "123456")
 
@@ -29,9 +29,9 @@ admin_2 = User.create(first_name: "Calvin",
   User.create!(
     first_name: "#{fname}",
     last_name: "#{lname}",
-    position: "Research Associate"
+    position: "Research Associate",
     company: "BioGen",
-    email: "#{fname}_#{lname}@gmail.com"
+    email: "#{fname}_#{lname}@gmail.com",
     username: "#{fname}".concat("_#{lname}"),
     password: "password"
   )
