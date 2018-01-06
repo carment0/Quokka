@@ -25,8 +25,6 @@ class User < ApplicationRecord
   has_many :assigned_tasks, through: :task_assignments, source: :task
   has_many :projects, through: :assigned_tasks, source: :project
 
-  has_many :project_teams, through: : 
-
   after_initialize :ensure_session_token
 
   def self.find_by_credentials(username, password)
