@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'static_pages#home'
   namespace :api, defaults: { format: :json } do
 
-    post :task_assignments, to:'task_assignments#create'
+    post 'task_assignments', to:'task_assignments#create'
     delete 'task_assignments', to: 'task_assignments#delete'
 
     resources :users, only: [:create] do

@@ -34,8 +34,8 @@ class ProjectTaskItem extends React.Component {
       description: this.props.task.description,
       completed: this.props.task.completed,
       deadline: this.props.task.due_date,
-      assignees: this.props.task.assignees
-    }
+    },
+    assignees: this.props.task.assignees
   };
 
   static propTypes = {
@@ -67,28 +67,22 @@ class ProjectTaskItem extends React.Component {
 
   handleDialogClose = () => {
     this.setState({
-      dialogOpen: false
+      dialogOpen: false,
+      assignees: this.props.task.assignees
     });
   };
 
   handleEditSubmission = () => {
-    console.log("submit");
+    // console.log("submit");
   };
 
   handleSelectChange = (e) => {
-    const arrayOfNames = e.split(',');
-    const newAssignees = arrayOfNames.map((user) => {
-      const name = user.split(' ');
-      return { first_name: name[0], last_name: name[1] };
+    const userIds = e.split(',');
+    const newAssignees = userIds.map((id) => {
+      return { id: id, first_name: this.props.companyUsers[id].first_name, last_name: this.props.companyUsers[id].last_name };
     });
-    const task = Object.assign({}, this.state.task);
-    task.assignees = newAssignees;
-    this.setState({ task });
+    this.setState({ assignees: newAssignees });
   };
-
-  componentDidUpdate() {
-    console.log(this.state);
-  }
 
   update(field) {
     return (e) => {
@@ -100,21 +94,28 @@ class ProjectTaskItem extends React.Component {
 
   arrayOfUsers = () => {
     const userIds = Object.keys(this.props.companyUsers);
-
+    const assignedIds = this.props.task.assignees.map((user) => {
+      return user.id;
+    });
     if (userIds.length === 0) {
       return;
     }
+    const users = [];
 
-    const users = userIds.map((id) => {
-      const name = this.props.companyUsers[id].first_name + ' ' + this.props.companyUsers[id].last_name;
-      return { label: `${name}`, value: `${name}` };
+    userIds.forEach((id) => {
+      const num = parseInt(id, 10);
+      if (!assignedIds.includes(num)) {
+        const name = this.props.companyUsers[id].first_name + ' ' + this.props.companyUsers[id].last_name;
+        const position =  this.props.companyUsers[id].position;
+        users.push({ label: `${name} (${position})`, value: `${id}` });
+      }
     });
     return users;
   };
 
   arrayOfAssigned = () => {
-    const users = this.state.task.assignees.map((user) => {
-      return user.first_name + ' ' + user.last_name;
+    const users = this.state.assignees.map((user) => {
+      return { label: this.props.companyUsers[user.id].first_name + ' ' + this.props.companyUsers[user.id].last_name, value: user.id };
     });
     return users;
   };
