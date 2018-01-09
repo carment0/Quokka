@@ -8,9 +8,8 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import Dialog from 'material-ui/Dialog';
-import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
-
+// React-select
+import Select from 'react-select';
 // Enums
 // Dialog content is the white box that pops up during on click
 const dialogContentStyle = {

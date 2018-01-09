@@ -66,7 +66,8 @@ class ProjectDetail extends React.Component {
     dispatchCreateTask: PropTypes.func.isRequired,
     dispatchDeleteTask: PropTypes.func.isRequired,
     dispatchUpdateTask: PropTypes.func.isRequired,
-    dispatchUsersByCompany: PropTypes.func.isRequired
+    dispatchUsersByCompany: PropTypes.func.isRequired,
+    users: PropTypes.object.isRequired
   }
 
   /**
@@ -97,6 +98,7 @@ class ProjectDetail extends React.Component {
 
   componentDidMount() {
     this.props.dispatchFetchProjectDetail(this.props.match.params.id);
+    this.props.dispatchUsersByCompany(this.props.currentUser.company);
     window.addEventListener('resize', this.handleWindowResize);
   }
 
@@ -277,7 +279,7 @@ class ProjectDetail extends React.Component {
         deleteTask={this.props.dispatchDeleteTask}
         projectId={this.props.project.id}
         updateTask={this.props.dispatchUpdateTask}
-        staff={this.props.dispatchUsersByCompany} />
+        companyUsers={this.props.users} />
     ));
 
     return (
@@ -288,7 +290,7 @@ class ProjectDetail extends React.Component {
           errors={this.props.taskErrors}
           clearErrors={this.props.dispatchClearTaskErrors}
           createTask={this.props.dispatchCreateTask}
-          staff={this.props.dispatchUsersByCompany} />
+          companyUsers={this.props.users}  />
         {projectTaskItems}
       </div>
     );
@@ -331,6 +333,7 @@ const mapStateToProps = (state, ownProps) => {
     currentUser: state.sessions.currentUser,
     projectErrors: state.errors.project,
     taskErrors: state.errors.task,
+    users: state.users,
     project
   };
 };
