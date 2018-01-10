@@ -37,20 +37,25 @@ class EmployeesOverview extends React.Component {
   }
 
   get employees() {
+    console.log(window.logoSrc);
     const employees = Object.keys(this.props.users).map((id) => (
       <GridTile
         key={uuid()}
         title={this.props.users[id].first_name.concat(' ' + this.props.users[id].last_name)}
-        subtitle={<span>Position: <b>{this.props.users[id].position}</b></span>} >
-        <img src="https://image.flaticon.com/icons/png/512/201/201555.png" />
+        subtitle={
+          <div>
+            <div>Position: <b>{this.props.users[id].position}</b></div>
+            <div>Email: <b>{this.props.users[id].email}</b></div>
+          </div>}>
+        {window.logoSrc}
       </GridTile>
     ));
 
     return (
       <GridList
-        cellHeight={180}
+        cellHeight={200}
         style={styles.gridList}>
-        <Subheader>Biology Team</Subheader>
+        <Subheader>Biology Department</Subheader>
         {employees}
       </GridList>
     );
@@ -61,11 +66,7 @@ class EmployeesOverview extends React.Component {
       <div>
         <h1>EmployeesOverview </h1>
         <div style={styles.root}>
-          <GridList
-            style={styles.gridList}
-            cellHeight={'auto'}>
-            {this.employees}
-          </GridList>
+          {this.employees}
         </div>
       </div>
     );

@@ -9,21 +9,35 @@ require 'faker'
 
 admin_1 = User.create(first_name: "Guest",
                       last_name: "User",
-                      position: "Scientist",
+                      position: "Senior Scientist",
                       company: "BioGen",
-                      email: "guest_user@gmail.com",
+                      email: "guest_user@biogen.com",
                       username: "guestuser",
                       password: "123456")
 admin_2 = User.create(first_name: "Calvin",
                       last_name: "Feng",
-                      position: "Scientist",
+                      position: "Biology Manager",
                       company: "BioGen",
-                      email: "calvin_feng@gmail.com",
+                      email: "calvin_feng@biogen.com",
                       username: "calvin_feng",
                       password: "123456")
 
 
-20.times do
+2.times do
+  fname = Faker::Name.first_name
+  lname = Faker::Name.last_name
+  User.create!(
+    first_name: "#{fname}",
+    last_name: "#{lname}",
+    position: "Scientist",
+    company: "BioGen",
+    email: "#{fname}_#{lname}@biogen.com",
+    username: "#{fname}".concat("_#{lname}"),
+    password: "password"
+  )
+end
+
+10.times do
   fname = Faker::Name.first_name
   lname = Faker::Name.last_name
   User.create!(
@@ -31,7 +45,7 @@ admin_2 = User.create(first_name: "Calvin",
     last_name: "#{lname}",
     position: "Research Associate",
     company: "BioGen",
-    email: "#{fname}_#{lname}@gmail.com",
+    email: "#{fname}_#{lname}@biogen.com",
     username: "#{fname}".concat("_#{lname}"),
     password: "password"
   )

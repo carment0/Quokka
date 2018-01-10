@@ -3,6 +3,8 @@
   	window.currentUser = <%= render("api/users/user.json.jbuilder",
   		user: current_user).html_safe %>
   <% end %>
+  // window.logoSrc = <%= image_tag("logo.png") %>;
+
 </script>
 
 <div id="react-application"></div>

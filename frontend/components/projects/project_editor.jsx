@@ -101,6 +101,7 @@ class ProjectEditor extends React.Component {
         <TextField
           hintText={'Project name'}
           value={this.state.name}
+          fullWidth={true}
           onChange={this.update('name')} />
         <h2>Deadline</h2>
         <DatePicker
