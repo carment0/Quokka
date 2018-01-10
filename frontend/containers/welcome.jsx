@@ -107,16 +107,14 @@ class Welcome extends React.Component {
         <section className="content">
           <div className="left-container">
             <div className="text-box">
+              <div className="catch-phrase">
+                Dream. Create. Innovate.
+              </div>
               <div className="head-line">
                 Achieve success with Quokka
               </div>
-              <div className="catch-phrase">
-                Sed rutrum lectus eu dictum sagittis.
-              </div>
               <div className="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in commodo dolor, nec congue tellus.
-                Vestibulum dignissim sodales dolor, in vehicula turpis porta euismod. Proin vel placerat mi, sit amet
-                blandit massa. Proin ac dui urna.
+                {"Quokka is the easiest way for teams to track work and get results. It's free to use and simple to get started. Sign up for free today."}
               </div>
             </div>
           </div>

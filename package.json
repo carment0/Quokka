@@ -38,6 +38,7 @@
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "draft-js": "^0.10.3",
+    "images": "^3.0.1",
     "lodash": "^4.17.4",
     "material-ui": "^0.19.1",
     "moment": "^2.20.1",

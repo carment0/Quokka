@@ -6,10 +6,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v1';
 // Material UI
 import { GridList, GridTile } from 'material-ui/GridList';
-import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
-import LinearProgress from 'material-ui/LinearProgress';
-
 // Actions
 import { fetchUsersFromCompany } from '../../actions/users_by_company_actions';
 // Enums
@@ -47,7 +44,7 @@ class EmployeesOverview extends React.Component {
             <div>Position: <b>{this.props.users[id].position}</b></div>
             <div>Email: <b>{this.props.users[id].email}</b></div>
           </div>}>
-        {window.logoSrc}
+        <img src="/assets/doraemon.svg" alt="profile" />
       </GridTile>
     ));
 
@@ -75,7 +72,7 @@ class EmployeesOverview extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentUser: state.sessions.currentUser,
-  users: state.users
+  users: state.users,
 });
 
 const mapDispatchToProps = (dispatch) => ({
