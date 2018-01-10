@@ -30,6 +30,7 @@ import ProjectOverview from './projects/project_overview';
 import ProjectCreator from './projects/project_creator';
 import TaskOverview from './tasks/task_overview';
 import CalendarOverview from './calendars/calendar_overview';
+import EmployeesOverview from './employees/employees_overview';
 // Style
 import Colors from '../shared/colors';
 
@@ -39,7 +40,8 @@ class Management extends React.Component {
 
   static propTypes = {
     dispatchLogout: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired
   };
 
   toggleSidebarExpand = () => {
@@ -55,6 +57,12 @@ class Management extends React.Component {
   handleCreateProject = () => {
     if (this.props.history.location.pathname !== '/management/create_project') {
       this.props.history.push('/management/create_project');
+    }
+  }
+
+  handleEmpolyeesOverview = () => {
+    if (this.props.history.location.pathname !== '/management/employees') {
+      this.props.history.push('/management/employees');
     }
   }
   /**
@@ -123,8 +131,10 @@ class Management extends React.Component {
               rightIcon={<AddCircleOutline />}>
               Create New Project
             </MenuItem>
-            <MenuItem rightIcon={<PeopleOutline />}>
-              Create New Team
+            <MenuItem
+              onClick={this.handleEmpolyeesOverview}
+              rightIcon={<PeopleOutline />}>
+              {this.props.currentUser.company} Employees
             </MenuItem>
             <Divider />
             <MenuItem rightIcon={<AccountCircle />}>
@@ -164,6 +174,7 @@ class Management extends React.Component {
                 <Route path="/management/tasks" component={TaskOverview} />
                 <Route path="/management/calendar" component={CalendarOverview} />
                 <Route path="/management/create_project" component={ProjectCreator} />
+                <Route path="/management/employees" component={EmployeesOverview} />
               </Switch>
             </Paper>
           </content>

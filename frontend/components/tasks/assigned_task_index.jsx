@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isEqual, assign } from 'lodash';
+// creates keys for mapping
+import uuid from 'uuid/v1';
 // Material UI
 import {
   Table,
@@ -56,7 +58,7 @@ class AssignedTaskIndex extends React.Component {
       const task = this.props.assignedTasks[id];
 
       return (
-        <TableRow selected={task.completed} key={task.name}>
+        <TableRow selected={task.completed} key={uuid()}>
           <TableRowColumn>{task.project.name}</TableRowColumn>
           <TableRowColumn>{task.name}</TableRowColumn>
           <TableRowColumn>{task.description}</TableRowColumn>

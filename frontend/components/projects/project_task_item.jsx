@@ -29,11 +29,12 @@ class ProjectTaskItem extends React.Component {
   state = {
     dialogOpen: false,
     task: {
-      project_id: this.props.task.project_id,
+      id: this.props.task.id,
+      project_id: this.props.projectId,
       name: this.props.task.name,
       description: this.props.task.description,
       completed: this.props.task.completed,
-      deadline: this.props.task.due_date,
+      due_date: this.props.task.due_date,
     },
     assignees: this.props.task.assignees
   };
@@ -42,8 +43,8 @@ class ProjectTaskItem extends React.Component {
     task: PropTypes.object.isRequired,
     projectId: PropTypes.number.isRequired,
     deleteTask: PropTypes.func.isRequired,
-    // editTask: PropTypes.func.isRequired,
     companyUsers: PropTypes.object.isRequired,
+    // updateTask: PropTypes.func.isRequired
   };
 
   handlePickDate = (nullVal, date) => {
@@ -73,7 +74,55 @@ class ProjectTaskItem extends React.Component {
   };
 
   handleEditSubmission = () => {
-    // console.log("submit");
+    const prev = this.props.task.assignees.map((user) => { return parseInt(user.id, 10) });
+    const current = this.state.assignees.map((user) => { return parseInt(user.id, 10) });
+    const deleteId = [];
+    const addId = [];
+
+    current.forEach((id) => {
+      if (!prev.includes(parseInt(id, 10))) {
+        addId.push(parseInt(id, 10));
+      }
+    });
+
+    prev.forEach((id) => {
+      if (!current.includes(parseInt(id, 10))) {
+        deleteId.push(parseInt(id, 10));
+      }
+    });
+
+    addId.forEach((id) => {
+      const userId = parseInt(id, 10);
+      const taskId = parseInt(this.props.task.id, 10);
+      $.ajax({
+        method: 'POST',
+        url: '/api/task_assignments',
+        data: {
+          'task_assignment': {
+            'user_id': userId,
+            'task_id': taskId
+          }
+        }
+      });
+    });
+
+    deleteId.forEach((id) => {
+      const userId = parseInt(id, 10);
+      const taskId = parseInt(this.props.task.id, 10);
+      $.ajax({
+        method: 'DELETE',
+        url: '/api/task_assignments',
+        data: {
+          'task_assignment': {
+            'user_id': userId,
+            'task_id': taskId
+          }
+        }
+      });
+    });
+    // console.log(this.state.task);
+    // this.props.updateTask(this.state.task);
+    this.handleDialogClose();
   };
 
   handleSelectChange = (e) => {
@@ -192,7 +241,7 @@ class ProjectTaskItem extends React.Component {
               <h3>Deadline</h3>
               <DatePicker
                 hintText="Deadline"
-                value={new Date(this.state.task.deadline)}
+                value={new Date(this.state.task.due_date)}
                 container="inline"
                 mode="landscape"
                 onChange={this.handlePickDate} />
