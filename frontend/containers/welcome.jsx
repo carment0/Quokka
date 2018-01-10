@@ -89,7 +89,12 @@ class Welcome extends React.Component {
       <section className="welcome-page">
         <Paper zDepth={2} className="nav-bar">
           <section className="left-container">
-            <div className="logo" />
+            <div className="logo">
+              <img src="/assets/images.svg" alt="profile"  height="70" width="70"/>
+            </div>
+            <div className="title">
+              QUOKKA
+            </div>
           </section>
           <section className="right-container">
             <div className="button-container">
@@ -107,6 +112,7 @@ class Welcome extends React.Component {
         <section className="content">
           <div className="left-container">
             <div className="text-box">
+              <img src="/assets/quokka_face.svg" alt="profile" height="100" width="100" />
               <div className="catch-phrase">
                 Dream. Create. Innovate.
               </div>

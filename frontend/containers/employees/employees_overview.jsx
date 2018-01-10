@@ -44,7 +44,7 @@ class EmployeesOverview extends React.Component {
             <div>Position: <b>{this.props.users[id].position}</b></div>
             <div>Email: <b>{this.props.users[id].email}</b></div>
           </div>}>
-        <img src="/assets/doraemon.svg" alt="profile" />
+        <img src="/assets/quokka_face.png" alt="profile" />
       </GridTile>
     ));
 
