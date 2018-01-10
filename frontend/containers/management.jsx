@@ -60,7 +60,7 @@ class Management extends React.Component {
     }
   }
 
-  handleEmpolyeesOverview = () => {
+  handleEmpolyee = () => {
     if (this.props.history.location.pathname !== '/management/employees') {
       this.props.history.push('/management/employees');
     }
@@ -132,7 +132,7 @@ class Management extends React.Component {
               Create New Project
             </MenuItem>
             <MenuItem
-              onClick={this.handleEmpolyeesOverview}
+              onClick={this.handleEmpolyee}
               rightIcon={<PeopleOutline />}>
               {this.props.currentUser.company} Employees
             </MenuItem>
