@@ -90,7 +90,7 @@ class Welcome extends React.Component {
         <Paper zDepth={2} className="nav-bar">
           <section className="left-container">
             <div className="logo">
-              <img src="/assets/images.svg" alt="profile"  height="70" width="70"/>
+              <img src="/assets/images.svg" alt="profile"  height="70" width="70" />
             </div>
             <div className="title">
               QUOKKA
@@ -120,7 +120,8 @@ class Welcome extends React.Component {
                 Achieve success with Quokka
               </div>
               <div className="description">
-                {"Quokka is the easiest way for teams to track work and get results. It's free to use and simple to get started. Sign up for free today."}
+                {`Quokka is the easiest way for teams to track work and get results. It's free to use and simple to get
+                  started. Sign up for free today.`}
               </div>
             </div>
           </div>

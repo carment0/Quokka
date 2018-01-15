@@ -1,6 +1,7 @@
 // React
 import React from 'react';
 import PropTypes from 'prop-types';
+
 // Material UI
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
@@ -8,9 +9,10 @@ import Chip from 'material-ui/Chip';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+
 // React-select
 import Select from 'react-select';
-// Enums
+
 // Dialog content is the white box that pops up during on click
 const dialogContentStyle = {
   width: '70%',
@@ -40,11 +42,12 @@ class ProjectTaskItem extends React.Component {
   };
 
   static propTypes = {
+    dispatchFetchProjectDetail: PropTypes.func.isRequired,
     task: PropTypes.object.isRequired,
     projectId: PropTypes.number.isRequired,
     deleteTask: PropTypes.func.isRequired,
     companyUsers: PropTypes.object.isRequired,
-    // updateTask: PropTypes.func.isRequired
+    updateTask: PropTypes.func.isRequired
   };
 
   handlePickDate = (nullVal, date) => {
@@ -74,8 +77,8 @@ class ProjectTaskItem extends React.Component {
   };
 
   handleEditSubmission = () => {
-    const prev = this.props.task.assignees.map((user) => { return parseInt(user.id, 10) });
-    const current = this.state.assignees.map((user) => { return parseInt(user.id, 10) });
+    const prev = this.props.task.assignees.map((user) => { return parseInt(user.id, 10); });
+    const current = this.state.assignees.map((user) => { return parseInt(user.id, 10); });
     const deleteId = [];
     const addId = [];
 
@@ -91,44 +94,69 @@ class ProjectTaskItem extends React.Component {
       }
     });
 
+    const promiseList = [];
     addId.forEach((id) => {
       const userId = parseInt(id, 10);
       const taskId = parseInt(this.props.task.id, 10);
-      $.ajax({
-        method: 'POST',
-        url: '/api/task_assignments',
-        data: {
-          'task_assignment': {
-            'user_id': userId,
-            'task_id': taskId
-          }
-        }
-      });
+      promiseList.push(new Promise((resolve, reject) => {
+        setTimeout(() => {
+          $.ajax({
+            method: 'POST',
+            url: '/api/task_assignments',
+            data: {
+              task_assignment: {
+                user_id: userId,
+                task_id: taskId
+              }
+            }
+          });
+          resolve();
+        }, 100);
+      }));
     });
 
     deleteId.forEach((id) => {
       const userId = parseInt(id, 10);
       const taskId = parseInt(this.props.task.id, 10);
-      $.ajax({
-        method: 'DELETE',
-        url: '/api/task_assignments',
-        data: {
-          'task_assignment': {
-            'user_id': userId,
-            'task_id': taskId
-          }
-        }
-      });
+      promiseList.push(new Promise((resolve, reject) => {
+        setTimeout(() => {
+          $.ajax({
+            method: 'DELETE',
+            url: '/api/task_assignments',
+            data: {
+              task_assignment: {
+                user_id: userId,
+                task_id: taskId
+              }
+            }
+          });
+          resolve();
+        }, 100);
+      }));
     });
-    // console.log(this.state.task);
-    // this.props.updateTask(this.state.task);
-    this.handleDialogClose();
+
+
+    promiseList.push(new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.props.updateTask(this.state.task);
+        resolve();
+      }, 100);
+    }));
+
+    Promise.all(promiseList).then(() => {
+      this.props.dispatchFetchProjectDetail(this.props.projectId);
+      this.handleDialogClose();
+    });
   };
 
   handleSelectChange = (e) => {
     const userIds = e.split(',');
     const newAssignees = userIds.map((id) => {
-      return { id: id, first_name: this.props.companyUsers[id].first_name, last_name: this.props.companyUsers[id].last_name };
+      return {
+        id: id,
+        first_name: this.props.companyUsers[id].first_name,
+        last_name: this.props.companyUsers[id].last_name
+      };
     });
     this.setState({ assignees: newAssignees });
   };
@@ -164,7 +192,10 @@ class ProjectTaskItem extends React.Component {
 
   arrayOfAssigned = () => {
     const users = this.state.assignees.map((user) => {
-      return { label: this.props.companyUsers[user.id].first_name + ' ' + this.props.companyUsers[user.id].last_name, value: user.id };
+      return {
+        label: this.props.companyUsers[user.id].first_name + ' ' + this.props.companyUsers[user.id].last_name,
+        value: user.id
+      };
     });
     return users;
   };
@@ -195,8 +226,14 @@ class ProjectTaskItem extends React.Component {
   get taskControls() {
     return (
       <div>
-        <FlatButton label="Delete" secondary={true} onClick={this.handleDeleteTask(this.props.projectId, this.props.task.id)} />
-        <FlatButton label="Edit" secondary={true}  onClick={this.handleEditTask} />
+        <FlatButton
+          label="Delete"
+          secondary={true}
+          onClick={this.handleDeleteTask(this.props.projectId, this.props.task.id)} />
+        <FlatButton
+          label="Edit"
+          secondary={true}
+          onClick={this.handleEditTask} />
       </div>
     );
   }

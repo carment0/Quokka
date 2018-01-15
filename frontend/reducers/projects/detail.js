@@ -12,7 +12,22 @@ export default (oldState = {}, action) => {
     case RECEIVE_TASK:
       newState = {};
       project = oldState[action.task.project_id];
-      project.tasks.push(action.task);
+
+      // Updating task
+      action.task.assignees = [];
+
+      let taskFound = false;
+      for (let i = 0; i < project.tasks.length; i += 1) {
+        if (project.tasks[i].id === action.task.id) {
+          project.tasks[i] = action.task;
+          taskFound = true;
+        }
+      }
+
+      if (!taskFound) {
+        project.tasks.push(action.task);
+      }
+
       newState[project.id] = project;
       return merge({}, oldState, newState);
 

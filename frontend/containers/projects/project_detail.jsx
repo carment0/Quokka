@@ -279,7 +279,8 @@ class ProjectDetail extends React.Component {
         deleteTask={this.props.dispatchDeleteTask}
         projectId={this.props.project.id}
         updateTask={this.props.dispatchUpdateTask}
-        companyUsers={this.props.users} />
+        companyUsers={this.props.users}
+        dispatchFetchProjectDetail={this.props.dispatchFetchProjectDetail} />
     ));
 
     return (

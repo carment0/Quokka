@@ -80,12 +80,8 @@ export const createTask = (project_id, task) => (dispatch) => (
 
 export const updateTask = (task) => (dispatch) => (
   $.ajax({ method: 'PATCH', url: `api/projects/${task.project_id}/tasks/${task.id}`, data: { task } })
-    .then((updatedTask) => (
-      dispatch(receiveTask(updatedTask))
-    ))
-    .fail((err) => (
-      dispatch(receiveTaskErrors(err.responseJSON))
-    ))
+    .then((updatedTask) => dispatch(receiveTask(updatedTask)))
+    .fail((err) => (dispatch(receiveTaskErrors(err.responseJSON))))
 );
 
 export const updateAssignedTask = (task) => (dispatch) => (
