@@ -14,7 +14,7 @@ export default (oldState = {}, action) => {
       project = oldState[action.task.project_id];
 
       // Updating task
-      action.task.assignees = [];
+      // action.task.assignees = [];
 
       let taskFound = false;
       for (let i = 0; i < project.tasks.length; i += 1) {
@@ -40,9 +40,9 @@ export default (oldState = {}, action) => {
       return merge({}, oldState, newState);
 
     case RECEIVE_PROJECT_DETAIL:
-      newState = {};
+      newState = merge({}, oldState);
       newState[action.project.id] = action.project;
-      return merge({}, oldState, newState);
+      return newState;
 
     case REMOVE_PROJECT:
       newState = merge({}, oldState);

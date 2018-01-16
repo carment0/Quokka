@@ -95,57 +95,54 @@ class ProjectTaskItem extends React.Component {
     });
 
     const promiseList = [];
+
+    // promiseList.push(new Promise((resolve, reject) => {
+    //   this.props.updateTask(this.state.task).then(resolve).fail(reject);
+    // }));
+
     addId.forEach((id) => {
       const userId = parseInt(id, 10);
       const taskId = parseInt(this.props.task.id, 10);
+      const requestParams = {
+        method: 'POST',
+        url: '/api/task_assignments',
+        data: {
+          task_assignment: {
+            user_id: userId,
+            task_id: taskId
+          }
+        }
+      };
+
       promiseList.push(new Promise((resolve, reject) => {
-        setTimeout(() => {
-          $.ajax({
-            method: 'POST',
-            url: '/api/task_assignments',
-            data: {
-              task_assignment: {
-                user_id: userId,
-                task_id: taskId
-              }
-            }
-          });
-          resolve();
-        }, 100);
+        $.ajax(requestParams).then(resolve).fail(reject);
       }));
     });
 
     deleteId.forEach((id) => {
       const userId = parseInt(id, 10);
       const taskId = parseInt(this.props.task.id, 10);
+      const requestParams = {
+        method: 'DELETE',
+        url: '/api/task_assignments',
+        data: {
+          task_assignment: {
+            user_id: userId,
+            task_id: taskId
+          }
+        }
+      };
       promiseList.push(new Promise((resolve, reject) => {
-        setTimeout(() => {
-          $.ajax({
-            method: 'DELETE',
-            url: '/api/task_assignments',
-            data: {
-              task_assignment: {
-                user_id: userId,
-                task_id: taskId
-              }
-            }
-          });
-          resolve();
-        }, 100);
+        $.ajax(requestParams).then(() => console.log('Delete is done')).then(resolve).fail(reject);
       }));
     });
 
-
-    promiseList.push(new Promise((resolve, reject) => {
-      setTimeout(() => {
-        this.props.updateTask(this.state.task);
-        resolve();
-      }, 100);
-    }));
-
     Promise.all(promiseList).then(() => {
-      this.props.dispatchFetchProjectDetail(this.props.projectId);
-      this.handleDialogClose();
+      setTimeout(() => {
+        console.log('Now fetching');
+        this.props.dispatchFetchProjectDetail(this.props.projectId);
+        this.handleDialogClose();
+      }, 0);
     });
   };
 
