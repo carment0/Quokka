@@ -89,10 +89,7 @@ class Welcome extends React.Component {
       <section className="welcome-page">
         <Paper zDepth={2} className="nav-bar">
           <section className="left-container">
-            <div className="logo">
-              <img src="/assets/images.svg" alt="profile"  height="70" width="70" />
-            </div>
-            <div className="title">
+            <div className="text">
               QUOKKA
             </div>
           </section>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Prompt:800');
+
 $blueberry: #6B7A8F;
 $light-apple-core: #eaddcc;
 $apple-core: #DCC7AA;
@@ -24,15 +26,20 @@ $apricot: #F7882F;
       width: 50%;
       display: inherit;
       flex-direction: row;
-
-      .logo {
-        height: 100%;
-        width: 12%;
-        min-width: 50px;
-        display: inherit;
-      }
+      padding-left: 4rem;
+      background-color: #eaddcc;
+      // .logo {
+      //   height: 100%;
+      //   width: 129%;
+      //   min-width: 50px;
+      //   display: inherit;
+      // }
 
       .text {
+        color: #F7882F;
+        font-family: 'Prompt', sans-serif;
+        font-size: 3rem;
+        letter-spacing: 15px;
         height: 100%;
         width: calc(100% - 12%);
         display: inherit;
@@ -49,6 +56,8 @@ $apricot: #F7882F;
       flex-direction: row;
       align-items: center;
       justify-content: flex-end;
+      background-color: #eaddcc;
+
 
       .button-container {
         height: 100%;
