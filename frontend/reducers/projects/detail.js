@@ -13,9 +13,6 @@ export default (oldState = {}, action) => {
       newState = {};
       project = oldState[action.task.project_id];
 
-      // Updating task
-      // action.task.assignees = [];
-
       let taskFound = false;
       for (let i = 0; i < project.tasks.length; i += 1) {
         if (project.tasks[i].id === action.task.id) {
@@ -39,6 +36,7 @@ export default (oldState = {}, action) => {
       newState[project.id] = project;
       return merge({}, oldState, newState);
 
+    // `merge()` is like _.assign except that it recursively merges own and inherited enumerable string keyed properties of source objects into the destination object. Source properties that resolve to undefined are skipped if a destination value exists. Array and plain object properties are merged recursively.
     case RECEIVE_PROJECT_DETAIL:
       newState = merge({}, oldState);
       newState[action.project.id] = action.project;
