@@ -18,7 +18,8 @@ class Login extends React.Component {
     handleDialogClose: PropTypes.func.isRequired,
     dispatchLogin: PropTypes.func.isRequired,
     sessionErrors: PropTypes.array.isRequired,
-    clearErrors: PropTypes.func.isRequired
+    clearErrors: PropTypes.func.isRequired,
+    switchDialog: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -92,6 +93,11 @@ class Login extends React.Component {
             secondary={true}
             fullWidth={true}
             onClick={this.handleDemoLogin} />
+          <p>{`Don't have an account?`}
+            <FlatButton
+              label="Sign up"
+              secondary={true}
+              onClick={this.props.switchDialog} /></p>
         </div>
       </div>
     );

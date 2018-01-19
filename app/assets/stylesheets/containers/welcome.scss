@@ -36,6 +36,7 @@ $apricot: #F7882F;
       // }
 
       .text {
+        text-shadow: 2px 1px #6B7A8F;
         color: #F7882F;
         font-family: 'Prompt', sans-serif;
         font-size: 3rem;
@@ -84,7 +85,7 @@ $apricot: #F7882F;
     height: calc(100% - 8%);
     width: 100%;
     z-index: 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), image-url('orange-wave.jpeg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2)), image-url('orange-wave.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -93,13 +94,19 @@ $apricot: #F7882F;
       flex-direction: column;
       height: 100%;
       width: 50%;
+
       .text-box {
         width: 100%; // 100% to left-container
         display: flex;
         flex-direction: column;
         position: relative; // Relative to its normal position
-        top: 31%;
-        left: 31%;
+        top: 20%;
+        left: 25%;
+
+        .face-logo {
+          height: 100px;
+          width: 100px;
+        }
 
         .head-line {
           width: 100%;
@@ -129,6 +136,19 @@ $apricot: #F7882F;
     .right-container {
       height: 100%;
       width: 50%;
+    }
+  }
+
+  footer {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    .logo {
+      margin-top: 0.2rem;
+      margin-left: 0.3rem;
+      margin-right: 0.3rem;
     }
   }
 }
