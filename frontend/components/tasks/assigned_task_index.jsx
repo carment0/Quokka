@@ -13,15 +13,30 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import Snackbar from 'material-ui/Snackbar';
 
 
 class AssignedTaskIndex extends React.Component {
+  state = {
+    open: false,
+  };
+
   static propTypes = {
     assignedTasks: PropTypes.object.isRequired,
     dispatchUpdateAssignedTask: PropTypes.func.isRequired
   };
 
+  handleRequestClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
   handleRowSelection = (selectedRows) => {
+    this.setState({
+      open: true,
+    });
+
     const taskIdList = Object.keys(this.props.assignedTasks).sort();
 
     const tasks = taskIdList.map((id) => assign({}, this.props.assignedTasks[id]));
@@ -93,8 +108,15 @@ class AssignedTaskIndex extends React.Component {
   render() {
     return (
       <div className="assigned-tasks">
-        <h2>Your Assigned Tasks</h2>
+        <div className="title">
+          <h2>My Assigned Tasks</h2>
+        </div>
         {this.taskList}
+        <Snackbar
+          open={this.state.open}
+          message="Members assigned to this task have been updated with your selection."
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose} />
       </div>
     );
   }

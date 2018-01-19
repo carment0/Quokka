@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 * {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 html, body {
@@ -30,7 +30,6 @@ html, body, h1, h2, h3, h4, h5 {
 @import "components/login.scss";
 @import "components/signup.scss";
 
-
 // Application page
 @import "containers/management.scss";
 
@@ -43,7 +42,15 @@ html, body, h1, h2, h3, h4, h5 {
 @import "components/project_task_item.scss";
 
 @import "containers/project_creator.scss";
+@import "components/project_editor.scss";
 
 // ==> Tasks
 @import "containers/task_overview.scss";
-@import "components/assigned_task_index";
+@import "components/assigned_task_index.scss";
+@import "components/task_creater.scss";
+
+// ==> Calendar
+@import "containers/calendar_overview.scss";
+
+// ==> Employee
+@import "containers/employee_overview.scss";

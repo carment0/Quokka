@@ -36,8 +36,9 @@ class AssignedProjectIndex extends React.Component {
             subtitle={'Deadline: ' + project.deadline}
             actAsExpander={true}
             showExpandableButton={true}
-            style={{ fontWeight: '900', padding: '0.5rem' }} />
-          <CardText expandable={true}>
+            subtitleColor={project.completed ? 'green' : 'red'}
+            style={{ fontWeight: '500', padding: '0.5rem' }} />
+          <CardText expandable={true} color={'#6B7A8F'}>
             <p>Project Summary:</p>
             <div dangerouslySetInnerHTML={{ __html: project.description }} />
           </CardText>
@@ -58,8 +59,10 @@ class AssignedProjectIndex extends React.Component {
 
   render() {
     return (
-      <div className="admin-projects">
-        <h2>Your Assigned Projects</h2>
+      <div className="assigned-projects">
+        <div className="title">
+          <h2>My Assigned Projects</h2>
+        </div>
         {this.projectCardList}
       </div>
     );

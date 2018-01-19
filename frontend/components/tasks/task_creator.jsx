@@ -8,8 +8,8 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import Dialog from 'material-ui/Dialog';
-// React-select
-import Select from 'react-select';
+import AddCircle from 'material-ui/svg-icons/content/add-circle-outline';
+
 // Enums
 // Dialog content is the white box that pops up during on click
 const dialogContentStyle = {
@@ -22,7 +22,8 @@ const dialogTitleStyle = {
   display: 'flex',
   justifyContent: 'flex-start',
   fontWeight: '100',
-  fontSize: '2rem'
+  fontSize: '2rem',
+  color: '#F7882F'
 };
 
 class CreateTask extends React.Component {
@@ -100,7 +101,7 @@ class CreateTask extends React.Component {
         <Dialog
           titleStyle={dialogTitleStyle}
           contentStyle={dialogContentStyle}
-          title={'Add a task'}
+          title={'Add a Task'}
           modal={false}
           open={this.state.dialogOpen}
           onRequestClose={this.handleDialogClose}>
@@ -131,8 +132,11 @@ class CreateTask extends React.Component {
 
   render() {
     return (
-      <div>
-        <FlatButton label="Add A Task" primary={true} onClick={this.handleTaskForm} />
+      <div className="task-creator">
+        <div className="title">
+          <h1>Tasks</h1>
+          <FlatButton label={<AddCircle color={'#F7882F'} />} primary={true} onClick={this.handleTaskForm} />
+        </div>
         {this.taskForm}
       </div>
     );

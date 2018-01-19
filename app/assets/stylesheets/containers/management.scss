@@ -29,6 +29,19 @@ $apricot: #F7882F;
       flex-direction: row;
       align-items: center;
 
+      .logo-title {
+        height: inherit;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        .face-logo {
+          height: 3.8rem;
+          width: 3.8rem;
+        }
+      }
+
       .left-container {
         display: inherit;
         width: 50%;

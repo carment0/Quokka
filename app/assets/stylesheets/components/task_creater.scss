@@ -1,0 +1,28 @@
+.task-creator {
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      color: #F7882F;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.project-form {
+  display: inherit;
+  flex-direction: column;
+
+  .session-errors {
+    color: red;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+}

@@ -20,6 +20,7 @@ import DateIcon from 'material-ui/svg-icons/action/date-range';
 import AssignmentIcon from 'material-ui/svg-icons/action/assignment';
 import PeopleOutline from 'material-ui/svg-icons/social/people-outline';
 import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
+import MailOutline from 'material-ui/svg-icons/communication/mail-outline';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 // Actions
 import { logout } from '../actions/session_actions';
@@ -125,7 +126,8 @@ class Management extends React.Component {
     return (
       <management className="management">
         <section className={this.sidebarClassName}>
-          <Drawer open={this.state.sidebarOpen} swipeAreaWidth={50}>
+          <Drawer open={this.state.sidebarOpen}
+            swipeAreaWidth={50}>
             <MenuItem
               onClick={this.handleCreateProject}
               rightIcon={<AddCircleOutline />}>
@@ -138,13 +140,23 @@ class Management extends React.Component {
             </MenuItem>
             <Divider />
             <MenuItem rightIcon={<AccountCircle />}>
-              My Profile
+              My Profile (Coming Soon)
+            </MenuItem>
+            <MenuItem rightIcon={<MailOutline />}>
+              Messages (Coming Soon)
             </MenuItem>
           </Drawer>
         </section>
         <section className={this.managementMainContentClassName}>
           <nav className="nav-bar">
             <AppBar
+              title={
+                <div className="logo-title">
+                  <img className="face-logo"
+                    src="/assets/quokka_face.svg"
+                    alt="profile" />
+                </div>
+              }
               iconElementLeft={this.iconElementLeft}
               iconElementRight={this.iconElementRight} />
           </nav>

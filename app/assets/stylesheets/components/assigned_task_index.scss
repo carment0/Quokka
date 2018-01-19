@@ -1,7 +1,15 @@
 .assigned-tasks {
-  h2 {
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+
+  .title {
+    display: flex;
+    justify-content: center;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      color: #6B7A8F;
+      letter-spacing: 1px;
+    }
   }
 }

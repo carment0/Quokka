@@ -82,8 +82,9 @@ class AdminProjectIndex extends React.Component {
             subtitle={'Deadline: ' + project.deadline}
             actAsExpander={true}
             showExpandableButton={true}
-            style={{ fontWeight: '900', padding: '0.5rem' }} />
-          <CardText expandable={true}>
+            subtitleColor={project.completed ? 'green' : 'red'}
+            style={{ fontWeight: '500', padding: '0.5rem' }} />
+          <CardText expandable={true} color={'#6B7A8F'}>
             <p>Project Summary:</p>
             <div dangerouslySetInnerHTML={{ __html: project.description }} />
           </CardText>
@@ -107,7 +108,9 @@ class AdminProjectIndex extends React.Component {
   render() {
     return (
       <div className="admin-projects">
-        <h2>Your Administrated Projects</h2>
+        <div className="title">
+          <h2>My Administrated Projects</h2>
+        </div>
         {this.projectCardList}
         <Dialog
           titleStyle={dialogTitleStyle}

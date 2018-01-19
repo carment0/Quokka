@@ -1,0 +1,18 @@
+.edit-project {
+  display: inherit;
+  flex-direction: column;
+
+  .session-errors {
+    color: red;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  h2 {
+    color: #6B7A8F;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+}

@@ -9,6 +9,8 @@ import LinearProgress from 'material-ui/LinearProgress';
 import CircularProgress from 'material-ui/CircularProgress';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import Editor from 'material-ui/svg-icons/editor/mode-edit';
+
 // creates keys for mapping
 import uuid from 'uuid/v1';
 // Quill
@@ -42,7 +44,8 @@ const dialogTitleStyle = {
   display: 'flex',
   justifyContent: 'flex-start',
   fontWeight: '100',
-  fontSize: '2rem'
+  fontSize: '2rem',
+  color: '#F7882F'
 };
 
 
@@ -148,13 +151,12 @@ class ProjectDetail extends React.Component {
     // resizes the screen.
     return (
       <section className="project-summary">
-        <article className="left-container">
+        <div className="left-container">
           {this.projectDescription}
-          {this.assigneeSection}
-        </article>
-        <article className="right-container" id="chart-container">
+        </div>
+        <div className="right-container" id="chart-container">
           {this.pieChart}
-        </article>
+        </div>
       </section>
     );
   }
@@ -211,8 +213,10 @@ class ProjectDetail extends React.Component {
   get projectDescription() {
     return (
       <div className="project-description">
-        <h1>{this.props.project.name}</h1>
-        {this.editProject}
+        <div className="title">
+          <h1>{this.props.project.name}</h1>
+          {this.editProject}
+        </div>
         <ReactQuill value={this.props.project.description} readOnly={true} theme="bubble" modules={modules} />
       </div>
     );
@@ -224,7 +228,7 @@ class ProjectDetail extends React.Component {
     }
     return (
       <div>
-        <FlatButton label="Edit" primary={true} onClick={this.handleDialogOpen(this.props.project)} />
+        <FlatButton label={<Editor color={'#F7882F'} />} primary={true} onClick={this.handleDialogOpen(this.props.project)} />
       </div>
     );
   }
@@ -246,18 +250,18 @@ class ProjectDetail extends React.Component {
     });
 
     const chips = Array.from(names).map((name) => (
-      <Chip
-        style={{ marginLeft: '0.1rem', marginRight: '0.1rem' }}
-        className="chip"
-        key={name}
-        onClick={this.handleToggleUserProfile}>
-        {name}
-      </Chip>
+      <div className="chip" key={name}>
+        <Chip
+          style={{ marginLeft: '0.1rem', marginRight: '0.1rem' }}
+          className="chip">
+          {name}
+        </Chip>
+      </div>
     ));
 
     return (
       <div className="assignees">
-        <h2>Members working on project</h2>
+        <h3>Team Members</h3>
         <div className="assignee-chips">{chips}</div>
       </div>
     );
@@ -285,7 +289,6 @@ class ProjectDetail extends React.Component {
 
     return (
       <div className="task-summary">
-        <h1>Tasks</h1>
         <CreateTask
           projectId={this.props.project.id}
           errors={this.props.taskErrors}
@@ -302,6 +305,7 @@ class ProjectDetail extends React.Component {
       <section className="project-detail">
         {this.progressIndicator}
         {this.projectSummary}
+        {this.assigneeSection}
         {this.taskSummary}
         <Dialog
           titleStyle={dialogTitleStyle}

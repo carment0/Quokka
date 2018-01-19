@@ -52,7 +52,6 @@ class EmployeesOverview extends React.Component {
       <GridList
         cellHeight={200}
         style={styles.gridList}>
-        <Subheader>Biology Department</Subheader>
         {employees}
       </GridList>
     );
@@ -60,8 +59,10 @@ class EmployeesOverview extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>EmployeesOverview </h1>
+      <div className="employee-overview">
+        <div className="title">
+          <h1>{this.props.currentUser.company} Employees </h1>
+        </div>
         <div style={styles.root}>
           {this.employees}
         </div>

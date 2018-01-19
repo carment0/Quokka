@@ -27,7 +27,8 @@ const dialogTitleStyle = {
   fontWeight: '100',
   fontSize: '2rem',
   display: 'flex',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  color: '#F7882F'
 };
 
 

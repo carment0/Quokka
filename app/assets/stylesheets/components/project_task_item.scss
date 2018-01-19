@@ -3,6 +3,52 @@
   margin: 1rem 1rem 1rem 1rem;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 
+  h3 {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #6B7A8F;
+    letter-spacing: 1px;
+  }
+
+  .task-detail {
+    margin-left: 2rem;
+    margin-right: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .description {
+      flex-wrap: wrap;
+      width: 70%;
+    }
+  }
+
+  .task-completion {
+    h4 {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .assignee-chips {
+      margin: 1rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
 }
 
 .task-edit-form {

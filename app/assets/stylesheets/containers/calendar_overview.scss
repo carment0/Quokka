@@ -1,0 +1,10 @@
+.calendar-overview {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+
+  .calendar {
+    height: 100%;
+  }
+}

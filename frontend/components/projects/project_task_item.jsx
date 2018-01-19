@@ -9,7 +9,7 @@ import Chip from 'material-ui/Chip';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
-
+import Divider from 'material-ui/Divider';
 // React-select
 import Select from 'react-select';
 
@@ -24,7 +24,8 @@ const dialogTitleStyle = {
   display: 'flex',
   justifyContent: 'flex-start',
   fontWeight: '100',
-  fontSize: '2rem'
+  fontSize: '2rem',
+  color: '#F7882F'
 };
 
 class ProjectTaskItem extends React.Component {
@@ -96,10 +97,6 @@ class ProjectTaskItem extends React.Component {
 
     const promiseList = [];
 
-    // promiseList.push(new Promise((resolve, reject) => {
-    //   this.props.updateTask(this.state.task).then(resolve).fail(reject);
-    // }));
-
     addId.forEach((id) => {
       const userId = parseInt(id, 10);
       const taskId = parseInt(this.props.task.id, 10);
@@ -136,6 +133,10 @@ class ProjectTaskItem extends React.Component {
         $.ajax(requestParams).then(() => console.log('Delete is done')).then(resolve).fail(reject);
       }));
     });
+
+    // promiseList.push(new Promise(() => {
+    //   this.props.updateTask(this.state.task);
+    // }));
 
     Promise.all(promiseList).then(() => {
       setTimeout(() => {
@@ -204,33 +205,32 @@ class ProjectTaskItem extends React.Component {
     });
 
     const chips = Array.from(names).map((name) => (
-      <Chip
-        style={{ marginLeft: '0.1rem', marginRight: '0.1rem' }}
-        className="chip"
-        key={name}
-        onClick={this.handleToggleUserProfile}>
-        {name}
-      </Chip>
+      <div className="chips" key={name}>
+        <Chip
+          style={{ marginLeft: '0.1rem', marginRight: '0.1rem' }}
+          className="chip"
+          onClick={this.handleToggleUserProfile}>
+          {name}
+        </Chip>
+      </div>
     ));
 
     return (
-      <div>
-        <div className="assignee-chips">{chips}</div>
-      </div>
+      <div className="assignee-chips">{chips}</div>
     );
   }
 
   get taskControls() {
     return (
-      <div>
+      <div className="buttons">
+        <FlatButton
+          label="Add Assignee to Task"
+          secondary={true}
+          onClick={this.handleEditTask} />
         <FlatButton
           label="Delete"
           secondary={true}
           onClick={this.handleDeleteTask(this.props.projectId, this.props.task.id)} />
-        <FlatButton
-          label="Edit"
-          secondary={true}
-          onClick={this.handleEditTask} />
       </div>
     );
   }
@@ -238,49 +238,28 @@ class ProjectTaskItem extends React.Component {
   render() {
     return (
       <Paper className="project-task-item" zDepth={1} rounded={false}>
-        <h3>{this.props.task.name}</h3>
-        <p>{this.props.task.description}</p>
-        <p>{this.props.task.due_date}</p>
-        <div>
-          <p>{this.props.task.completed ? 'Completed' : 'In progress'} by</p>
+        <div className="title">
+          <h3>{this.props.task.name}</h3>
+          {this.taskControls}
+        </div>
+        <Divider />
+        <div className="task-detail">
+          <p className="description">{this.props.task.description}</p>
+          <p>Deadline: {this.props.task.due_date ? this.props.task.due_date : 'N/A' }</p>
+        </div>
+        <div className="task-completion">
+          <h4>{this.props.task.completed ? 'Task completed' : 'Task in progress'} by</h4>
           {this.props.task.assignees[0] ? this.assigeeNames : 'not assigned'}
         </div>
-        {this.taskControls}
         <Dialog
           titleStyle={dialogTitleStyle}
           contentStyle={dialogContentStyle}
-          title={'Edit a task'}
+          title={'Add Assignee'}
           modal={false}
           open={this.state.dialogOpen}
           autoScrollBodyContent={true}
           onRequestClose={this.handleDialogClose}>
           <form className="task-edit-form" onSubmit={this.handleEditSubmission}>
-            <div className="form-box">
-              <h3>Task Name</h3>
-              <TextField
-                hintText={'Task name'}
-                value={this.state.task.name}
-                fullWidth={true}
-                onChange={this.update('name')} />
-            </div>
-            <div className="form-box">
-              <h3>Description</h3>
-              <TextField
-                hintText={'Description'}
-                fullWidth={true}
-                value={this.state.task.description}
-                onChange={this.update('description')} />
-            </div>
-            <div className="form-box">
-              <h3>Deadline</h3>
-              <DatePicker
-                hintText="Deadline"
-                value={new Date(this.state.task.due_date)}
-                container="inline"
-                mode="landscape"
-                onChange={this.handlePickDate} />
-            </div>
-            <h3>Assignee(s)</h3>
             <Select multi
               simpleValue
               closeOnSelect={false}

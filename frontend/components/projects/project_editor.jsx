@@ -95,7 +95,7 @@ class ProjectEditor extends React.Component {
 
   render() {
     return (
-      <form className="create-project" onSubmit={this.handleFormSubmission}>
+      <form className="edit-project" onSubmit={this.handleFormSubmission}>
         {this.renderErrors}
         <h2>Name</h2>
         <TextField

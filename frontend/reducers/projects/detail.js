@@ -11,7 +11,11 @@ export default (oldState = {}, action) => {
   switch (action.type) {
     case RECEIVE_TASK:
       newState = {};
+
       project = oldState[action.task.project_id];
+
+      // Updating task
+      action.task.assignees = [];
 
       let taskFound = false;
       for (let i = 0; i < project.tasks.length; i += 1) {
@@ -26,6 +30,7 @@ export default (oldState = {}, action) => {
       }
 
       newState[project.id] = project;
+
       return merge({}, oldState, newState);
 
     case REMOVE_TASK:

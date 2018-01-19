@@ -7,40 +7,34 @@
   .project-summary {
     display: inherit;
     flex-direction: row;
-    height: 42%;
     width: 100%;
+    height: 60%;
+    align-items: center;
+    padding: 3rem;
 
     .left-container {
       display: inherit;
       flex-direction: column;
-      height: 100%;
-      width: 50%;
       padding: 1rem 1rem 1rem 1rem;
+      width: 60%;
+
 
       .project-description {
-        h1 {
-          font-size: 2rem;
+
+        .title {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+
+          h1 {
+            font-size: 2rem;
+            color: #F7882F;
+            letter-spacing: 1px;
+          }
         }
+
         p {
           font-size: 1rem;
-        }
-      }
-
-      .assignees {
-        display: inherit;
-        flex-direction: column;
-        h2 {
-          font-size: 1.5rem;
-          margin-bottom: 1rem;
-        }
-        .assignee-chips {
-          display: inherit;
-          flex-direction: row;
-
-          .chip {
-            margin-left: 0.1rem;
-            margin-right: 0.1rem;
-          }
         }
       }
     }
@@ -57,10 +51,34 @@
     display: inherit;
     flex-direction: column;
     height: 58%;
-    width: 100%;
+    padding: 3rem;
+
     h1 {
       font-size: 2rem;
       margin: 1rem 1rem 1rem 1rem;
+    }
+  }
+
+  .assignees {
+    display: inherit;
+    flex-direction: column;
+    padding: 4rem;
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #6B7A8F;
+    }
+
+    .assignee-chips {
+      margin: 1rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .chip {
+        margin: 0.2rem;
+      }
     }
   }
 }
