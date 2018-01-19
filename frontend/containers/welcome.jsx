@@ -55,9 +55,9 @@ class Welcome extends React.Component {
 
   get dialogTitle() {
     if (this.state.formType === FormType.SIGN_UP) {
-      return 'Sign Up';
+      return 'Join the Quokka community';
     }
-    return 'Login';
+    return 'Welcome back to Quokka';
   }
 
   /**
@@ -72,7 +72,8 @@ class Welcome extends React.Component {
           dispatchLogin={this.props.dispatchLogin}
           handleDialogClose={this.handleDialogClose}
           sessionErrors={this.props.errors}
-          clearErrors={this.props.dispatchClearSessionErrors} />
+          clearErrors={this.props.dispatchClearSessionErrors}
+          switchDialog={this.createDialogOpenHandler(FormType.LOG_IN)} />
       );
     }
     return (
@@ -80,7 +81,8 @@ class Welcome extends React.Component {
         dispatchLogin={this.props.dispatchLogin}
         handleDialogClose={this.handleDialogClose}
         sessionErrors={this.props.errors}
-        clearErrors={this.props.dispatchClearSessionErrors} />
+        clearErrors={this.props.dispatchClearSessionErrors}
+        switchDialog={this.createDialogOpenHandler(FormType.SIGN_UP)} />
     );
   }
 
@@ -89,10 +91,7 @@ class Welcome extends React.Component {
       <section className="welcome-page">
         <Paper zDepth={2} className="nav-bar">
           <section className="left-container">
-            <div className="logo">
-              <img src="/assets/images.svg" alt="profile"  height="70" width="70" />
-            </div>
-            <div className="title">
+            <div className="text">
               QUOKKA
             </div>
           </section>
@@ -100,11 +99,13 @@ class Welcome extends React.Component {
             <div className="button-container">
               <FlatButton label="Login"
                 className="login-button"
+                hoverColor="#DCC7AA"
                 primary={true}
                 onClick={this.createDialogOpenHandler(FormType.LOG_IN)} />
               <FlatButton label="Sign up"
                 className="signup-button"
-                secondary={true}
+                primary={true}
+                hoverColor="#DCC7AA"
                 onClick={this.createDialogOpenHandler(FormType.SIGN_UP)} />
             </div>
           </section>
@@ -112,7 +113,7 @@ class Welcome extends React.Component {
         <section className="content">
           <div className="left-container">
             <div className="text-box">
-              <img src="/assets/quokka_face.svg" alt="profile" height="100" width="100" />
+              <img className="face-logo" src="/assets/quokka_face.svg" alt="profile" />
               <div className="catch-phrase">
                 Dream. Create. Innovate.
               </div>
@@ -127,12 +128,21 @@ class Welcome extends React.Component {
           </div>
           <div className="right-container" />
         </section>
+        <footer>
+          <a className="logo" href="https://www.github.com/carment0/NeutroEvolution">
+            <img className="logo" src="/assets/github.png" alt="github" />
+          </a>
+          <a className="logo" href="https://www.linkedin.com/in/carmen-to-2480161a/">
+            <img className="logo" src="/assets/linkedin.png" alt="github" />
+          </a>
+        </footer>
         <Dialog
           titleStyle={dialogTitleStyle}
           contentStyle={dialogContentStyle}
           title={this.dialogTitle}
           modal={false}
           open={this.state.openDialog}
+          autoScrollBodyContent={true}
           onRequestClose={this.handleDialogClose}>
           {this.form}
         </Dialog>
