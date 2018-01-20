@@ -7,9 +7,9 @@ import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import Chip from 'material-ui/Chip';
 import Dialog from 'material-ui/Dialog';
-import TextField from 'material-ui/TextField';
-import DatePicker from 'material-ui/DatePicker';
 import Divider from 'material-ui/Divider';
+import Snackbar from 'material-ui/Snackbar';
+
 // React-select
 import Select from 'react-select';
 
@@ -39,7 +39,8 @@ class ProjectTaskItem extends React.Component {
       completed: this.props.task.completed,
       due_date: this.props.task.due_date,
     },
-    assignees: this.props.task.assignees
+    assignees: this.props.task.assignees,
+    snackOpen: false
   };
 
   static propTypes = {
@@ -48,7 +49,6 @@ class ProjectTaskItem extends React.Component {
     projectId: PropTypes.number.isRequired,
     deleteTask: PropTypes.func.isRequired,
     companyUsers: PropTypes.object.isRequired,
-    updateTask: PropTypes.func.isRequired
   };
 
   handlePickDate = (nullVal, date) => {
@@ -77,7 +77,17 @@ class ProjectTaskItem extends React.Component {
     });
   };
 
+  handleSnackClose = () => {
+    this.setState({
+      snackOpen: false,
+    });
+  };
+
   handleEditSubmission = () => {
+    this.setState({
+      snackOpen: true
+    });
+
     const prev = this.props.task.assignees.map((user) => { return parseInt(user.id, 10); });
     const current = this.state.assignees.map((user) => { return parseInt(user.id, 10); });
     const deleteId = [];
@@ -130,22 +140,19 @@ class ProjectTaskItem extends React.Component {
         }
       };
       promiseList.push(new Promise((resolve, reject) => {
-        $.ajax(requestParams).then(() => console.log('Delete is done')).then(resolve).fail(reject);
+        $.ajax(requestParams).then(resolve).fail(reject);
       }));
     });
 
-    // promiseList.push(new Promise(() => {
-    //   this.props.updateTask(this.state.task);
-    // }));
-
-    Promise.all(promiseList).then(() => {
-      setTimeout(() => {
-        console.log('Now fetching');
-        this.props.dispatchFetchProjectDetail(this.props.projectId);
-        this.handleDialogClose();
-      }, 0);
-    });
-  };
+    setTimeout(() => {
+      Promise.all(promiseList).then(() => {
+        setTimeout(() => {
+          this.props.dispatchFetchProjectDetail(this.props.projectId);
+          this.handleDialogClose();
+        }, 0);
+      });
+    }, 1000);
+  }
 
   handleSelectChange = (e) => {
     const userIds = e.split(',');
@@ -279,6 +286,11 @@ class ProjectTaskItem extends React.Component {
             </div>
           </form>
         </Dialog>
+        <Snackbar
+          open={this.state.snackOpen}
+          message="Members assigned to this project have been notified."
+          autoHideDuration={4000}
+          onRequestClose={this.handleSnackClose} />
       </Paper>
     );
   }
