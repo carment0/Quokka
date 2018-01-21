@@ -27,7 +27,7 @@ $apricot: #F7882F;
       display: inherit;
       flex-direction: row;
       padding-left: 4rem;
-      background-color: #eaddcc;
+      background-color: white;
       // .logo {
       //   height: 100%;
       //   width: 129%;
@@ -57,7 +57,7 @@ $apricot: #F7882F;
       flex-direction: row;
       align-items: center;
       justify-content: flex-end;
-      background-color: #eaddcc;
+      background-color: white;
 
 
       .button-container {
@@ -81,7 +81,7 @@ $apricot: #F7882F;
 
   .content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: calc(100% - 8%);
     width: 100%;
     z-index: 0;
@@ -89,46 +89,50 @@ $apricot: #F7882F;
     background-repeat: no-repeat;
     background-size: cover;
 
-    .left-container {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      width: 50%;
+    .top-container {
+      height: 93%;
 
-      .text-box {
-        width: 100%; // 100% to left-container
+      .left-container {
         display: flex;
         flex-direction: column;
-        position: relative; // Relative to its normal position
-        top: 20%;
-        left: 25%;
+        height: 100%;
+        width: 50%;
 
-        .face-logo {
-          height: 100px;
-          width: 100px;
-        }
+        .text-box {
+          width: 100%; // 100% to left-container
+          display: flex;
+          flex-direction: column;
+          position: relative; // Relative to its normal position
+          top: 20%;
+          left: 25%;
 
-        .head-line {
-          width: 100%;
-          color: white;
-          font-size: 4rem;
-          font-weight: bolder;
-          text-shadow: 1px 1px 4px #effete;
-        }
+          .face-logo {
+            height: 100px;
+            width: 100px;
+          }
 
-        .catch-phrase {
-          width: 100%;
-          color: white;
-          font-size: 3rem;
-          font-weight: normal;
-          text-shadow: 1px 1px 4px #effete;
-        }
+          .head-line {
+            width: 100%;
+            color: white;
+            font-size: 4rem;
+            font-weight: bolder;
+            text-shadow: 1px 1px 4px #effete;
+          }
 
-        .description {
-          width: 70%;
-          color: white;
-          font-size: 1.5rem;
-          font-weight: lighter;
+          .catch-phrase {
+            width: 100%;
+            color: white;
+            font-size: 3rem;
+            font-weight: normal;
+            text-shadow: 1px 1px 4px #effete;
+          }
+
+          .description {
+            width: 70%;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: lighter;
+          }
         }
       }
     }
@@ -137,18 +141,24 @@ $apricot: #F7882F;
       height: 100%;
       width: 50%;
     }
-  }
 
-  footer {
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    .bottom-container {
+      height: 7%;
 
-    .logo {
-      margin-top: 0.2rem;
-      margin-left: 0.3rem;
-      margin-right: 0.3rem;
+      footer {
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+
+        .logo {
+          margin-top: 0.2rem;
+          margin-left: 0.3rem;
+          margin-right: 0.3rem;
+        }
+      }
     }
   }
+
 }

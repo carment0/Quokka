@@ -7,10 +7,10 @@
   .project-summary {
     display: inherit;
     flex-direction: row;
-    width: 100%;
+    width: calc(100% - 5rem);
     height: 60%;
     align-items: center;
-    padding: 3rem;
+    padding: 2.5rem;
 
     .left-container {
       display: inherit;

@@ -80,7 +80,7 @@ class ProjectCreator extends React.Component {
   get renderErrors() {
     return (
       <ul className="session-errors">
-        {this.props.errors.map((error, i) => (
+        {this.props.errors.map((error) => (
           <li key={uuid()} >
             {error}
           </li>
@@ -101,7 +101,10 @@ class ProjectCreator extends React.Component {
           </div>
           <div className="form-box">
             <h2>Deadline</h2>
-            <DatePicker hintText="Deadline" container="inline" mode="landscape" onChange={this.handlePickDate} />
+            <DatePicker hintText="Deadline"
+              container="inline"
+              mode="landscape"
+              onChange={this.handlePickDate} />
           </div>
           <div className="form-box">
             <h2 className="description">Description</h2>

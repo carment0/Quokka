@@ -112,31 +112,34 @@ class Welcome extends React.Component {
           </section>
         </Paper>
         <section className="content">
-          <div className="left-container">
-            <div className="text-box">
-              <img className="face-logo" src="http://res.cloudinary.com/dwepnf6cc/image/upload/v1516518163/quokka_face_c6nsfa.svg" alt="profile" />
-              <div className="catch-phrase">
-                Dream. Create. Innovate.
-              </div>
-              <div className="head-line">
-                Achieve success with Quokka
-              </div>
-              <div className="description">
-                {`Quokka is the easiest way for teams to track work and get results. It's free to use and simple to get
-                  started. Sign up for free today.`}
+          <div className="top-container">
+            <div className="left-container">
+              <div className="text-box">
+                <img className="face-logo" src="http://res.cloudinary.com/dwepnf6cc/image/upload/v1516518163/quokka_face_c6nsfa.svg" alt="profile" />
+                <div className="catch-phrase">
+                  Dream. Create. Innovate.
+                </div>
+                <div className="head-line">
+                  Achieve success with Quokka
+                </div>
+                <div className="description">
+                  {`Quokka is the easiest way for teams to track work and get results. It's free to use and simple to get
+                    started. Sign up for free today.`}
+                </div>
               </div>
             </div>
           </div>
-          <div className="right-container" />
+          <div className="bottom-container">
+            <footer>
+              <a className="logo" href="https://github.com/carment0/Quokka">
+                <img className="logo" src="http://res.cloudinary.com/dwepnf6cc/image/upload/v1516518061/github_zmrpur.png" alt="github" />
+              </a>
+              <a className="logo" href="https://www.linkedin.com/in/carmen-to-2480161a/">
+                <img className="logo" src="http://res.cloudinary.com/dwepnf6cc/image/upload/v1516518064/linkedin_nx1dzs.png" alt="github" />
+              </a>
+            </footer>
+          </div>
         </section>
-        <footer>
-          <a className="logo" href="https://www.github.com/carment0/NeutroEvolution">
-            <img className="logo" src="http://res.cloudinary.com/dwepnf6cc/image/upload/v1516518061/github_zmrpur.png" alt="github" />
-          </a>
-          <a className="logo" href="https://www.linkedin.com/in/carmen-to-2480161a/">
-            <img className="logo" src="http://res.cloudinary.com/dwepnf6cc/image/upload/v1516518064/linkedin_nx1dzs.png" alt="github" />
-          </a>
-        </footer>
         <Dialog
           titleStyle={dialogTitleStyle}
           contentStyle={dialogContentStyle}

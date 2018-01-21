@@ -31,6 +31,13 @@ const customizedTheme = {
   palette: {
     primary1Color: Colors.APRICOT,
     accent1Color: Colors.CITRUS,
+  },
+  datePicker: {
+    color: Colors.APRICOT,
+    calendarTextColor: Colors.APRICOT,
+    selectColor: Colors.APRICOT,
+    calendarYearBackgroundColor: Colors.APRICOT,
+    headerColor: Colors.APRICOT,
   }
 };
 
