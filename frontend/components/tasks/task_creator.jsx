@@ -26,6 +26,11 @@ const dialogTitleStyle = {
   color: '#F7882F'
 };
 
+const style = {
+  margin: 12,
+  color: '#F7882F'
+};
+
 class CreateTask extends React.Component {
   state = {
     dialogOpen: false,
@@ -135,7 +140,9 @@ class CreateTask extends React.Component {
       <div className="task-creator">
         <div className="title">
           <h1>Tasks</h1>
-          <FlatButton label={<AddCircle color={'#F7882F'} />} primary={true} onClick={this.handleTaskForm} />
+          <FlatButton icon={<AddCircle />}
+            style={style}
+            onClick={this.handleTaskForm} />
         </div>
         {this.taskForm}
       </div>

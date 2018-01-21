@@ -48,6 +48,11 @@ const dialogTitleStyle = {
   color: '#F7882F'
 };
 
+const style = {
+  margin: 12,
+  color: '#F7882F'
+};
+
 
 class ProjectDetail extends React.Component {
   state = {
@@ -228,7 +233,9 @@ class ProjectDetail extends React.Component {
     }
     return (
       <div>
-        <FlatButton label={<Editor color={'#F7882F'} />} primary={true} onClick={this.handleDialogOpen(this.props.project)} />
+        <FlatButton icon={<Editor />}
+          style={style}
+          onClick={this.handleDialogOpen(this.props.project)} />
       </div>
     );
   }

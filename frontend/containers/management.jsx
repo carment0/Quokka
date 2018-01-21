@@ -161,7 +161,7 @@ class Management extends React.Component {
               iconElementRight={this.iconElementRight} />
           </nav>
           <content className="content-body">
-            <Tabs className="tabs-controller">
+            <Tabs className="tabs-controller" style={{ width: '100%' }}>
               <Tab
                 style={{ backgroundColor: Colors.DARK_APPLE_CORE }}
                 icon={<AssignmentIcon />}
