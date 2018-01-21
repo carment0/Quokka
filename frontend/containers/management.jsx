@@ -153,7 +153,7 @@ class Management extends React.Component {
               title={
                 <div className="logo-title">
                   <img className="face-logo"
-                    src="/assets/quokka_face.svg"
+                    src="http://res.cloudinary.com/dwepnf6cc/image/upload/v1516518163/quokka_face_c6nsfa.svg"
                     alt="profile" />
                 </div>
               }

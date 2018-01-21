@@ -114,7 +114,7 @@ class Welcome extends React.Component {
         <section className="content">
           <div className="left-container">
             <div className="text-box">
-              <img className="face-logo" src="/assets/quokka_face.svg" alt="profile" />
+              <img className="face-logo" src="http://res.cloudinary.com/dwepnf6cc/image/upload/v1516518163/quokka_face_c6nsfa.svg" alt="profile" />
               <div className="catch-phrase">
                 Dream. Create. Innovate.
               </div>
