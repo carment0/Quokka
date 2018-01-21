@@ -23,7 +23,8 @@ class AssignedTaskIndex extends React.Component {
 
   static propTypes = {
     assignedTasks: PropTypes.object.isRequired,
-    dispatchUpdateAssignedTask: PropTypes.func.isRequired
+    dispatchUpdateAssignedTask: PropTypes.func.isRequired,
+    currentUser: PropTypes.object.isRequired
   };
 
   handleRequestClose = () => {
@@ -109,7 +110,7 @@ class AssignedTaskIndex extends React.Component {
     return (
       <div className="assigned-tasks">
         <div className="title">
-          <h2>My Assigned Tasks</h2>
+          <h2>{this.props.currentUser.first_name + ' ' + this.props.currentUser.last_name + "'s"} Assigned Tasks</h2>
         </div>
         {this.taskList}
         <Snackbar

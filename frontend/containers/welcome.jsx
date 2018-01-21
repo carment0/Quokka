@@ -131,10 +131,10 @@ class Welcome extends React.Component {
         </section>
         <footer>
           <a className="logo" href="https://www.github.com/carment0/NeutroEvolution">
-            <img className="logo" src="/assets/github.png" alt="github" />
+            <img className="logo" src="http://res.cloudinary.com/dwepnf6cc/image/upload/v1516518061/github_zmrpur.png" alt="github" />
           </a>
           <a className="logo" href="https://www.linkedin.com/in/carmen-to-2480161a/">
-            <img className="logo" src="/assets/linkedin.png" alt="github" />
+            <img className="logo" src="http://res.cloudinary.com/dwepnf6cc/image/upload/v1516518064/linkedin_nx1dzs.png" alt="github" />
           </a>
         </footer>
         <Dialog

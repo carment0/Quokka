@@ -9,7 +9,8 @@ import FlatButton from 'material-ui/FlatButton';
 class AssignedProjectIndex extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
-    assignedProjects: PropTypes.object.isRequired
+    assignedProjects: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired
   }
 
   createViewProjectHandler(projectId) {
@@ -61,7 +62,7 @@ class AssignedProjectIndex extends React.Component {
     return (
       <div className="assigned-projects">
         <div className="title">
-          <h2>My Assigned Projects</h2>
+          <h2>{this.props.currentUser.first_name + ' ' + this.props.currentUser.last_name + "'s"} Assigned Projects</h2>
         </div>
         {this.projectCardList}
       </div>

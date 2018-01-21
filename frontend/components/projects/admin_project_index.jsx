@@ -28,7 +28,8 @@ class AdminProjectIndex extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
     adminProjects: PropTypes.object.isRequired,
-    dispatchDeleteProject: PropTypes.func.isRequired
+    dispatchDeleteProject: PropTypes.func.isRequired,
+    currentUser: PropTypes.object.isRequired
   }
 
   createViewProjectHandler(projectId) {
@@ -109,7 +110,7 @@ class AdminProjectIndex extends React.Component {
     return (
       <div className="admin-projects">
         <div className="title">
-          <h2>My Administrated Projects</h2>
+          <h2>{this.props.currentUser.first_name + ' ' + this.props.currentUser.last_name + "'s"} Administrated Projects</h2>
         </div>
         {this.projectCardList}
         <Dialog

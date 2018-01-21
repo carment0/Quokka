@@ -88,7 +88,8 @@ class TaskOverview extends React.Component {
         </section>
         <AssignedTaskIndex
           assignedTasks={this.props.assignedTasks}
-          dispatchUpdateAssignedTask={this.props.dispatchUpdateAssignedTask} />
+          dispatchUpdateAssignedTask={this.props.dispatchUpdateAssignedTask}
+          currentUser={this.props.currentUser} />
       </div>
     );
   }
