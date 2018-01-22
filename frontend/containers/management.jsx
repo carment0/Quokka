@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+
 // Material UI
 import { Tabs, Tab } from 'material-ui/Tabs';
 import Paper from 'material-ui/Paper';
@@ -14,6 +15,7 @@ import FlatButton from 'material-ui/FlatButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import Divider from 'material-ui/Divider';
+
 // Icons
 import ListIcon from 'material-ui/svg-icons/action/list';
 import DateIcon from 'material-ui/svg-icons/action/date-range';
@@ -22,9 +24,11 @@ import PeopleOutline from 'material-ui/svg-icons/social/people-outline';
 import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import MailOutline from 'material-ui/svg-icons/communication/mail-outline';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
+
 // Actions
 import { logout } from '../actions/session_actions';
 import { createProject } from '../actions/project_actions';
+
 // Other Containers
 import ProjectDetail from './projects/project_detail';
 import ProjectOverview from './projects/project_overview';
@@ -32,9 +36,9 @@ import ProjectCreator from './projects/project_creator';
 import TaskOverview from './tasks/task_overview';
 import CalendarOverview from './calendars/calendar_overview';
 import EmployeesOverview from './employees/employees_overview';
+
 // Style
 import Colors from '../shared/colors';
-
 
 class Management extends React.Component {
   state = { sidebarOpen: false, dialogOpen: false };
@@ -55,17 +59,18 @@ class Management extends React.Component {
     this.props.dispatchLogout();
   };
 
-  handleCreateProject = () => {
+  handleNavigateToCreateProject = () => {
     if (this.props.history.location.pathname !== '/management/create_project') {
       this.props.history.push('/management/create_project');
     }
-  }
+  };
 
-  handleEmpolyee = () => {
+  handleNavigateToEmpolyee = () => {
     if (this.props.history.location.pathname !== '/management/employees') {
       this.props.history.push('/management/employees');
     }
-  }
+  };
+
   /**
    * Returns the appropriate class name of the management main content section
    * @returns {string}
@@ -129,12 +134,12 @@ class Management extends React.Component {
           <Drawer open={this.state.sidebarOpen}
             swipeAreaWidth={50}>
             <MenuItem
-              onClick={this.handleCreateProject}
+              onClick={this.handleNavigateToCreateProject}
               rightIcon={<AddCircleOutline />}>
               Create New Project
             </MenuItem>
             <MenuItem
-              onClick={this.handleEmpolyee}
+              onClick={this.handleNavigateToEmpolyee}
               rightIcon={<PeopleOutline />}>
               {this.props.currentUser.company} Employees
             </MenuItem>

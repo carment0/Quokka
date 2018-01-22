@@ -2,30 +2,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 // creates keys for mapping
 import uuid from 'uuid/v1';
+
 // Material UI
 import ReactQuill from 'react-quill';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import DatePicker from 'material-ui/DatePicker';
+
 // Actions
 import { createProject, clearProjectErrors } from '../../actions/project_actions';
+
 // Enums
 const modules = {
   toolbar: [
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],       // header dropdown
-    [{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
-    [{ 'font': [] }],                                // font family
-    ['bold', 'italic', 'underline'],       // toggled buttons
-    [{ 'color': [] }, { 'background': [] }],         // dropdown with defaults
-    [{ 'align': [] }],                               // text align
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],    // lists
-    [{ 'indent': '-1'}, { 'indent': '+1' }],         // outdent/indent
-    [{ 'script': 'sub'}, { 'script': 'super' }],     // superscript/subscript
-    ['blockquote', 'code-block'],                    // blocks
-    ['link'],                                        // address link
-    ['clean']                                        // remove formatting
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],       // header dropdown
+    [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+    [{ font: [] }],                                // font family
+    ['bold', 'italic', 'underline'],               // toggled buttons
+    [{ color: [] }, { background: [] }],           // dropdown with defaults
+    [{ align: [] }],                               // text align
+    [{ list: 'ordered' }, { list: 'bullet' }],     // lists
+    [{ indent: '-1' }, { indent: '+1' }],          // outdent/indent
+    [{ script: 'sub' }, { script: 'super' }],      // superscript/subscript
+    ['blockquote', 'code-block'],                  // blocks
+    ['link'],                                      // address link
+    ['clean']                                      // remove formatting
   ]
 };
 
@@ -47,14 +51,9 @@ class ProjectCreator extends React.Component {
   static propTypes = {
     dispatchCreateProject: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    placeholder: React.PropTypes.string,
     dispatchClearProjectErrors: PropTypes.func.isRequired,
     errors: PropTypes.array.isRequired
   };
-
-  componentDidMount() {
-    this.props.dispatchClearProjectErrors();
-  }
 
   handleTextEditorChange = (value) => {
     this.setState({
@@ -89,6 +88,10 @@ class ProjectCreator extends React.Component {
     );
   }
 
+  componentDidMount() {
+    this.props.dispatchClearProjectErrors();
+  }
+
   render() {
     return (
       <div className="project-creator">
@@ -113,8 +116,7 @@ class ProjectCreator extends React.Component {
               onChange={this.handleTextEditorChange}
               modules={modules}
               formats={formats}
-              defaultValue={this.state.defaultValue}
-              placeholder={this.props.placeholder} />
+              defaultValue={this.state.defaultValue} />
           </div>
           <div className="form-box">
             <FlatButton

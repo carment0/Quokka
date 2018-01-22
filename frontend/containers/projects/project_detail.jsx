@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 // Material UI
 import { PieChart, Pie, Tooltip, Cell } from 'recharts';
 import Chip from 'material-ui/Chip';
@@ -13,12 +14,15 @@ import Editor from 'material-ui/svg-icons/editor/mode-edit';
 
 // creates keys for mapping
 import uuid from 'uuid/v1';
+
 // Quill
 import ReactQuill from 'react-quill';
+
 // Actions
 import { fetchProjectDetail, updateProject, clearProjectErrors } from '../../actions/project_actions';
 import { clearTaskErrors, createTask, updateTask, deleteTask } from '../../actions/task_http_actions';
 import { fetchUsersFromCompany } from '../../actions/users_by_company_actions';
+
 // Components
 import ProjectTaskItem from '../../components/projects/project_task_item';
 import ProjectEditor from '../../components/projects/project_editor';
@@ -53,7 +57,6 @@ const style = {
   color: '#F7882F'
 };
 
-
 class ProjectDetail extends React.Component {
   state = {
     height: null,
@@ -62,14 +65,14 @@ class ProjectDetail extends React.Component {
   };
 
   static propTypes = {
-    dispatchFetchProjectDetail: PropTypes.func.isRequired,
     project: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
-    dispatchUpdateProject: PropTypes.func.isRequired,
     currentUser: PropTypes.object.isRequired,
-    dispatchClearProjectErrors: PropTypes.func.isRequired,
     projectErrors: PropTypes.array.isRequired,
     taskErrors: PropTypes.array.isRequired,
+    dispatchFetchProjectDetail: PropTypes.func.isRequired,
+    dispatchClearProjectErrors: PropTypes.func.isRequired,
+    dispatchUpdateProject: PropTypes.func.isRequired,
     dispatchClearTaskErrors: PropTypes.func.isRequired,
     dispatchCreateTask: PropTypes.func.isRequired,
     dispatchDeleteTask: PropTypes.func.isRequired,
@@ -103,23 +106,6 @@ class ProjectDetail extends React.Component {
       dialogOpen: false
     });
   };
-
-  componentDidMount() {
-    this.props.dispatchFetchProjectDetail(this.props.match.params.id);
-    this.props.dispatchUsersByCompany(this.props.currentUser.company);
-    window.addEventListener('resize', this.handleWindowResize);
-  }
-
-  /*
-   * Whenever component is going to unmount, always check if there is a callback waiting to be called. If so, cancel it.
-   */
-  componentWillUnmount() {
-    if (this.setTimeoutId) {
-      clearTimeout(this.setTimeoutId);
-    }
-
-    window.removeEventListener('resize', this.handleWindowResize);
-  }
 
   /**
    * Checks whether the project is fetched from the backend.
@@ -305,6 +291,20 @@ class ProjectDetail extends React.Component {
         {projectTaskItems}
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.props.dispatchFetchProjectDetail(this.props.match.params.id);
+    this.props.dispatchUsersByCompany(this.props.currentUser.company);
+    window.addEventListener('resize', this.handleWindowResize);
+  }
+
+  componentWillUnmount() {
+    if (this.setTimeoutId) {
+      clearTimeout(this.setTimeoutId);
+    }
+
+    window.removeEventListener('resize', this.handleWindowResize);
   }
 
   render() {
