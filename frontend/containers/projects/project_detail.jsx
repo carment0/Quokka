@@ -319,6 +319,7 @@ class ProjectDetail extends React.Component {
           contentStyle={dialogContentStyle}
           title={'Edit Project'}
           modal={false}
+          autoScrollBodyContent={true}
           open={this.state.dialogOpen}
           onRequestClose={this.handleDialogClose}>
           <ProjectEditor
