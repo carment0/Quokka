@@ -55,11 +55,13 @@ class ProjectOverview extends React.Component {
           adminProjects={this.props.adminProjects}
           handleDialogOpen={this.handleDialogOpen}
           dispatchDeleteProject={this.props.dispatchDeleteProject}
-          currentUser={this.props.currentUser} />
+          currentUser={this.props.currentUser}
+          dispatchUpdateProject={this.props.dispatchUpdateProject} />
         <AssignedProjectIndex
           assignedProjects={this.props.assignedProjects}
           history={this.props.history}
-          currentUser={this.props.currentUser} />
+          currentUser={this.props.currentUser}
+          dispatchUpdateProject={this.props.dispatchUpdateProject} />
       </div>
     );
   }

@@ -20,6 +20,28 @@ class AssignedProjectIndex extends React.Component {
     };
   }
 
+  isOverDue = (project) => {
+    let now = new Date();
+    now = new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
+    if (project.completed) {
+      return 'completed';
+    } else if (new Date(project.deadline).getTime() >= now) {
+      return 'progress';
+    }
+    return 'due';
+  };
+
+  subtitleColor = (project) => {
+    switch (this.isOverDue(project)) {
+      case 'completed':
+        return 'green';
+      case 'progress':
+        return 'gray';
+      case 'due':
+        return 'red';
+    }
+  }
+
   get projectCardList() {
     const projectIds = Object.keys(this.props.assignedProjects);
 
@@ -34,10 +56,10 @@ class AssignedProjectIndex extends React.Component {
         <Card key={project.id}>
           <CardHeader
             title={project.name}
-            subtitle={'Deadline: ' + project.deadline}
+            subtitle={project.completed ? 'Project Completed' : 'Deadline: ' + project.deadline}
             actAsExpander={true}
             showExpandableButton={true}
-            subtitleColor={project.completed ? 'green' : 'red'}
+            subtitleColor={this.subtitleColor(project)}
             style={{ fontWeight: '500', padding: '0.5rem' }} />
           <CardText expandable={true} color={'#6B7A8F'}>
             <p>Project Summary:</p>

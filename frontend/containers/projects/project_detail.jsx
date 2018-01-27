@@ -178,10 +178,10 @@ class ProjectDetail extends React.Component {
       const tasks = this.props.project.tasks;
 
       const isOverDue = (task) => {
-        const now = new Date().getTime();
+        let now = new Date();
+        now = new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
         return !task.completed && new Date(task.due_date).getTime() < now;
       };
-
       const record = [
         { name: 'Completed', value: tasks.filter((task) => task.completed).length },
         { name: 'In Progress', value: tasks.filter((task) => !task.completed && !isOverDue(task)).length },
