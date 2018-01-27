@@ -2,9 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 // Components
 import AdminProjectIndex from '../../components/projects//admin_project_index';
 import AssignedProjectIndex from '../../components/projects/assigned_project_index';
+
 // Actions
 import {
   fetchAssignedProjects,
@@ -12,7 +14,6 @@ import {
   updateProject,
   deleteProject
 } from '../../actions/project_actions';
-
 
 class ProjectOverview extends React.Component {
   state = { dialogOpen: false };
@@ -23,7 +24,6 @@ class ProjectOverview extends React.Component {
     assignedProjects: PropTypes.object.isRequired,
     adminProjects: PropTypes.object.isRequired,
     dispatchDeleteProject: PropTypes.func.isRequired,
-    dispatchUpdateProject: PropTypes.func.isRequired,
     dispatchFetchAdministratedProjects: PropTypes.func.isRequired,
     dispatchFetchAssignedProjects: PropTypes.func.isRequired
   };
