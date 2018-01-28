@@ -12,15 +12,17 @@ export default (oldState = {}, action) => {
       action.projects.forEach((project) => {
         newState[project.id] = project;
         let count = 0;
-        project.tasks.forEach((task) => {
-          if (task.completed) {
-            count += 1;
+        if (project.task !== undefined) {
+          project.tasks.forEach((task) => {
+            if (task.completed) {
+              count += 1;
+            }
+          });
+          if (count === Object.keys(project.tasks).length && count !== 0) {
+            project.completed = true;
+          } else {
+            project.completed = false;
           }
-        });
-        if (count === Object.keys(project.tasks).length && count !== 0) {
-          project.completed = true;
-        } else {
-          project.completed = false;
         }
       });
       return merge({}, oldState, newState);
