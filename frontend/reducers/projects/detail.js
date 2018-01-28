@@ -43,9 +43,14 @@ export default (oldState = {}, action) => {
 
     // `merge()` is like _.assign except that it recursively merges own and inherited enumerable string keyed properties of source objects into the destination object. Source properties that resolve to undefined are skipped if a destination value exists. Array and plain object properties are merged recursively.
     case RECEIVE_PROJECT_DETAIL:
-      newState = {};
+      newState = merge({}, oldState);
+      const updateState = merge({}, oldState);
       newState[action.project.id] = action.project;
-      return merge({}, oldState, newState);
+      if (!newState[action.project.id].tasks) {
+        Object.assign(updateState[action.project.id], newState[action.project.id]);
+        return updateState;
+      }
+      return newState;
 
     case REMOVE_PROJECT:
       newState = merge({}, oldState);
