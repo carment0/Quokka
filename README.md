@@ -3,6 +3,23 @@
 
 A project management software for real time collaboration. Quokka allows for team members to collaboratively track project and task completion.
 
+## Installing
+Clone this project into your local computer:
+
+`git clone https://github.com/carment0/Quokka.git`
+
+In the project directory run the following command to install all dependencies:
+
+`bundle install`
+
+`npm install`
+
+Next run the server:
+
+`rails s`
+
+Open http://localhost:3000 to view the project in the browser
+
 
 ### Screenshots
 ##### Landing Page
