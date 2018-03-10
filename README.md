@@ -50,11 +50,12 @@ Open http://localhost:3000 to view the project in the browser
 
 ### Technologies Used
 * React.js
-* Flux
+* Redux
 * Ruby on Rails
 * JSON API
 * PostgreSQL
 * Heroku
+* Websocket
 * Recharts
 * React Big Calendar
 * React Quill
