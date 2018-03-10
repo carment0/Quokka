@@ -1,5 +1,5 @@
 # Quokka
-[Quokka Live](quokka-cloud.herokuapp.com)
+https://quokka-cloud.herokuapp.com
 
 A project management software for real time collaboration. Quokka allows for team members to collaboratively track project and task completion.
 
